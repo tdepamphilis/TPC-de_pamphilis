@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29920.165
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frontend", "Frontend\Frontend.csproj", "{C14DDC6F-113B-493B-9F2C-0A35C37E45E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Dominio\Dominio.csproj", "{DACEDDC6-FA6C-4765-8F80-B611610AC259}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Business.csproj", "{3665C6FF-A3C6-4F11-8AD4-7221135667DB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C14DDC6F-113B-493B-9F2C-0A35C37E45E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C14DDC6F-113B-493B-9F2C-0A35C37E45E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C14DDC6F-113B-493B-9F2C-0A35C37E45E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C14DDC6F-113B-493B-9F2C-0A35C37E45E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DACEDDC6-FA6C-4765-8F80-B611610AC259}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DACEDDC6-FA6C-4765-8F80-B611610AC259}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DACEDDC6-FA6C-4765-8F80-B611610AC259}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DACEDDC6-FA6C-4765-8F80-B611610AC259}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3665C6FF-A3C6-4F11-8AD4-7221135667DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3665C6FF-A3C6-4F11-8AD4-7221135667DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3665C6FF-A3C6-4F11-8AD4-7221135667DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3665C6FF-A3C6-4F11-8AD4-7221135667DB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {23BCE37F-079E-4257-A7AE-45145BF22CD4}
+	EndGlobalSection
+EndGlobal

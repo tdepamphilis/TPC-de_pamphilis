@@ -1,0 +1,9 @@
+D:\Repos\visual studio\TPC-de_pamphilis\TPC-DE_PAMPHILIS\Business\obj\Debug\Business.csprojAssemblyReference.cache
+D:\Repos\visual studio\TPC-de_pamphilis\TPC-DE_PAMPHILIS\Business\obj\Debug\Business.csproj.CoreCompileInputs.cache
+D:\Repos\visual studio\TPC-de_pamphilis\TPC-DE_PAMPHILIS\Business\bin\Debug\Business.dll
+D:\Repos\visual studio\TPC-de_pamphilis\TPC-DE_PAMPHILIS\Business\bin\Debug\Business.pdb
+D:\Repos\visual studio\TPC-de_pamphilis\TPC-DE_PAMPHILIS\Business\bin\Debug\Dominio.dll
+D:\Repos\visual studio\TPC-de_pamphilis\TPC-DE_PAMPHILIS\Business\bin\Debug\Dominio.pdb
+D:\Repos\visual studio\TPC-de_pamphilis\TPC-DE_PAMPHILIS\Business\obj\Debug\Business.csproj.CopyComplete
+D:\Repos\visual studio\TPC-de_pamphilis\TPC-DE_PAMPHILIS\Business\obj\Debug\Business.dll
+D:\Repos\visual studio\TPC-de_pamphilis\TPC-DE_PAMPHILIS\Business\obj\Debug\Business.pdb
