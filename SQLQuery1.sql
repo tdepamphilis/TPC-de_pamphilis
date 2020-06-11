@@ -50,9 +50,14 @@ go
 
 create view [vw_articulos] 
 as
-select a.Codigo, a.Nombre, a.Descripcion, a.IdMarca, m.Nombre as marca   from articulos as a 
+select a.Codigo, a.Nombre, a.Descripcion, a.MargenGanancia, a.ImagenUrl, a.IdMarca, m.Nombre as Marca   from articulos as a 
 inner join marcas as m on a.IdMarca = m.id
-
+go
+create view [vw_articulosxcategoria] 
+as
+select a.Codigo, a.Nombre, a.Descripcion, a.MargenGanancia, a.ImagenUrl,  a.IdMarca , a.Marca , c.id as IdCategoria, c.nombre as categoria   from vw_articulos as a 
+inner join categoriaxarticulo as cxa on a.Codigo = cxa.CodigoArticulo
+inner join categorias as c on cxa.Idcategoria = c.id
 
 go
 
@@ -65,8 +70,11 @@ insert into articulos values ('asasd','mermelada de naranja', 'caja 24 unidades'
 go
 insert into categoriaxarticulo values ('asasd',2),('qwere',1),('qwere',5),('qwdas',6),('asdqw',4),('asdqw',2)
 go
-select * from vw_articulos as a
+select * from vw_articulosxcategoria 
+
+/*
+as a
 inner join categoriaxarticulo as cxa on a.Codigo = cxa.CodigoArticulo
 inner join categorias as c on cxa.Idcategoria = c.id
-
+*/
 
