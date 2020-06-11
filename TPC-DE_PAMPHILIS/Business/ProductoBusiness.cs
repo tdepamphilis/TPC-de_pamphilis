@@ -9,8 +9,8 @@ namespace Business
 {
     public class ProductoBusiness
     {
-    //-------------LECTURA--------------------
-    public List<Producto> listar(string busqueda)
+        //-------------LECTURA--------------------
+        public List<Producto> listar(string busqueda)
         {
             GestorConexion gestor = new GestorConexion();
             List<Producto> aux = new List<Producto>();
@@ -56,7 +56,7 @@ namespace Business
 
         }
 
-    public List<Producto> listarxcat(string busqueda, int cat)
+        public List<Producto> listarxcat(string busqueda, int cat)
         {
             GestorConexion gestor = new GestorConexion();
             List<Producto> aux = new List<Producto>();
@@ -66,7 +66,7 @@ namespace Business
             try
             {
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "select * from vw_articulosxcategoria where (Nombre like '%" + busqueda + "%' or Marca like '%" + busqueda + "%') and IdCategoria = "+cat;
+                command.CommandText = "select * from vw_articulosxcategoria where (Nombre like '%" + busqueda + "%' or Marca like '%" + busqueda + "%') and IdCategoria = " + cat;
                 command.Connection = connection;
                 connection.Open();
                 lector = command.ExecuteReader();
@@ -97,6 +97,61 @@ namespace Business
             {
 
                 throw;
+            }
+
+
+        }
+
+        public bool checkcode(string code)
+        {
+            GestorConexion gestor = new GestorConexion();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            SqlDataReader lector;
+            bool found = false;
+            try
+            {
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "select * from vw_articulos where Codigo ='" +code+"'";
+                command.Connection = connection;
+                connection.Open();
+                lector = command.ExecuteReader();
+                while (lector.Read())
+                {
+                    found = true;  
+                }
+                connection.Close();
+                return found;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+
+
+        }
+
+        public string generateCode()
+        {
+            while (true)
+            {
+                var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                var stringChars = new Char[5];
+                Random random = new Random();
+                for (int i = 0; i < stringChars.Length; i++)
+                {
+                    stringChars[i] = chars[random.Next(chars.Length)];
+                }
+                string result = new string(stringChars);
+
+                if (!checkcode(result))
+                {
+                    return result;
+
+                }
             }
 
 
