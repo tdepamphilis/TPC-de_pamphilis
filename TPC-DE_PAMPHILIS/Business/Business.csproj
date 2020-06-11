@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoriaBusiness.cs" />
     <Compile Include="GestorConexion.cs" />
+    <Compile Include="MarcaBusiness.cs" />
     <Compile Include="ProductoBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

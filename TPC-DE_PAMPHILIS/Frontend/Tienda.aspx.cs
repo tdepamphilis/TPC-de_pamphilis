@@ -12,10 +12,35 @@ namespace Frontend
     public partial class Tienda : System.Web.UI.Page
     {
         public List<Producto> productos;
+        public List<Categoria> categorias;
+        ProductoBusiness productoBusiness = new ProductoBusiness();
+        CategoriaBusiness categoriaBusiness = new CategoriaBusiness();
         protected void Page_Load(object sender, EventArgs e)
         {
-            ProductoBusiness productoBusiness = new ProductoBusiness();
-            productos = productoBusiness.listar("");
+
+            loadproducts();
+            categorias = categoriaBusiness.listar();
+        }
+
+        protected void TextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        //-------------FUNCIONES DE CARGA--------------
+
+        private void loadproducts()
+        {
+            string strcatid = Request.QueryString["cat"];
+            if (strcatid == null)
+            {
+                productos = productoBusiness.listar(TextBox1.Text);
+                return;
+            }
+            int catid;
+            int.TryParse(strcatid, out catid);
+            productos = productoBusiness.listarxcat(TextBox1.Text, catid);
+
         }
     }
 }
