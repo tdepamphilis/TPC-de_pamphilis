@@ -14,32 +14,35 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm" style="border: medium; border: solid">
-                    One of three columns
-                </div>
-                <div class="col-sm-5" style="border: medium; border: solid">
+      
+                
                     <div class="container">
                         <div class="form-row">
-                            <div class="form-group col-sm">
+                            <div class="col-sm-3"></div>
+                            <div class="form-group col-sm-6">
                                 <asp:TextBox ID="TextName" runat="server" CssClass="form-control" placeholder="Nombre"></asp:TextBox>
                             </div>
+                            <div class="col-sm-3"></div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-sm">
+                            <div class="col-sm-3"></div>
+                            <div class="form-group col-sm-6">
                                 <asp:TextBox ID="TextDesc" runat="server" CssClass="form-control" placeholder="Descripcion"></asp:TextBox>
                             </div>
+                            <div class="col-sm-3"></div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-sm">
+                            <div class="col-sm-3"></div>
+                            <div class="form-group col-sm-6">
                                 <asp:TextBox ID="TextImg" runat="server" CssClass="form-control" placeholder="Url de imagen"></asp:TextBox>
                             </div>
+                            <div class="col-sm-3"></div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-sm">
+                            <div class="col-sm-3"></div>
+                            <div class="form-group col-sm-4" style="border:solid">
 
-                                <div class="container">
+                                <div class="container-fluid">
                                     <div class="row">
                                         <div class=" col-sm">
                                             <asp:Label ID="Labelbrand" runat="server" Text="Marca:"></asp:Label>
@@ -58,17 +61,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group col-sm overflow-auto" style="max-height: 170px; border: thin; border: solid">
+                            <div class="form-group col-sm-2 overflow-auto" style="max-height: 170px; border: thin; border: solid">
                                 <asp:CheckBoxList ID="Categorybox" runat="server"></asp:CheckBoxList>
                             </div>
+                            <div class="col-sm-3"></div>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm" style="border: medium; border: solid">
-                    One of three columns
-                </div>
-            </div>
-        </div>
+                
+     
     </form>
 </body>
 </html>
