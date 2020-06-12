@@ -15,45 +15,66 @@
     <form id="form1" runat="server">
 
 
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categorias</button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="tienda.aspx">Todos</a>
-                    <%foreach (Dominio.Categoria item in categorias)
-                        { %>
-                    <div><a class="dropdown-item" href="?cat=<%= item.id %>"><%=item.name %></a></div>
-                    <%} %>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm"></div>
+                <div class="col-sm">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categorias</button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="tiendaAdmin.aspx">Todos</a>
+                                <%foreach (Dominio.Categoria item in categorias)
+                                    { %>
+                                <div><a class="dropdown-item" href="?cat=<%= item.id %>"><%=item.name %></a></div>
+                                <%} %>
+                            </div>
+                        </div>
+                        <asp:TextBox CssClass="form-control" ID="TextBox1" runat="server" OnTextChanged="TextBox1_TextChanged"></asp:TextBox>
+                    </div>
                 </div>
+                <div class="col-sm"></div>
             </div>
-            <asp:TextBox CssClass="form-control" ID="TextBox1" runat="server" OnTextChanged="TextBox1_TextChanged"  ></asp:TextBox>
+            <div class="row">
+                <div class="col-sm"></div>
+                <div class="col-sm-7" style="border: solid">
+                    <div class="container-fluid">
+
+                        <div class="row row-cols-1 row-cols-md-4">
+
+                            <% foreach (Dominio.Producto product in productos)
+
+                                {
+                            %>
+
+                            <div class="col mb-4">
+                                <div class="card">
+                                    <img src="<% = product.urlimagen %>" class="card-img-top" alt="..." height="200" width="80">
+                                    <div class="card-body" style="height: 150px">
+                                        <h5 class="card-title" style="display: flex"><% = product.name %></h5>
+                                        <p class="card-subtitle">$<% =product.margin %> </p>
+                                        <p class="card-text" style="font-size: smaller"><% =product.desc %></p>
+                                    </div>
+                                    <div class="card-footer text-center">
+
+                                        <a class="btn btn-dark" href="<%="?ART="+product.code %> ">comprar</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <%} %>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-sm"></div>
+
+
+            </div>
+
         </div>
 
 
-        <div class="row row-cols-1 row-cols-md-4" style="position: relative; top: 100px">
-
-            <% foreach (Dominio.Producto product in productos)
-                {
-            %>
-
-            <div class="col mb-4">
-                <div class="card">
-                    <img src="<% = product.urlimagen %>" class="card-img-top" alt="..." height="200" width="80">
-                    <div class="card-body" style="height: 150px">
-                        <h5 class="card-title" style="display: flex"><% = product.name %></h5>
-                        <p class="card-subtitle">$<% =product.margin %> </p>
-                        <p class="card-text" style="font-size: smaller"><% =product.desc %></p>
-                    </div>
-                    <div class="card-footer text-center">
-
-                        <a class="btn btn-dark" href="<%="?ART="+product.code %> ">comprar</a>
-                    </div>
-                </div>
-            </div>
-            <%} %>
-        </div>
-
-       
     </form>
 </body>
 </html>

@@ -14,12 +14,12 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-sm" style="border: medium; border: solid">
                     One of three columns
                 </div>
-                <div class="col-sm-6" style="border: medium; border: solid">
+                <div class="col-sm-5" style="border: medium; border: solid">
                     <div class="container">
                         <div class="form-row">
                             <div class="form-group col-sm">
