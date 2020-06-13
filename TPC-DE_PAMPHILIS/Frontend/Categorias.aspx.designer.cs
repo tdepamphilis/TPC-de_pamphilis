@@ -11,7 +11,7 @@ namespace Frontend
 {
 
 
-    public partial class Marcas
+    public partial class Categorias
     {
 
         /// <summary>

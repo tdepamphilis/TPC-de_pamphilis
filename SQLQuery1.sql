@@ -58,9 +58,19 @@ as
 select a.Codigo, a.Nombre, a.Descripcion, a.MargenGanancia, a.ImagenUrl,  a.IdMarca , a.Marca , c.id as IdCategoria, c.nombre as categoria   from vw_articulos as a 
 inner join categoriaxarticulo as cxa on a.Codigo = cxa.CodigoArticulo
 inner join categorias as c on cxa.Idcategoria = c.id
-
 go
-
+create view [vw_categorias]
+as
+select c.Id, c.Nombre, COUNT(cxa.CodigoArticulo) as articulos from categorias as c
+inner join categoriaxarticulo as cxa on c.Id = cxa.Idcategoria
+group by c.Nombre, c.Id
+go
+create view [vw_marcas]
+as
+select m.Id, m.Nombre, COUNT(a.Codigo) as articulos from marcas as m
+inner join articulos as a on a.IdMarca = m.Id
+group by m.Nombre, m.Id
+go
 insert into marcas values ('arcor'),('la campagnola'),('Magistral'),('la serenisima'),('sancor')
 insert into categorias values ('cocina'),('almacen'),('bebidas'),('lacteos'),('limpieza'),('golosinas')
 insert into articulos values ('asasd','mermelada de naranja', 'caja 24 unidades', 2,'https://walmartar.vteximg.com.br/arquivos/ids/829225-1000-1000/Mermelada-Naranja-La-Campagnola-454-Gr-1-17738.jpg?v=636685104012570000', 25),
@@ -70,7 +80,7 @@ insert into articulos values ('asasd','mermelada de naranja', 'caja 24 unidades'
 go
 insert into categoriaxarticulo values ('asasd',2),('qwere',1),('qwere',5),('qwdas',6),('asdqw',4),('asdqw',2)
 go
-select * from vw_articulos where Codigo = 
+select * from vw_marcas where Nombre
 
 /*
 as a

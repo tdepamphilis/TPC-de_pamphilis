@@ -21,7 +21,7 @@ namespace Business
             try
             {
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "select * from marcas";
+                command.CommandText = "select * from vw_marcas";
                 command.Connection = connection;
                 connection.Open();
                 lector = command.ExecuteReader();
@@ -30,6 +30,7 @@ namespace Business
                     Marca x = new Marca();
                     x.id = lector.GetInt32(0);
                     x.name = lector.GetString(1);
+                    x.productAmmount = lector.GetInt32(2);
                     aux.Add(x);
                 }
                 connection.Close();
@@ -40,5 +41,37 @@ namespace Business
                 throw;
             }
         }
+
+        public List<Marca> buscar(string name)
+        {
+            GestorConexion gestor = new GestorConexion();
+            List<Marca> aux = new List<Marca>();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            SqlDataReader lector;
+            try
+            {
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "select * from vw_marcas where Nombre like '%"+name+"%'";
+                command.Connection = connection;
+                connection.Open();
+                lector = command.ExecuteReader();
+                while (lector.Read())
+                {
+                    Marca x = new Marca();
+                    x.id = lector.GetInt32(0);
+                    x.name = lector.GetString(1);
+                    x.productAmmount = lector.GetInt32(2);
+                    aux.Add(x);
+                }
+                connection.Close();
+                return aux;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }
