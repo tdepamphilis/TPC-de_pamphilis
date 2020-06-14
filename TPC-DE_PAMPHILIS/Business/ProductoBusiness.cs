@@ -134,6 +134,40 @@ namespace Business
             
         }
 
+        public void create(Producto producto)
+        {
+
+            GestorConexion gestor = new GestorConexion();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            try
+            {
+               
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "insert into ARTICULOS values(@cod, @nombre, @desc, @marca, @imagen, @margen)";
+                command.Parameters.AddWithValue("@cod", producto.code);
+                command.Parameters.AddWithValue("@nombre", producto.name);
+                command.Parameters.AddWithValue("@desc", producto.desc);
+                command.Parameters.AddWithValue("@marca", producto.marca.id);
+                
+                command.Parameters.AddWithValue("@imagen", producto.urlimagen);
+                command.Parameters.AddWithValue("@margen", producto.margin);
+                command.Connection = connection;
+                connection.Open();
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
         //------------GENERACION DE CODIGO-----------------
         public bool checkcode(string code)
         {

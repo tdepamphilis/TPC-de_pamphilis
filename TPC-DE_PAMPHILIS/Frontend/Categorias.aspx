@@ -74,8 +74,6 @@
                 <div class="col-sm-5"></div>
             </div>
             
-
-
             <%} %>
             <div class="row row-cols-2 row-cols-md-5">
 

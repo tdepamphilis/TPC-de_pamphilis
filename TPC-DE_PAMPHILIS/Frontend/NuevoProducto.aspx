@@ -34,7 +34,9 @@
                         <div class="form-row">
                             <div class="col-sm-3"></div>
                             <div class="form-group col-sm-6">
-                                <asp:TextBox ID="TextImg" runat="server" CssClass="form-control" placeholder="Url de imagen"></asp:TextBox>
+                                
+                                <asp:FileUpload ID="FileImage" runat="server" />
+
                             </div>
                             <div class="col-sm-3"></div>
                         </div>
@@ -65,6 +67,14 @@
                                 <asp:CheckBoxList ID="Categorybox" runat="server"></asp:CheckBoxList>
                             </div>
                             <div class="col-sm-3"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-sm-4"></div>
+                            <div class="form-group col-sm-4">
+
+                                <asp:Button ID="ButtonConfirm" runat="server" Text="Button" OnClick="ButtonConfirm_Click" />
+                            </div>
+                            <div class="form-group col-sm-4"></div>
                         </div>
                     </div>
                 

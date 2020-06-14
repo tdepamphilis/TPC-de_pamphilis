@@ -49,7 +49,7 @@
 
                             <div class="col mb-4">
                                 <div class="card">
-                                    <img src="<% = product.urlimagen %>" class="card-img-top" alt="..." height="200" width="80">
+                                    <img src="<% = product.urlimagen %>" class="card-img-top" alt="..." height="200" width="80">                                    
                                     <div class="card-body" style="height: 150px">
                                         <h5 class="card-title" style="display: flex"><% = product.name %></h5>
                                         <p class="card-subtitle">$<% =product.margin %> </p>

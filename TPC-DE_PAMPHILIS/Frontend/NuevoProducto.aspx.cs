@@ -6,9 +6,13 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Configuration;
+using System.IO;
+using System.Security.Permissions;
 
 namespace Frontend
 {
+    [AspNetHostingPermission(SecurityAction.Demand, Level = AspNetHostingPermissionLevel.Medium)]
     public partial class NuevoProducto : System.Web.UI.Page
     {
         MarcaBusiness marcaBusiness = new MarcaBusiness();
@@ -44,9 +48,38 @@ namespace Frontend
         private void generateCode()
         {
             TextCode.Text = productoBusiness.generateCode();
-        //    TextCode.ReadOnly = true;
+            TextCode.ReadOnly = true;
 
         }
 
+        protected void ButtonConfirm_Click(object sender, EventArgs e)
+        {
+            if(true)
+            {
+
+                Producto nuevo = new Producto();
+                Marca marca = new Marca();
+                nuevo.name = TextName.Text;
+                nuevo.code = TextCode.Text;
+                nuevo.desc = TextDesc.Text;
+                marca = marcaBusiness.buscarnombre((string)BrandSelector.SelectedItem.Value);
+                nuevo.marca = marca;
+                nuevo.margin = 25;
+                nuevo.urlimagen = save();
+                productoBusiness.create(nuevo);
+                Response.Redirect("TiendaAdmin.aspx");
+                             
+            }
+        }
+
+        private string save()
+        {
+            string root = Server.MapPath("~");
+            string savePath = root + "\\Images\\";
+            string filename = TextCode.Text + ".jpg";
+            FileImage.SaveAs(savePath + filename);
+            return "\\Images\\" + filename;
+
+        }
     }
 }

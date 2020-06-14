@@ -73,6 +73,36 @@ namespace Business
             }
         }
 
+        public Marca buscarnombre(string name)
+        {
+            GestorConexion gestor = new GestorConexion();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            SqlDataReader lector;
+            try
+            {
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "select * from vw_marcas where Nombre = '" + name + "'";
+                command.Connection = connection;
+                connection.Open();
+                lector = command.ExecuteReader();
+                Marca x = new Marca();
+
+                while (lector.Read())
+                {
+                    x.id = lector.GetInt32(0);
+                    x.name = lector.GetString(1);
+                    x.productAmmount = lector.GetInt32(2);
+
+                }
+                connection.Close();
+                return x;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public Marca buscarid(int id)
         {
 

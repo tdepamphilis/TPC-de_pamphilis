@@ -62,13 +62,13 @@ go
 create view [vw_categorias]
 as
 select c.Id, c.Nombre, COUNT(cxa.CodigoArticulo) as articulos from categorias as c
-inner join categoriaxarticulo as cxa on c.Id = cxa.Idcategoria
+left join  categoriaxarticulo as cxa on c.Id = cxa.Idcategoria
 group by c.Nombre, c.Id
 go
 create view [vw_marcas]
 as
 select m.Id, m.Nombre, COUNT(a.Codigo) as articulos from marcas as m
-inner join articulos as a on a.IdMarca = m.Id
+left join articulos as a on a.IdMarca = m.Id
 group by m.Nombre, m.Id
 go
 insert into marcas values ('arcor'),('la campagnola'),('Magistral'),('la serenisima'),('sancor')
@@ -81,6 +81,12 @@ go
 insert into categoriaxarticulo values ('asasd',2),('qwere',1),('qwere',5),('qwdas',6),('asdqw',4),('asdqw',2)
 go
 
+
+
+select * from vw_categorias
+select * from categorias
+use depamphilis_db
+select * from articulos
 
 /*
 as a

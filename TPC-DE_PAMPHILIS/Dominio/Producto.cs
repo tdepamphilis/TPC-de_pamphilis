@@ -14,6 +14,7 @@ namespace Dominio
         public string urlimagen { get; set; }
         public int margin { get; set; }
         public Marca marca { get; set; }
+        
         public List<Categoria> categorias { get; set; }
 
 
