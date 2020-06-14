@@ -80,7 +80,7 @@ insert into articulos values ('asasd','mermelada de naranja', 'caja 24 unidades'
 go
 insert into categoriaxarticulo values ('asasd',2),('qwere',1),('qwere',5),('qwdas',6),('asdqw',4),('asdqw',2)
 go
-select * from vw_marcas where Nombre
+
 
 /*
 as a

@@ -102,6 +102,39 @@ namespace Business
 
         }
 
+
+        //------------ESCRITURA-------------------
+
+        public void deleteBrandProducts(int idMarca)
+        {
+           
+                GestorConexion gestor = new GestorConexion();
+                SqlConnection connection = gestor.connection();
+                SqlCommand command = new SqlCommand();
+                try
+                {
+
+                    command.CommandType = System.Data.CommandType.Text;
+                    command.CommandText = "delete from articulos where IdMarca = @code";
+                    command.Parameters.AddWithValue("@code", idMarca);
+                    command.Connection = connection;
+                    connection.Open();
+                    command.ExecuteNonQuery();
+
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            
+        }
+
+        //------------GENERACION DE CODIGO-----------------
         public bool checkcode(string code)
         {
             GestorConexion gestor = new GestorConexion();
@@ -112,13 +145,13 @@ namespace Business
             try
             {
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "select * from vw_articulos where Codigo ='" +code+"'";
+                command.CommandText = "select * from vw_articulos where Codigo ='" + code + "'";
                 command.Connection = connection;
                 connection.Open();
                 lector = command.ExecuteReader();
                 while (lector.Read())
                 {
-                    found = true;  
+                    found = true;
                 }
                 connection.Close();
                 return found;

@@ -23,24 +23,71 @@
             </div>
             <div class=" form-row">
                 <div class="col-sm-4"></div>
-                <div class="col-sm-4">
-                    <asp:TextBox ID="TextSearch" runat="server" CssClass="form-control" placeholder="Buscar" ></asp:TextBox>
+                <div class="col-sm-3">
+                    <asp:TextBox ID="TextSearch" runat="server" CssClass="form-control" placeholder="Buscar"></asp:TextBox>
 
+                </div>
+                <div class="col-sm-1">
+                    <a href="NewBC.aspx?type=brand">Nueva</a>
                 </div>
                 <div class="col-sm-4"></div>
             </div>
+            <%if (action == 1)
+                { %>
+            <div class="form-row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4" style="text-align: center">
+                    <h4><%=selected.name %></h4>
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+            <div class="form-row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-3">
+                    <asp:TextBox ID="TextRename" runat="server" placeholder="Nuevo nombre" CssClass="form-control"></asp:TextBox>
+                </div>
+                <div class="col-sm-2">
+                    <asp:Button ID="Confirmar" runat="server" Text="Button" OnClick="Confirmar_Click" />
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+            <%}
+                else if (action == 2)
+                { %>
+            <div class="form-row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4" style="text-align: center">
+                    <h6><%="Está seguro que desea eliminar " + selected.name + "? Tambien borrara todos sus productos." %></h6>
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+            <div class="form-row">
+                <div class="col-sm-5"></div>
+                <div class="col-sm-1">
+                    <a href="Categorias.aspx">Cancelar</a>
+                </div>
+                <div class="col-sm-1">
+                    <asp:Button ID="Borrar" runat="server" Text="Borrar" OnClick="Borrar_Click" />
+                </div>
+                <div class="col-sm-5"></div>
+            </div>
+
+
+
+
+            <%} %>
             <div class="row row-cols-2 row-cols-md-5">
 
                 <%foreach (Dominio.Marca marca in marcas)
                     { %>
                 <div class="card" style="width: 18rem;">
-                    <div class="card-header" style="text-align:center">
+                    <div class="card-header" style="text-align: center">
                         <%=marca.name %>
                     </div>
-                    <ul class="list-group list-group-flush" style="text-align:center">
+                    <ul class="list-group list-group-flush" style="text-align: center">
                         <li class="list-group-item">
-                            <a href="#">Renombrar</a>
-                            <a href="#">Eliminar</a>
+                            <a href="Marcas?rnm=<%=marca.id %>">Renombrar</a>
+                            <a href="Marcas?del=<%=marca.id %>">Eliminar</a>
                         </li>
                     </ul>
                 </div>
