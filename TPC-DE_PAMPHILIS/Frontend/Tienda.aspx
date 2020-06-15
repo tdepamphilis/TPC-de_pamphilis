@@ -37,10 +37,10 @@
             </div>
             <div class="row">
                 <div class="col-sm"></div>
-                <div class="col-sm-7" style="border: solid">
+                <div class="col-sm-9" style="border: solid">
                     <div class="container-fluid">
 
-                        <div class="row row-cols-1 row-cols-md-4">
+                        <div class="row row-cols-1 row-cols-md-5">
 
                             <% foreach (Dominio.Producto product in productos)
 
@@ -49,15 +49,22 @@
 
                             <div class="col mb-4">
                                 <div class="card">
-                                    <img src="<% = product.urlimagen %>" class="card-img-top" alt="..." height="200" width="80">                                    
+                                    <img src="<% = product.urlimagen %>" class="card-img-top" alt="..." height="200" width="80">
                                     <div class="card-body" style="height: 150px">
                                         <h5 class="card-title" style="display: flex"><% = product.name %></h5>
                                         <p class="card-subtitle">$<% =product.margin %> </p>
                                         <p class="card-text" style="font-size: smaller"><% =product.desc %></p>
                                     </div>
                                     <div class="card-footer text-center">
+                                        <%if (product.stock.ammount > 0)
+                                            { %>
+                                        <a class="btn btn-dark" href="<%="?ART=" + product.code %> ">comprar</a>
+                                        <%}
+                                        else
+                                        { %>
 
-                                        <a class="btn btn-dark" href="<%="?ART="+product.code %> ">comprar</a>
+                                        <p style="color: red">Sin stock</p>
+                                        <%} %>
                                     </div>
                                 </div>
                             </div>
@@ -67,7 +74,10 @@
 
 
                 </div>
-                <div class="col-sm"></div>
+                <div class="col-sm"  style="background-color:aqua">
+                    <h4> <%="Items en carrito " + carrito.items.Count() %></h4>
+
+                </div>
 
 
             </div>

@@ -86,8 +86,9 @@ namespace Frontend
             if (TextName.Text != "" && TextDesc.Text != "" && FileImage.HasFile)
             {
 
-                
-                
+
+
+                StockBusiness stockBusiness = new StockBusiness();
                 productoBusiness.delete(TextCode.Text);                
                 Producto nuevo = new Producto();
                 Marca marca = new Marca();
@@ -99,6 +100,7 @@ namespace Frontend
                 nuevo.margin = 25;
                 nuevo.urlimagen = save();
                 productoBusiness.create(nuevo);
+                stockBusiness.createData(nuevo.code);
                 Response.Redirect("TiendaAdmin.aspx");
 
             }

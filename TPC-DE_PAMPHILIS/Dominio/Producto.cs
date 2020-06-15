@@ -14,9 +14,18 @@ namespace Dominio
         public string urlimagen { get; set; }
         public int margin { get; set; }
         public Marca marca { get; set; }
-        
-        public List<Categoria> categorias { get; set; }
 
+        public Stock stock { get; set; }
+
+        //   public List<Categoria> categorias { get; set; }
+
+        public float unitPrice()
+        {
+            decimal x = decimal.Multiply(stock.price , (  decimal.Divide((decimal)margin, 100) + 1));
+            
+            return (float)x;
+            
+        }
 
     }
 }

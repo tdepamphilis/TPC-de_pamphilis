@@ -24,6 +24,8 @@ namespace Frontend
             categorias = categoriaBusiness.listar();
             if (isdel())
                 action = 1;
+            if (isstock())
+                action = 2;
         }
 
         protected void TextBox1_TextChanged(object sender, EventArgs e)
@@ -57,12 +59,42 @@ namespace Frontend
 
         }
 
+        private bool isstock()
+        {
+            string code = Request.QueryString["stk"];
+            if (code == null)
+                return false;
+            producto = productoBusiness.buscarid(code);
+            return true;
+
+        }
         //-----------------BOTONES---------------------
         protected void Buttondel_Click(object sender, EventArgs e)
         {
+
+            StockBusiness stockBusiness = new StockBusiness();
             productoBusiness.delete(producto.code);
             productoBusiness.clearcategories(producto.code);
+            stockBusiness.deleteData(producto.code);
             Response.Redirect("TiendaAdmin.aspx");
+        }
+
+        protected void ButtonStock_Click(object sender, EventArgs e)
+        {
+            if(TextAmmount.Text != "" && TextPrice.Text != "")
+            {
+                StockBusiness stockBusiness = new StockBusiness();
+                int newammount = producto.stock.ammount + int.Parse(TextAmmount.Text);
+                decimal newprice = Decimal.Parse(TextPrice.Text);
+                stockBusiness.updatestock(producto.code, newammount, newprice);
+                Response.Redirect("TiendaAdmin.aspx");
+            }
+        }
+
+        protected void TextAmmount_TextChanged(object sender, EventArgs e)
+        {
+
+            
         }
     }
 }

@@ -28,6 +28,7 @@ namespace Business
                 {
                     Producto x = new Producto();
                     Marca y = new Marca();
+                    Stock s = new Stock();
                     x.code = lector.GetString(0);
                     x.name = lector.GetString(1);
                     x.desc = lector.GetString(2);
@@ -36,6 +37,10 @@ namespace Business
                     y.id = lector.GetInt32(5);
                     y.name = lector.GetString(6);
                     x.marca = y;
+                    s.ammount = lector.GetInt32(7);
+                    s.price = lector.GetDecimal(8);
+                    x.stock = s;
+
 
                     aux.Add(x);
                 }
@@ -74,6 +79,7 @@ namespace Business
                 {
                     Producto x = new Producto();
                     Marca y = new Marca();
+                    Stock s = new Stock();
                     x.code = lector.GetString(0);
                     x.name = lector.GetString(1);
                     x.desc = lector.GetString(2);
@@ -82,6 +88,10 @@ namespace Business
                     y.id = lector.GetInt32(5);
                     y.name = lector.GetString(6);
                     x.marca = y;
+                    s.ammount = lector.GetInt32(9);
+                    s.price = lector.GetDecimal(10);
+                    x.stock = s;
+
 
                     aux.Add(x);
                 }
@@ -120,6 +130,7 @@ namespace Business
                 {
                     
                     Marca y = new Marca();
+                    Stock s = new Stock();
                     aux.code = lector.GetString(0);
                     aux.name = lector.GetString(1);
                     aux.desc = lector.GetString(2);
@@ -128,6 +139,9 @@ namespace Business
                     y.id = lector.GetInt32(5);
                     y.name = lector.GetString(6);
                     aux.marca = y;
+                    s.ammount = lector.GetInt32(7);
+                    s.price = lector.GetDecimal(8);
+                    aux.stock = s;
 
                     
                 }
