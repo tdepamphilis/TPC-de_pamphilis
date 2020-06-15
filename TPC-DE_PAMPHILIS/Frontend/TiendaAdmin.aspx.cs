@@ -13,13 +13,17 @@ namespace Frontend
     {
         public List<Producto> productos;
         public List<Categoria> categorias;
-        ProductoBusiness productoBusiness = new ProductoBusiness();
+        public Producto producto;
+        public ProductoBusiness productoBusiness = new ProductoBusiness();
         CategoriaBusiness categoriaBusiness = new CategoriaBusiness();
+        public int action;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            action = 0;
             loadproducts();
             categorias = categoriaBusiness.listar();
+            if (isdel())
+                action = 1;
         }
 
         protected void TextBox1_TextChanged(object sender, EventArgs e)
@@ -41,6 +45,24 @@ namespace Frontend
             int.TryParse(strcatid, out catid);
             productos = productoBusiness.listarxcat(TextBox1.Text, catid);
 
+        }
+
+        private bool isdel()
+        {
+            string code = Request.QueryString["del"];
+            if (code == null)
+                return false;
+            producto = productoBusiness.buscarid(code);
+            return true;
+
+        }
+
+        //-----------------BOTONES---------------------
+        protected void Buttondel_Click(object sender, EventArgs e)
+        {
+            productoBusiness.delete(producto.code);
+            productoBusiness.clearcategories(producto.code);
+            Response.Redirect("TiendaAdmin.aspx");
         }
     }
 }

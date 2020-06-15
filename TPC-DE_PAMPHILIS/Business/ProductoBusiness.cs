@@ -102,6 +102,50 @@ namespace Business
 
         }
 
+        public Producto buscarid(string code)
+        {
+            GestorConexion gestor = new GestorConexion();
+            Producto aux = new Producto();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            SqlDataReader lector;
+            try
+            {
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "select * from vw_articulos where Codigo = '"+ code+"'";
+                command.Connection = connection;
+                connection.Open();
+                lector = command.ExecuteReader();
+                while (lector.Read())
+                {
+                    
+                    Marca y = new Marca();
+                    aux.code = lector.GetString(0);
+                    aux.name = lector.GetString(1);
+                    aux.desc = lector.GetString(2);
+                    aux.margin = lector.GetInt32(3);
+                    aux.urlimagen = lector.GetString(4);
+                    y.id = lector.GetInt32(5);
+                    y.name = lector.GetString(6);
+                    aux.marca = y;
+
+                    
+                }
+
+
+                connection.Close();
+                return aux;
+
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
 
         //------------ESCRITURA-------------------
 
@@ -168,6 +212,75 @@ namespace Business
             }
         }
 
+        public void clearcategories(string productId)
+        {
+            GestorConexion gestor = new GestorConexion();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            try
+            {
+
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "delete from categoriaxarticulo  where CodigoArticulo = @code";
+                command.Parameters.AddWithValue("@code",productId);
+                command.Connection = connection;
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+            }
+        }
+
+        public void delete(string code)
+        {
+
+            
+            GestorConexion gestor = new GestorConexion();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            try
+            {
+
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "delete from articulos where Codigo = @code";
+                command.Parameters.AddWithValue("@code", code);
+                command.Connection = connection;
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+            }
+        }
+
+        public void mod(Producto producto)
+        {
+            try
+            {
+                delete(producto.code);
+                create(producto);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         //------------GENERACION DE CODIGO-----------------
         public bool checkcode(string code)
         {

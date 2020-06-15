@@ -48,6 +48,7 @@
                                     <div class="row">
                                         <div class=" col-sm">
                                             <asp:Label ID="Labelbrand" runat="server" Text="Marca:"></asp:Label>
+
                                         </div>
                                     </div>
                                     <div class="row">

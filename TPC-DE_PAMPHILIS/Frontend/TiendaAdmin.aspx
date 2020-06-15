@@ -35,28 +35,49 @@
                 </div>
                 <div class="col-sm"></div>
             </div>
+
+            <%if (action == 1)
+                { %>
+            <div class="form-row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4" style="text-align:center">
+                    <h4>Eliminar <%=" "+ producto.name + "?" %></h4>
+                </div>
+                <div class="col-sm-4"></div>
+
+
+            </div>
+            <div class="form-row">
+                <div class="col-sm" style="text-align:center">
+                    <asp:Button ID="Buttondel" runat="server" Text="Button" OnClick="Buttondel_Click" />
+                </div>
+            </div>
+
+
+            <%} %>
+
             <div class="row">
                 <div class="col-sm">
-                    <div class="container-fluid" style="background-color:lightslategrey">                     
+                    <div class="container-fluid" style="background-color: lightslategrey">
                         <div class="form-row">
-                            <div class="form-group col-sm" style="text-align:center">
+                            <div class="form-group col-sm" style="text-align: center">
                                 <a href="#" class="btn btn-dark btn-sm">Nuevo producto</a>
 
                             </div>
                         </div>
-                        <div class="form-row" style="text-align:center">
+                        <div class="form-row" style="text-align: center">
                             <div class="form-group col-sm">
                                 <a href="#" class="btn btn-dark btn-sm">Marcas</a>
 
                             </div>
                         </div>
-                        <div class="form-row" style="text-align:center">
+                        <div class="form-row" style="text-align: center">
                             <div class="form-group col-sm">
                                 <a href="#" class="btn btn-dark btn-sm">categorias</a>
 
                             </div>
                         </div>
-                        <div class="form-row" style="text-align:center">
+                        <div class="form-row" style="text-align: center">
                             <div class="form-group col-sm">
                                 <a href="#" class="btn btn-dark btn-sm">Estadisticas</a>
 
@@ -84,8 +105,8 @@
                                     </div>
                                     <div class="card-footer text-center">
 
-                                        <a class="btn btn-danger btn-sm" href="<%="?ART="+product.code %> ">X</a>
-                                        <a class="btn btn-dark btn-sm" href="<%="?ART="+product.code %> ">Editar</a>
+                                        <a class="btn btn-danger btn-sm" href="<%="?del="+product.code %> ">X</a>
+                                        <a class="btn btn-dark btn-sm" href="<%="NuevoProducto.aspx?mod=" + product.code %> ">Editar</a>
                                         <a class="btn btn-dark btn-sm" href="<%="?ART="+product.code %> ">Agregar stock</a>
                                     </div>
                                 </div>
