@@ -18,7 +18,7 @@
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm"></div>
+                <div class="col-sm"> <a href="Tienda.aspx">Cliente</a> </div>
                 <div class="col-sm">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -114,6 +114,10 @@
                             <div class="form-group col-sm">
                                 <a href="Categorias.aspx" class="btn btn-dark btn-sm">categorias</a>
                             </div>
+                        </div><div class="form-row" style="text-align: center">
+                            <div class="form-group col-sm">
+                                <a href="#" class="btn btn-dark btn-sm">Facturacion</a>
+                            </div>
                         </div>
                         <div class="form-row" style="text-align: center">
                             <div class="form-group col-sm">
@@ -138,7 +142,7 @@
                                     <img src="<% = product.urlimagen %>" class="card-img-top" alt="..." height="200" width="80">
                                     <div class="card-body" style="height: 150px">
                                         <h5 class="card-title" style="display: flex"><% = product.name %></h5>
-                                        <p class="card-subtitle">$<% =product.margin %> </p>
+                                        
                                         <p class="card-text" style="font-size: smaller"><% =product.desc %></p>
                                         <p class="card-text" style="font-size: smaller"><% = "Stock " + product.stock.ammount +" Precio $" + product.unitPrice() %></p>
                                     </div>

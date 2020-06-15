@@ -17,13 +17,13 @@
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm"></div>
+                <div class="col-sm"> <a href="TiendaAdmin.aspx">Admin</a> </div>
                 <div class="col-sm">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categorias</button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="tiendaAdmin.aspx">Todos</a>
+                                <a class="dropdown-item" href="tienda.aspx">Todos</a>
                                 <%foreach (Dominio.Categoria item in categorias)
                                     { %>
                                 <div><a class="dropdown-item" href="?cat=<%= item.id %>"><%=item.name %></a></div>
@@ -52,7 +52,7 @@
                                     <img src="<% = product.urlimagen %>" class="card-img-top" alt="..." height="200" width="80">
                                     <div class="card-body" style="height: 150px">
                                         <h5 class="card-title" style="display: flex"><% = product.name %></h5>
-                                        <p class="card-subtitle">$<% =product.margin %> </p>
+                                        <p class="card-subtitle">$<% =product.unitPrice() %> </p>
                                         <p class="card-text" style="font-size: smaller"><% =product.desc %></p>
                                     </div>
                                     <div class="card-footer text-center">
@@ -60,8 +60,8 @@
                                             { %>
                                         <a class="btn btn-dark" href="<%="?ART=" + product.code %> ">comprar</a>
                                         <%}
-                                        else
-                                        { %>
+                                            else
+                                            { %>
 
                                         <p style="color: red">Sin stock</p>
                                         <%} %>
@@ -71,12 +71,27 @@
                             <%} %>
                         </div>
                     </div>
-
-
                 </div>
-                <div class="col-sm"  style="background-color:aqua">
-                    <h4> <%="Items en carrito " + carrito.items.Count() %></h4>
+                <div class="col-sm" style="background-color: aqua">
 
+                    <div class="container" style="border: solid">
+                        <div class="row">
+                            <div class="col-sm">
+                                <h2>Orden</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <h6><%="Items en carrito " + carrito.items.Count() %></h6>
+                                <h6><%="Total " + carrito.totalPrice() %></h6>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <a href="DetalleOrden.aspx">content</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
 

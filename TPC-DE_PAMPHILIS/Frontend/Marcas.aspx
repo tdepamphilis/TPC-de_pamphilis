@@ -17,7 +17,7 @@
             <div class="form-row" style="text-align: center">
                 <div class="col-sm-3"></div>
                 <div class="form-group col-sm-6">
-                    <h3>categorias</h3>
+                    <h1>Marcas</h1>
                 </div>
                 <div class="col-sm-3"></div>
             </div>
