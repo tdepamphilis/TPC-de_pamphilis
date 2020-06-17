@@ -1,4 +1,5 @@
-﻿using Dominio;
+﻿using Business;
+using Dominio;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,9 +17,12 @@ namespace Frontend
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+
+            carrito = loadChart();
+            
             if(!IsPostBack)
             {
-                carrito = loadChart();
                 del();
                 take();
                 add();
@@ -96,5 +100,13 @@ namespace Frontend
             }
         }
 
+        protected void ButtonComprar_Click(object sender, EventArgs e)
+        {
+            
+            FacturaBusiness facturaBusiness = new FacturaBusiness();
+            Carrito carro = loadChart();     
+            Factura factura = carro.GenerarFactura();
+            facturaBusiness.SaveFactura(factura);
+        }
     }
 }

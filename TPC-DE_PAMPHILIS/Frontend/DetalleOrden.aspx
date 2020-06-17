@@ -37,8 +37,12 @@
                         </div>
 
                         <%} %>
+                        <div class="row">
+                            <div class="col-sm" style="text-align:center">
+                                <asp:Button ID="ButtonComprar" runat="server" Text="Button" OnClick="ButtonComprar_Click" />
+                            </div>
+                        </div>
                     </div>
-
                 </div>
                 <div class="col-sm"></div>
 
