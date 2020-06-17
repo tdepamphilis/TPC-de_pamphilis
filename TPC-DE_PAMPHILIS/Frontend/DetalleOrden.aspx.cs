@@ -1,6 +1,7 @@
 ﻿using Dominio;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -18,6 +19,9 @@ namespace Frontend
             if(!IsPostBack)
             {
                 carrito = loadChart();
+                del();
+                take();
+                add();
             }
         }
 
@@ -29,6 +33,67 @@ namespace Frontend
 
             Carrito rtn = (Carrito)Session["chart"];
             return rtn;
+        }
+
+        private void add()
+        {
+            string code;
+            code = Request.QueryString["add"];
+            if(code != null)
+            {
+                foreach(ItemCarrito item in carrito.items)
+                {
+                    if (item.code == code)
+                        item.ammount++;
+                }
+            }
+        }
+        
+        private void take()
+        {
+            string code;
+            code = Request.QueryString["take"];
+            if(code != null)
+            {
+                int remove = -1;
+                int index = 0;
+                foreach(ItemCarrito item in carrito.items)
+                {
+                    if(item.code == code)
+                    {
+                        item.ammount--;
+                        remove = index;
+                        
+                    }
+                    index++;
+                }
+
+                if (remove != -1)
+                    carrito.items.RemoveAt(remove);
+            }
+
+        }
+
+        private void del()
+        {
+            string code;
+            code = Request.QueryString["del"];
+            if(code != null)
+            {
+                int index = 0;
+                int selected = 1;
+
+                foreach(ItemCarrito item in carrito.items)
+                {
+                    if(item.code == code)
+                    {
+                        selected = index;
+                    }
+                    index++;
+                }
+                carrito.items.RemoveAt(selected);
+                
+            }
         }
 
     }

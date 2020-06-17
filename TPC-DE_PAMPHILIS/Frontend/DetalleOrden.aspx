@@ -28,9 +28,9 @@
                                 <p> <%= item.name + " X " + item.ammount + " Precio parcial $" + item.partialPrice() %></p>
                             </div>
                             <div class="col-sm-3" style="border:solid; border-width:thin">
-                                <a href="#">+1</a>
-                                <a href="#">-1</a>
-                                <a href="#">Quitar todo</a>
+                                <a href="?add=<%=item.code %>">+1</a>
+                                <a href="?take=<%=item.code %>">-1</a>
+                                <a href="?del=<%=item.code %>">Quitar todo</a>
                             </div>
                             <div class="col-sm-2"></div>
 
