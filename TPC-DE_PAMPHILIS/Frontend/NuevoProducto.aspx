@@ -16,7 +16,7 @@
     <form id="form1" runat="server">
         <div class="container-fluid">
             <div class="row" style="background-color: dimgrey">
-                <div class="col-sm-1" style="text-align: center">
+                <div class="col-sm-1">
                     <img src="https://darodistribuidora.com/wp-content/uploads/logodarodist.png" style="width: 170px; height: 80px" alt="Alternate Text" />
                 </div>
                 <div class="col-sm-10" style="position: relative; top: 27px; text-align: center">
@@ -29,7 +29,7 @@
                         </div>
 
                         <a href="TiendaAdmin.aspx" class="btn btn-dark btn-sm">Volver</a>
-                        <a href="Marcas.aspx" class="btn btn-dark btn-sm">Stock</a>
+                        <a href="GestionStock.aspx" class="btn btn-dark btn-sm">Stock</a>
                         <a href="Marcas.aspx" class="btn btn-dark btn-sm">Marcas</a>
                         <a href="Categorias.aspx" class="btn btn-dark btn-sm">categorias</a>
                         <a href="#" class="btn btn-dark btn-sm">Facturacion</a>
@@ -64,10 +64,10 @@
             <div class="form-row">
                 <div class="col-sm-5"></div>
                 <div class="form-group col-sm-2">
-                    <div class="form-row">
-                        <div class="form-group col-sm">
-                            <asp:Label ID="LabelCode" runat="server" Text="Codigo"></asp:Label>
-                            <asp:TextBox ID="TextCode" runat="server" CssClass="form-control"></asp:TextBox>
+                    <div class="form-row" style="text-align:center">
+                        <div class="form-group col-xs" >
+                            <asp:Label ID="LabelCode" runat="server" Text="Codigo" style=" position:relative;left:17%"></asp:Label>
+                            <asp:TextBox ID="TextCode" runat="server" CssClass="form-control" style="width:35%; position:relative; left:50%" > </asp:TextBox>
                         </div>
                     </div>
                 </div>
@@ -82,9 +82,9 @@
             </div>
             <div class="form-row">
                 <div class="form-group col-sm-5"></div>
-                <div class="form-group col-sm-2">
+                <div class="form-group col-sm-2" style="text-align:center">
 
-                    <asp:Button ID="ButtonConfirm" runat="server" Text="Button" OnClick="ButtonConfirm_Click" />
+                    <asp:Button ID="ButtonConfirm" runat="server" Text="Confirmar" OnClick="ButtonConfirm_Click"  CssClass="btn btn-light"/>
                 </div>
                 <div class="form-group col-sm-5"></div>
             </div>

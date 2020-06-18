@@ -117,6 +117,7 @@
     <Content Include="DetalleOrden.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="GestionStock.aspx" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -204,6 +205,13 @@
     </Compile>
     <Compile Include="DetalleOrden.aspx.designer.cs">
       <DependentUpon>DetalleOrden.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GestionStock.aspx.cs">
+      <DependentUpon>GestionStock.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionStock.aspx.designer.cs">
+      <DependentUpon>GestionStock.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

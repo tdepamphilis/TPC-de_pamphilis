@@ -11,26 +11,42 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </head>
-<body>
+<body style="background: #e8e4e1">
     <form id="form1" runat="server">
-        <div class="container" style="border: solid">
+        <div class="container-fluid">
+            <div class="row" style="background-color: dimgrey">
+                <div class="col-sm-1" style="text-align: center">
+                    <img src="https://darodistribuidora.com/wp-content/uploads/logodarodist.png" style="width: 170px; height: 80px" alt="Alternate Text" />
+                </div>
+                <div class="col-sm-5" style="position: relative; top: 27px; text-align: center">
+
+                    <div class="dropdown show">
+
+                        <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nuevo</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="NuevoProducto.aspx">Producto</a>
+                            <a class="dropdown-item" href="NewBC.aspx?type=cat">Categoria</a>
+                            <a class="dropdown-item" href="NewBC.aspx?type=brand">Marca</a>
+                        </div>
+                        <a href="TiendaAdmin.aspx" class="btn btn-dark btn-sm" style="text-align: left">Productos</a>
+                        <a href="GestionStock.aspx" class="btn btn-dark btn-sm">Stock</a>
+                        <a href="Categorias.aspx" class="btn btn-dark btn-sm">categorias</a>
+                        <a href="#" class="btn btn-dark btn-sm">Facturacion</a>
+                        <a href="#" class="btn btn-dark btn-sm">Estadisticas</a>
+                    </div>
+                </div>
+                <div class="hidden-lg hidden-md hidden-sm">&nbsp;</div>
+                <div class="col-sm-3">
+                    <asp:TextBox ID="TextSearch" runat="server" CssClass="form-control" placeholder="Buscar" Style="position: relative; top: 30%"></asp:TextBox>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
             <div class="form-row" style="text-align: center">
                 <div class="col-sm-3"></div>
                 <div class="form-group col-sm-6">
                     <h1>Marcas</h1>
                 </div>
                 <div class="col-sm-3"></div>
-            </div>
-            <div class=" form-row">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-3">
-                    <asp:TextBox ID="TextSearch" runat="server" CssClass="form-control" placeholder="Buscar"></asp:TextBox>
-
-                </div>
-                <div class="col-sm-1">
-                    <a href="NewBC.aspx?type=brand">Nueva</a>
-                </div>
-                <div class="col-sm-4"></div>
             </div>
             <%if (action == 1)
                 { %>
@@ -76,21 +92,25 @@
 
 
             <%} %>
-            <div class="row row-cols-2 row-cols-md-5">
+            <div class="row row-cols-2 row-cols-md-6">
 
                 <%foreach (Dominio.Marca marca in marcas)
                     { %>
-                <div class="card" style="width: 18rem;">
-                    <div class="card-header" style="text-align: center">
-                        <%=marca.name %>
+                <div class="col-md-2">
+
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-header" style="text-align: center">
+                            <%=marca.name %>
+                        </div>
+                        <ul class="list-group list-group-flush" style="text-align: center">
+                            <li class="list-group-item">
+                                <a href="Marcas?rnm=<%=marca.id %>">Renombrar</a>
+                                <a href="Marcas?del=<%=marca.id %>">Eliminar</a>
+                            </li>
+                        </ul>
                     </div>
-                    <ul class="list-group list-group-flush" style="text-align: center">
-                        <li class="list-group-item">
-                            <a href="Marcas?rnm=<%=marca.id %>">Renombrar</a>
-                            <a href="Marcas?del=<%=marca.id %>">Eliminar</a>
-                        </li>
-                    </ul>
                 </div>
+
 
                 <%} %>
             </div>
