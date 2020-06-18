@@ -12,17 +12,35 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
 </head>
-<body>
+<body style="background: #e8e4e1">
     <form id="form1" runat="server">
 
-
-        <div class="container-fluid">
+        <div class="container-fluid" style="background-color: dimgrey">
             <div class="row">
-                <div class="col-sm"> <a href="Tienda.aspx">Cliente</a> </div>
-                <div class="col-sm">
-                    <div class="input-group mb-3">
+                <div class="col-sm-1" style="text-align: center">
+                    <img src="https://darodistribuidora.com/wp-content/uploads/logodarodist.png" style="width: 170px; height: 80px" alt="Alternate Text" />
+                </div>
+                <div class="col-sm-5" style="position: relative; top: 27px; text-align: center">
+                    <div class="dropdown show">
+                        <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nuevo</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="NuevoProducto.aspx">Producto</a>
+                            <a class="dropdown-item" href="NewBC.aspx?type=cat">Categoria</a>
+                            <a class="dropdown-item" href="NewBC.aspx?type=brand">Marca</a>
+                        </div>
+
+                        <a href="Marcas.aspx" class="btn btn-dark btn-sm">Stock</a>
+                        <a href="Marcas.aspx" class="btn btn-dark btn-sm">Marcas</a>
+                        <a href="Categorias.aspx" class="btn btn-dark btn-sm">categorias</a>
+                        <a href="#" class="btn btn-dark btn-sm">Facturacion</a>
+                        <a href="#" class="btn btn-dark btn-sm">Estadisticas</a>
+                    </div>
+                </div>
+                <div class="hidden-lg hidden-md hidden-sm">&nbsp;</div>
+                <div class="col-sm-3" style="position: relative; top: 25px; text-align: center;">
+                    <div class="input-group mb-4">
                         <div class="input-group-prepend">
-                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categorias</button>
+                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: white">Categorias</button>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="tiendaAdmin.aspx">Todos</a>
                                 <%foreach (Dominio.Categoria item in categorias)
@@ -34,8 +52,14 @@
                         <asp:TextBox CssClass="form-control" ID="TextBox1" runat="server" OnTextChanged="TextBox1_TextChanged"></asp:TextBox>
                     </div>
                 </div>
-                <div class="col-sm"></div>
+                <div class="hidden-lg hidden-md hidden-sm">&nbsp;</div>
+                <div class="col-sm-3"></div>
+
+
             </div>
+        </div>
+        <div class="container-fluid">
+
 
             <%if (action == 1)
                 { %>
@@ -86,8 +110,8 @@
             </div>
             <div class="form-row">
                 <div class="col-sm-4"></div>
-                <div class="col-sm-4" style="text-align:center">
-                    <asp:Button ID="ButtonStock" runat="server" Text="Button" OnClick="ButtonStock_Click"/>
+                <div class="col-sm-4" style="text-align: center">
+                    <asp:Button ID="ButtonStock" runat="server" Text="Button" OnClick="ButtonStock_Click" />
                 </div>
                 <div class="col-sm-4"></div>
 
@@ -96,53 +120,31 @@
             <%} %>
 
             <div class="row">
-                <div class="col-sm">
-                    <div class="container-fluid" style="background-color: lightslategrey">
-                        <div class="form-row">
-                            <div class="form-group col-sm" style="text-align: center">
-                                <a href="NuevoProducto.aspx" class="btn btn-dark btn-sm">Nuevo producto</a>
+                <div class="col-sm" style="text-align: center">
 
-                            </div>
-                        </div>
-                        <div class="form-row" style="text-align: center">
-                            <div class="form-group col-sm">
-                                <a href="Marcas.aspx" class="btn btn-dark btn-sm">Marcas</a>
-
-                            </div>
-                        </div>
-                        <div class="form-row" style="text-align: center">
-                            <div class="form-group col-sm">
-                                <a href="Categorias.aspx" class="btn btn-dark btn-sm">categorias</a>
-                            </div>
-                        </div><div class="form-row" style="text-align: center">
-                            <div class="form-group col-sm">
-                                <a href="#" class="btn btn-dark btn-sm">Facturacion</a>
-                            </div>
-                        </div>
-                        <div class="form-row" style="text-align: center">
-                            <div class="form-group col-sm">
-                                <a href="#" class="btn btn-dark btn-sm">Estadisticas</a>
-
-                            </div>
-                        </div>
-                    </div>
+                    <h1>Gestion de productos</h1>
+                    <div>&nbsp;</div>
                 </div>
-                <div class="col-sm-9" style="border: solid">
+
+            </div>
+
+            <div class="row">
+                <div class="col-sm">
                     <div class="container-fluid">
 
-                        <div class="row row-cols-1 row-cols-md-5">
+                        <div class="row row-cols-1 row-cols-md-6" style="text-align: center">
 
                             <% foreach (Dominio.Producto product in productos)
 
                                 {
                             %>
 
-                            <div class="col sm-4">
+                            <div class="col-sm">
                                 <div class="card">
                                     <img src="<% = product.urlimagen %>" class="card-img-top" alt="..." height="200" width="80">
                                     <div class="card-body" style="height: 150px">
                                         <h5 class="card-title" style="display: flex"><% = product.name %></h5>
-                                        
+
                                         <p class="card-text" style="font-size: smaller"><% =product.desc %></p>
                                         <p class="card-text" style="font-size: smaller"><% = "Stock " + product.stock.ammount +" Precio $" + product.unitPrice() %></p>
                                     </div>
@@ -160,12 +162,6 @@
 
 
                 </div>
-                <div class="col-sm">
-
-
-
-                </div>
-
 
             </div>
 

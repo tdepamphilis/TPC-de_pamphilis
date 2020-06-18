@@ -173,7 +173,7 @@ namespace Business
                 {
 
                     command.CommandType = System.Data.CommandType.Text;
-                    command.CommandText = "delete from articulos where IdMarca = @code";
+                    command.CommandText = "upate  articulos set Active = 0 where IdMarca = @code ";
                     command.Parameters.AddWithValue("@code", idMarca);
                     command.Connection = connection;
                     connection.Open();
@@ -202,7 +202,7 @@ namespace Business
             {
                
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "insert into ARTICULOS values(@cod, @nombre, @desc, @marca, @imagen, @margen)";
+                command.CommandText = "insert into ARTICULOS values(@cod, @nombre, @desc, @marca, @imagen, @margen, 1)";
                 command.Parameters.AddWithValue("@cod", producto.code);
                 command.Parameters.AddWithValue("@nombre", producto.name);
                 command.Parameters.AddWithValue("@desc", producto.desc);
@@ -264,7 +264,7 @@ namespace Business
             {
 
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "delete from articulos where Codigo = @code";
+                command.CommandText = "update articulos set Active = 0 where Codigo = @code ";
                 command.Parameters.AddWithValue("@code", code);
                 command.Connection = connection;
                 connection.Open();

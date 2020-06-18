@@ -33,15 +33,6 @@ namespace Frontend
         protected global::System.Web.UI.WebControls.TextBox TextName;
 
         /// <summary>
-        /// Control TextDesc.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextDesc;
-
-        /// <summary>
         /// Control FileImage.
         /// </summary>
         /// <remarks>
@@ -67,6 +58,15 @@ namespace Frontend
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList BrandSelector;
+
+        /// <summary>
+        /// Control TextDesc.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextDesc;
 
         /// <summary>
         /// Control LabelCode.

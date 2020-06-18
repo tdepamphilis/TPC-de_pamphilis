@@ -12,74 +12,85 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </head>
-<body>
+<body style="background: #e8e4e1">
     <form id="form1" runat="server">
-      
-                
-                    <div class="container">
-                        <div class="form-row">
-                            <div class="col-sm-3"></div>
-                            <div class="form-group col-sm-6">
-                                <asp:TextBox ID="TextName" runat="server" CssClass="form-control" placeholder="Nombre"></asp:TextBox>
-                            </div>
-                            <div class="col-sm-3"></div>
+        <div class="container-fluid">
+            <div class="row" style="background-color: dimgrey">
+                <div class="col-sm-1" style="text-align: center">
+                    <img src="https://darodistribuidora.com/wp-content/uploads/logodarodist.png" style="width: 170px; height: 80px" alt="Alternate Text" />
+                </div>
+                <div class="col-sm-10" style="position: relative; top: 27px; text-align: center">
+                    <div class="dropdown show">
+                        <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nuevo</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="NuevoProducto.aspx">Producto</a>
+                            <a class="dropdown-item" href="NewBC.aspx?type=cat">Categoria</a>
+                            <a class="dropdown-item" href="NewBC.aspx?type=brand">Marca</a>
                         </div>
-                        <div class="form-row">
-                            <div class="col-sm-3"></div>
-                            <div class="form-group col-sm-6">
-                                <asp:TextBox ID="TextDesc" runat="server" CssClass="form-control" placeholder="Descripcion"></asp:TextBox>
-                            </div>
-                            <div class="col-sm-3"></div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-sm-3"></div>
-                            <div class="form-group col-sm-6">
-                                
-                                <asp:FileUpload ID="FileImage" runat="server" />
 
-                            </div>
-                            <div class="col-sm-3"></div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-sm-3"></div>
-                            <div class="form-group col-sm-4" style="border:solid">
+                        <a href="TiendaAdmin.aspx" class="btn btn-dark btn-sm">Volver</a>
+                        <a href="Marcas.aspx" class="btn btn-dark btn-sm">Stock</a>
+                        <a href="Marcas.aspx" class="btn btn-dark btn-sm">Marcas</a>
+                        <a href="Categorias.aspx" class="btn btn-dark btn-sm">categorias</a>
+                        <a href="#" class="btn btn-dark btn-sm">Facturacion</a>
+                        <a href="#" class="btn btn-dark btn-sm">Estadisticas</a>
+                    </div>
+                </div>
+            </div>
+            <div>&nbsp;</div>
+            <div class="row">
+                <div class="col-sm">
+                    <h1 style="text-align: center">Nuevo producto</h1>
+                </div>
+            </div>
+            <div>&nbsp;</div>
+            <div class="form-row" style="text-align: center">
+                <div class="col-sm-4"></div>
+                <div class="form-group col-sm-2">
+                    <asp:TextBox ID="TextName" runat="server" CssClass="form-control" placeholder="Nombre"></asp:TextBox>
+                    <div>&nbsp;</div>
+                    <asp:FileUpload ID="FileImage" runat="server" />
+                    <div>&nbsp;</div>
+                    <asp:Label ID="Labelbrand" runat="server" Text="Marca:"></asp:Label>
+                    <asp:DropDownList ID="BrandSelector" runat="server"></asp:DropDownList>
+                    <div>&nbsp;</div>
 
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class=" col-sm">
-                                            <asp:Label ID="Labelbrand" runat="server" Text="Marca:"></asp:Label>
-
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-sm">
-                                            <asp:DropDownList ID="BrandSelector" runat="server"></asp:DropDownList>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-sm">
-                                            <asp:Label ID="LabelCode" runat="server" Text="Codigo"></asp:Label>
-                                            <asp:TextBox ID="TextCode" runat="server" CssClass="form-control"  ></asp:TextBox>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group col-sm-2 overflow-auto" style="max-height: 170px; border: thin; border: solid">
-                                <asp:CheckBoxList ID="Categorybox" runat="server"></asp:CheckBoxList>
-                            </div>
-                            <div class="col-sm-3"></div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-sm-4"></div>
-                            <div class="form-group col-sm-4">
-
-                                <asp:Button ID="ButtonConfirm" runat="server" Text="Button" OnClick="ButtonConfirm_Click" />
-                            </div>
-                            <div class="form-group col-sm-4"></div>
+                </div>
+                <div class="form-group col-sm-2">
+                    <asp:TextBox ID="TextDesc" runat="server" CssClass="form-control" placeholder="Descripcion" Rows="4" TextMode="MultiLine"></asp:TextBox>
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+            <div class="form-row">
+                <div class="col-sm-5"></div>
+                <div class="form-group col-sm-2">
+                    <div class="form-row">
+                        <div class="form-group col-sm">
+                            <asp:Label ID="LabelCode" runat="server" Text="Codigo"></asp:Label>
+                            <asp:TextBox ID="TextCode" runat="server" CssClass="form-control"></asp:TextBox>
                         </div>
                     </div>
-                
-     
+                </div>
+                <div class="col-sm-5"></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5"></div>
+                <div class="form-group col-sm-2 overflow-auto" style="max-height: 170px; border: thin; border: solid">
+                    <asp:CheckBoxList ID="Categorybox" runat="server"></asp:CheckBoxList>
+                </div>
+                <div class="col-sm-5"></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-5"></div>
+                <div class="form-group col-sm-2">
+
+                    <asp:Button ID="ButtonConfirm" runat="server" Text="Button" OnClick="ButtonConfirm_Click" />
+                </div>
+                <div class="form-group col-sm-5"></div>
+            </div>
+        </div>
+
+
     </form>
 </body>
 </html>
