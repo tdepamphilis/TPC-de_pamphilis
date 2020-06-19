@@ -22,7 +22,7 @@
                 <div class="col-sm-5" style="position: relative; top: 27px; text-align: center">
 
                     <div class="dropdown show">
-                        <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nuevo</a>
+                        <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nuevo</a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" href="NuevoProducto.aspx">Producto</a>
                             <a class="dropdown-item" href="NewBC.aspx?type=cat">Categoria</a>

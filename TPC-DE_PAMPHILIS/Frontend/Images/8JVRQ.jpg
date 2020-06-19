@@ -1,0 +1,29 @@
+div class=row row-cols-1 row-cols-md-6
+
+                % foreach (Dominio.Producto product in productos)
+
+                    {
+                %
+
+                div class=col mb
+                    div class=card style=
+                        img src=% = product.urlimagen % class=card-img-top alt=... height=200 width=80
+                        div class=card-body style=height 150px
+                            h5 class=card-title style=display flex% = product.name %h5
+                            p class=card-subtitle$% =product.unitPrice() % p
+                            p class=card-text style=font-size smaller% =product.desc %p
+                        div
+                        div class=card-footer text-center
+                            %if (product.stock.ammount  0)
+                                { %
+                            a class=btn btn-dark href=%=ART= + product.code % Agregar a carritoa
+                            %}
+                                else
+                                { %
+
+                            p style=color redSin stockp
+                            %} %
+                        div
+                    div
+                div
+                %} %

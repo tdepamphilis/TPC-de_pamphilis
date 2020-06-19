@@ -163,6 +163,7 @@
     <Content Include="Site.Master" />
     <Content Include="Tienda.aspx" />
     <Content Include="TiendaAdmin.aspx" />
+    <Content Include="VerProducto.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -272,6 +273,13 @@
     </Compile>
     <Compile Include="TiendaAdmin.aspx.designer.cs">
       <DependentUpon>TiendaAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VerProducto.aspx.cs">
+      <DependentUpon>VerProducto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VerProducto.aspx.designer.cs">
+      <DependentUpon>VerProducto.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

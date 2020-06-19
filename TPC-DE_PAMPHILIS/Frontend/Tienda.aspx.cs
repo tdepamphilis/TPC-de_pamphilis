@@ -19,6 +19,7 @@ namespace Frontend
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            checkSearch();
             loadproducts();
             categorias = categoriaBusiness.listar();
             if(!IsPostBack)
@@ -48,6 +49,16 @@ namespace Frontend
             productos = productoBusiness.listarxcat(TextBox1.Text, catid);
 
         }
+
+        private void checkSearch()
+        {
+            string code = Request.QueryString["search"];
+            if(code != null)
+            {
+                TextBox1.Text = code;
+            }
+        }
+
 
         private Carrito readChart()
         {
