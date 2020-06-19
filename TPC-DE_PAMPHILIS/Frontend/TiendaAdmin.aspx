@@ -141,15 +141,17 @@
 
                             <div class="col-sm">
                                 <div class="card">
+                                    
+                                    <a href="VerProductoAdmin?prod=<%=product.code %>"> 
                                     <img src="<% = product.urlimagen %>" class="card-img-top" alt="..." height="200" width="80">
+                                    </a>
                                     <div class="card-body" style="height: 150px">
                                         <h5 class="card-title" style="display: flex"><% = product.name %></h5>
 
                                         <p class="card-text" style="font-size: smaller"><% =product.desc %></p>
                                         <p class="card-text" style="font-size: smaller"><% = "Stock " + product.stock.ammount +" Precio $" + product.unitPrice() %></p>
                                     </div>
-                                    <div class="card-footer text-center">
-
+                                    <div class="card-footer text-center"> 
                                         <a class="btn btn-danger btn-sm" href="<%="?del="+product.code %> ">X</a>
                                         <a class="btn btn-dark btn-sm" href="<%="NuevoProducto.aspx?mod=" + product.code %> ">Editar</a>
                                         <a class="btn btn-dark btn-sm" href="<%="?stk="+product.code %> ">Agregar stock</a>
