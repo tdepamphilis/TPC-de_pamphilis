@@ -40,7 +40,7 @@
             <div>&nbsp;</div>
             <div class="row">
                 <div class="col-sm">
-                    <h1 style="text-align: center">Nuevo producto</h1>
+                    <h1 style="text-align: center"><%=title + " " %> producto</h1>
                 </div>
             </div>
             <div>&nbsp;</div>

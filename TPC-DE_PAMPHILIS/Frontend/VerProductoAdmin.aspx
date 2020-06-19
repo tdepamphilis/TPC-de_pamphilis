@@ -12,7 +12,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
 </head>
-<body>
+<body style="background-color: #e8e4e1">
     <form id="form1" runat="server">
 
         <div class="container-fluid" style="background-color: dimgrey">
@@ -64,7 +64,7 @@
                 <div class="col-sm-5">
                     <img src="<% = producto.urlimagen %>" class="card-img-top" alt="..." height="370" width="250" style="border: solid">
                 </div>
-                <div class="col-sm-7" style="border: solid">
+                <div class="col-sm-7">
                     <div class="container">
                         <div class="row">
                             <div class="col">
@@ -78,56 +78,79 @@
                                 <h4><%= producto.desc %></h4>
                             </div>
                         </div>
+                        <div class="row">
+                            <div>&nbsp</div>
+                            <div class="col-6">
+                                <div>&nbsp;</div>
+                                <p>-Stock actual:<%=" "+ producto.stock.ammount %></p>
+                                <p>-Ultimo precio de repsicion: <%=" $"+ (float)producto.stock.price %></p>
+                                <p>-Precio de venta <%=" $"+ producto.unitPrice().ToString() %></p>
+                                <div>&nbsp;</div>
+                                <div>&nbsp;</div>
 
-
-                        <div style="position: relative; top: 60px;">
-
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
 
 
                             <p>
-                                <a class="btn btn-secondary btn-sm" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Agregar stock  </a>
-
+                                <a class="btn btn-light btn-sm" data-toggle="collapse" href="#stock" role="button" aria-expanded="false" aria-controls="collapseExample">Agregar stock  </a>
+                                <a href="<%="NuevoProducto.aspx?mod=" + producto.code %> " class="btn btn-light btn-sm">Modificar</a>
+                                <a class="btn btn-light btn-sm" data-toggle="collapse" href="#del" role="button" aria-expanded="false" aria-controls="collapseExample">Eliminar</a>
                             </p>
-                            <div class="collapse" id="collapseExample">
-                                <div class="card card-body">
-                                    <div class="form-row">
-                                        <div class="col-sm-3"></div>
-                                        <div class="col-sm-3">
-                                            <asp:TextBox ID="TextAmmount" runat="server" CssClass="form-control" placeholder="Cantidad"></asp:TextBox>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">$</div>
-                                                </div>
-                                                <asp:TextBox ID="TextPrice" runat="server" CssClass="form-control"></asp:TextBox>
+                        </div>
+                        <div class="collapse" id="stock">
+                            <div class="card card-body">
+                                <div class="form-row">
+                                    <div class="col-sm-3"></div>
+                                    <div class="col-sm-3">
+                                        <asp:TextBox ID="TextAmmount" runat="server" CssClass="form-control" placeholder="Cantidad"></asp:TextBox>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">$</div>
                                             </div>
-
+                                            <asp:TextBox ID="TextPrice" runat="server" CssClass="form-control"></asp:TextBox>
                                         </div>
-                                        <div class="col-sm-3"></div>
 
                                     </div>
-                                    <div class="form-row mt-3 ">
-                                        <div class="col-sm-4"></div>
-                                        <div class="col-sm-4">
-                                            <asp:Button ID="ButtonStock" runat="server" Text="Button" OnClick="ButtonStock_Click" CssClass="btn btn-light" />
-                                        </div>
-                                        <div class="col-sm-4"></div>
-                                    </div>
+                                    <div class="col-sm-3"></div>
 
+                                </div>
+                                <div class="form-row mt-3 ">
+                                    <div class="col-sm-4"></div>
+                                    <div class="col-sm-4">
+                                        <asp:Button ID="ButtonStock" runat="server" Text="Button" OnClick="ButtonStock_Click" CssClass="btn btn-light" />
+                                    </div>
+                                    <div class="col-sm-4"></div>
                                 </div>
 
                             </div>
 
+                        </div>
 
+                        <div class="collapse" id="del">
+                            <div class=" card card-body">
+                                <div class="row justify-content-center">
+                                    <h6>Seguro?</h6>
 
+                                </div>
+                                <div class="row justify-content-center">
 
-
-
-
-
+                                    <asp:Button ID="ButtonDel" runat="server" Text="Eliminar" CssClass="btn btn-danger btn-sm" OnClick="ButtonDel_Click" />
+                                </div>
+                            </div>
 
                         </div>
+
+
+
+
+
+
+
+
 
                     </div>
                 </div>

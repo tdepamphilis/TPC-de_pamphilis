@@ -40,7 +40,7 @@ create table articulos
 
 create table stock
 (
-	[CodigoArticulo] [varchar] (5) unique not null,
+	[CodigoArticulo] [varchar] (5) foreign key references articulos(Codigo),
 	[Cantidad] [int] not null,
 	[PrecioDistribuidor] [money] not null,
 	
@@ -49,32 +49,38 @@ create table stock
 go
 
 create table categoriaxarticulo(
-[CodigoArticulo] [varchar] (5),
+[CodigoArticulo] [varchar] (5) foreign key references articulos(Codigo) ,
 [Idcategoria] [int] foreign key references categorias(id),
+)
+go
+create table zonas(
+[Id] [int] identity (1,1) primary key,
+[Nombre] [varchar] (15) not null
 )
 go
 create table usuarios(
 [Codigo] [varchar] (5) primary key,
 [Nombre] [varchar] (50) not null,
 [Apellido] [varchar] (50) not null,
+[DNI] [smallint] not null,
 [Correo] [varchar] (100) not null,
 [Password] [varchar] (50) not null,
 [Dirrecion] [varchar] (50) not null,
-[IdCiudad] [int] foreign key 
-[]
+[IdZona] [int] foreign key references zonas(id)
 )
 go
-create table ciudades(
-[Id] [int] identity(1,1) primary key,
-[Nombre] [varchar] unique not null
+create table admins(
+[Codigo] [varchar] (5) primary key,
+[Correo] [varchar] (50) not null,
+[Password] [varchar] (50) not null,
+[Nombre] [varchar] (50) not null
 )
 go
 create table facturas(
-
 [Codigo] [varchar] (15) primary key not null,
-[CodigoUsuario] [varchar] (5) not null,
+[CodigoUsuario] [varchar] (5) foreign key references usuarios(Codigo),
 [Fecha] [datetime] not null,
-[Estado] [bit]  not null,
+[Estado] [bit] not null,
 [ModoDePago] [varchar] (1) not null,
 [Monto] [money] not null
 )
@@ -125,8 +131,10 @@ go
 insert into categoriaxarticulo values ('asasd',2),('qwere',1),('qwere',5),('qwdas',6),('asdqw',4),('asdqw',2)
 go
 insert into stock values ('asasd', 0,500),('qwere', 300,200),('qwdas', 100,700),('asdqw', 300,500)
+insert into zonas values ('CABA'), ('Norte'), ('Sur')
+go
 
-select * from vw_articulos
+select * from zonas
 
 select * from articulos
 

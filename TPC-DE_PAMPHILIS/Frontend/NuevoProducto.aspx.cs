@@ -22,6 +22,7 @@ namespace Frontend
         List<Marca> marcas;
         List<Categoria> categorias;
         public Producto producto = new Producto();
+        public string title = "Nuevo";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -59,7 +60,9 @@ namespace Frontend
             if (code == null)
                 return false;
             loadProduct(code);
+            title = "Modificar";
             return true;
+
 
         }
         //-------------NUEVO PRODUCTO------------------
