@@ -12,12 +12,16 @@ namespace Dominio
         public string name { get; set; }
         public string apellido { get; set; }
 
+        public string mail { get; set; }
+        public string pass { get; set; }
         public string direccion { get; set; }
+
 
         public int dni { get; set; }
         public int tel { get; set; }
 
         public Zona zona { get; set; }
+
 
     }
 }

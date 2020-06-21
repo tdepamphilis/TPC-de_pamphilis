@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AltaUsuario.aspx.cs" Inherits="Frontend.AltaUsuario" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AltaUsuario.aspx.cs" Inherits="Frontend.AltaUsuario" EnableViewState="true" %>
 
 <!DOCTYPE html>
 
@@ -12,7 +12,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
 </head>
-<body style="background-color:#e8e4e1">
+<body style="background-color: #e8e4e1">
     <form id="form1" runat="server">
         <div class="container-fluid" style="background-color: dimgrey">
             <div class="row">
@@ -31,9 +31,9 @@
         <div class="container" style="">
             <div class="row justify-content-center">
                 <div class="col-5 justify-content-center">
-                     <img src="https://darodistribuidora.com/wp-content/uploads/logodarodist.png" style="width: 460px; height: 280px" alt="Alternate Text" />
+                    <img src="https://darodistribuidora.com/wp-content/uploads/logodarodist.png" style="width: 460px; height: 280px" alt="Alternate Text" />
                 </div>
-            </div>                        
+            </div>
             <div class="row justify-content-center">
                 <div class="col-5">
 
@@ -63,6 +63,9 @@
                                 <asp:TextBox ID="TextPass" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>
+                        
+                        
+                        
                         <div class="form-row justify-content-center mt-2">
                             <div class="form-group col-6 my-2 ">
 
@@ -77,17 +80,17 @@
                         <div class="form-row justify-content-center mt-2">
                             <div class="form-group col-9 my-2 ">
 
-                                <asp:Label ID="LabelDir" runat="server" Text="Direccion de su comercio"></asp:Label>
+                                <asp:Label ID="LabelDir" runat="server" Text="Direccion"></asp:Label>
                                 <asp:TextBox ID="TextDir" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
 
                             <div class="form-group col-3 my-2">
                                 <asp:Label ID="Label2" runat="server" Text="Zona"></asp:Label>
-                                <asp:DropDownList ID="DropDownZonas" runat="server" CssClass="dropwdown"></asp:DropDownList>
+                                <asp:DropDownList ID="DropDownZonas" runat="server" CssClass="dropwdown" AutoPostBack="true"></asp:DropDownList>
                             </div>
                         </div>
                         <div class="row justify-content-center mt-4">
-                            <asp:Button ID="ButtonSend" runat="server" Text="Registrarse" CssClass="btn btn-light"/>
+                            <asp:Button ID="ButtonSend" runat="server" Text="Registrarse" CssClass="btn btn-light" OnClick="ButtonSend_Click" />
                         </div>
                     </div>
                 </div>

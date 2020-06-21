@@ -2,10 +2,10 @@
 use master
 
 go
-
+/*
 drop database depamphilis_db
 go
-
+*/
 create database depamphilis_db
 go
 use depamphilis_db
@@ -62,7 +62,7 @@ create table usuarios(
 [Codigo] [varchar] (5) primary key,
 [Nombre] [varchar] (50) not null,
 [Apellido] [varchar] (50) not null,
-[DNI] [smallint] not null,
+[DNI] [int] not null,
 [Correo] [varchar] (100) not null,
 [Password] [varchar] (50) not null,
 [Dirrecion] [varchar] (50) not null,
@@ -131,19 +131,17 @@ go
 insert into categoriaxarticulo values ('asasd',2),('qwere',1),('qwere',5),('qwdas',6),('asdqw',4),('asdqw',2)
 go
 insert into stock values ('asasd', 0,500),('qwere', 300,200),('qwdas', 100,700),('asdqw', 300,500)
+go
 insert into zonas values ('CABA'), ('Norte'), ('Sur')
 go
+insert into usuarios values ('abcdf' ,'Tomas', 'De Pamphilis', 41067359, 'tomdp@gmail.com','hola123','calle falsa 123',2)
+go
 
-select * from zonas
-
-select * from articulos
-
-select * from facturas
-
-select * from itemsxfactura
+select * from usuarios
 /*
 as a
 inner join categoriaxarticulo as cxa on a.Codigo = cxa.CodigoArticulo
 inner join categorias as c on cxa.Idcategoria = c.id
 */
 
+select Count(*) from usuarios where Codigo = '3321d'
