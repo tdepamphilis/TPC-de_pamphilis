@@ -14,12 +14,14 @@ namespace Frontend
         public UsuarioBusiness usuarioBusiness = new UsuarioBusiness();
         public ZonaBusiness zonaBusiness = new ZonaBusiness();
         public List<Zona> zonas;
+       
         protected void Page_Load(object sender, EventArgs e)
         {
 
             if (!IsPostBack)
             {
                 loadZones();
+                checkError();
 
             }
         }
@@ -39,6 +41,15 @@ namespace Frontend
             }
         }
 
+        private void checkError()
+        {
+            string code = Request.QueryString["error"];
+            if (code == "mail")
+            {
+                LabelCorreo.Text = "Correo ya registrado";
+                LabelCorreo.Attributes.Add("style", "color:red");
+            }
+        }
         protected void ButtonSend_Click(object sender, EventArgs e)
         {
             if (true)
@@ -59,6 +70,8 @@ namespace Frontend
                 usuarioBusiness.nuevoUsuario(usuario);
                 if (usuarioBusiness.CheckAlta(usuario.mail, usuario.pass) == 0)
                     Response.Redirect("AltaUsuario.aspx?error=server");
+                Session["userCode"] = usuario.code;
+                Session["userPass"] = usuario.pass;
                 Response.Redirect("Tienda.aspx");
             }
 
