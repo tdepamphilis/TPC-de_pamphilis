@@ -43,7 +43,7 @@
                     <asp:TextBox ID="TextPass" runat="server" CssClass="form-control" placeholder="Contraseña" ></asp:TextBox>
                     </div>
                     <div class="form-group">
-                        <asp:Button ID="ButtonLogin" runat="server" Text="Login"  CssClass="btn btn-light"/>
+                        <asp:Button ID="ButtonLogin" runat="server" Text="Login"  CssClass="btn btn-light" OnClick="ButtonLogin_Click"/>
                         <a href="#" class="btn btn-light">Registrarse</a>
                     </div>
                     <div class="form-group">

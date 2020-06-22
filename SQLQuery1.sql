@@ -119,8 +119,11 @@ select m.Id, m.Nombre, COUNT(a.Codigo) as articulos from marcas as m
 left join articulos as a on a.IdMarca = m.Id
 group by m.Nombre, m.Id
 go
-
-
+create view [vw_usuarios]
+as
+select u.codigo, u.Nombre,u.Apellido,u.DNI,u.Correo,u.Password, u.Dirrecion, z.Id as idzona, z.Nombre as zona from usuarios as u
+inner join zonas as z on z.Id = u.IdZona
+go
 insert into marcas values ('arcor'),('la campagnola'),('Magistral'),('la serenisima'),('sancor')
 insert into categorias values ('cocina'),('almacen'),('bebidas'),('lacteos'),('limpieza'),('golosinas')
 insert into articulos values ('asasd','mermelada de naranja', 'caja 24 unidades', 2,'https://walmartar.vteximg.com.br/arquivos/ids/829225-1000-1000/Mermelada-Naranja-La-Campagnola-454-Gr-1-17738.jpg?v=636685104012570000', 100,1),
@@ -136,8 +139,9 @@ insert into zonas values ('CABA'), ('Norte'), ('Sur')
 go
 insert into usuarios values ('abcdf' ,'Tomas', 'De Pamphilis', 41067359, 'tomdp@gmail.com','hola123','calle falsa 123',2)
 go
+insert into admins values ('abcde','admin@correo','adminpass','tomas')
 
-select * from usuarios
+select * from  vw_usuarios
 /*
 as a
 inner join categoriaxarticulo as cxa on a.Codigo = cxa.CodigoArticulo

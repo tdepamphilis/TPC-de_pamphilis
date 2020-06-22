@@ -83,6 +83,47 @@ namespace Business
             }
         }
 
+        public Usuario login(string mail, string pass)
+        {
+            Usuario usuario = new Usuario();
+            Zona zona = new Zona();
+            GestorConexion gestor = new GestorConexion();
+
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            SqlDataReader lector;
+            try
+            {
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "select * from vw_usuarios where Correo = @correo and Password = @pass";
+                command.Parameters.AddWithValue("@correo", mail);
+                command.Parameters.AddWithValue("@pass", pass);
+                command.Connection = connection;
+                connection.Open();
+                lector = command.ExecuteReader();
+                lector.Read();
+                usuario.code = lector.GetString(0);
+                usuario.name = lector.GetString(1);
+                usuario.apellido = lector.GetString(2);
+                usuario.dni = lector.GetInt32(3);
+                usuario.mail = lector.GetString(4);
+                usuario.pass = lector.GetString(5);
+                usuario.direccion = lector.GetString(6);
+                zona.id = lector.GetInt32(7);
+                zona.name = lector.GetString(8);
+                usuario.zona = zona;
+                connection.Close();
+                return usuario;
+
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         //-------------CODIGOS------------------
 
         private bool checkCode(string code)
@@ -91,7 +132,7 @@ namespace Business
             SqlConnection connection = gestor.connection();
             SqlCommand command = new SqlCommand();
             bool result = false;
-            SqlDataReader  lector;
+            SqlDataReader lector;
             try
             {
                 command.CommandType = System.Data.CommandType.Text;
@@ -102,13 +143,13 @@ namespace Business
                 lector = command.ExecuteReader();
                 lector.Read();
                 int x = lector.GetInt32(0);
-                
+
                 if (x != 0)
                     result = true;
 
                 connection.Close();
                 return result;
-                
+
             }
             catch (Exception)
             {
@@ -157,7 +198,7 @@ namespace Business
                 command.Parameters.AddWithValue("@Password", usuario.pass);
                 command.Parameters.AddWithValue("@Dir", usuario.direccion);
                 command.Parameters.AddWithValue("@Zona", usuario.zona.id);
-                command.Connection = connection;               
+                command.Connection = connection;
                 connection.Open();
                 command.ExecuteNonQuery();
             }
