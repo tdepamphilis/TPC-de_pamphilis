@@ -59,66 +59,6 @@
             </div>
         </div>
         <div class="container-fluid">
-
-
-            <%if (action == 1)
-                { %>
-            <div class="form-row">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-4" style="text-align: center">
-                    <h4>Eliminar <%=" " + producto.name + "?" %></h4>
-                </div>
-                <div class="col-sm-4"></div>
-
-
-            </div>
-            <div class="form-row">
-                <div class="col-sm" style="text-align: center">
-                    <asp:Button ID="Buttondel" runat="server" Text="Button" OnClick="Buttondel_Click" />
-                </div>
-            </div>
-
-
-            <%}
-                else if (action == 2)
-                { %>
-
-            <div class="form-row">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-4" style="text-align: center">
-                    <h4><%=producto.name %></h4>
-
-                </div>
-                <div class="col-sm-4"></div>
-            </div>
-            <div class="form-row">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-4" style="text-align: center">
-                    <p><%= "Stock actual: " +producto.stock.ammount + " Precio de utlima reposicion $" + (float)producto.stock.price%></p>
-                </div>
-                <div class="col-sm-4"></div>
-            </div>
-            <div class="form-row">
-                <div class="col-sm-5"></div>
-                <div class="col-sm-1" style="text-align: center">
-                    <asp:TextBox ID="TextAmmount" runat="server" placeholder="Cantidad" CssClass="form-control"></asp:TextBox>
-                </div>
-                <div class="col-sm-1">
-                    <asp:TextBox ID="TextPrice" runat="server" placeholder="Precio" CssClass="form-control" MaxLength="80"></asp:TextBox>
-                </div>
-                <div class="col-sm-5"></div>
-            </div>
-            <div class="form-row">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-4" style="text-align: center">
-                    <asp:Button ID="ButtonStock" runat="server" Text="Button" OnClick="ButtonStock_Click" />
-                </div>
-                <div class="col-sm-4"></div>
-
-            </div>
-
-            <%} %>
-
             <div class="row">
                 <div class="col-sm" style="text-align: center">
 
@@ -143,18 +83,10 @@
                                 <div class="card">
                                     
                                     <a href="VerProductoAdmin?prod=<%=product.code %>"> 
-                                    <img src="<% = product.urlimagen %>" class="card-img-top" alt="..." height="200" width="80">
+                                    <img src="<% = product.urlimagen %>" class="card-img-top" alt="..." height="200" width="200">
                                     </a>
-                                    <div class="card-body" style="height: 150px">
-                                        <h5 class="card-title" style="display: flex"><% = product.name %></h5>
-
-                                        <p class="card-text" style="font-size: smaller"><% =product.desc %></p>
-                                        <p class="card-text" style="font-size: smaller"><% = "Stock " + product.stock.ammount +" Precio $" + product.unitPrice() %></p>
-                                    </div>
-                                    <div class="card-footer text-center"> 
-                                        <a class="btn btn-danger btn-sm" href="<%="?del="+product.code %> ">X</a>
-                                        <a class="btn btn-dark btn-sm" href="<%="NuevoProducto.aspx?mod=" + product.code %> ">Editar</a>
-                                        <a class="btn btn-dark btn-sm" href="<%="?stk="+product.code %> ">Agregar stock</a>
+                                    <div class="card-footer align-content-center" style="height: 80px">
+                                        <h5 class="card-title" style="text-align:center"><% = product.name %></h5>
                                     </div>
                                 </div>
                             </div>

@@ -17,7 +17,9 @@
         <div class="container-fluid" style="background-color: dimgrey">
             <div class="row">
                 <div class="col-sm-1" style="text-align: center">
+                  <a href="Tienda.aspx">
                     <img src="https://darodistribuidora.com/wp-content/uploads/logodarodist.png" style="width: 170px; height: 80px" alt="Alternate Text" />
+                </a>
                 </div>
                 <div class="col-sm-4" style="position: relative; top: 27px; text-align: center;">
                     <div class="dropdown show">
@@ -50,52 +52,58 @@
                 <div class="col-sm-5">
                     <img src="<% = producto.urlimagen %>" class="card-img-top" alt="..." height="370" width="250" style="border: solid">
                 </div>
-                <div class="col-sm-7" style="border: solid">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-                                <h1 style="text-align: center;"><%=producto.name %></h1>
-                            </div>
+                <div class="col-sm-7 card">
+
+                    <div class="row card-header">
+                        <div class="col">
+                            <h1 style="text-align: center;"><%=producto.name %></h1>
                         </div>
-                        <div class="row" style="text-align: center">
-                            <div class="col">
-                                <div class="hidden-lg hidden-md hidden-sm">&nbsp;</div>
-                                <div class="hidden-lg hidden-md hidden-sm">&nbsp;</div>
-                                <h4><%= producto.desc %></h4>
-                            </div>
+                    </div>
+                    <div class="row card-body" style="text-align: center">
+                        <div class="col">
+                            <h4><%= producto.desc %></h4>
+                            <div>&nbsp;</div>
+                            <div>&nbsp;</div>
+                            <div>&nbsp;</div>
+                            <p><%="Precio unitario: $"+ producto.unitPrice()%></p>
                         </div>
+                    </div>
 
 
-                        <div style="position:relative;top:60px;"> 
-                        <div class="row justify-content-md-center" style="text-align: center;">
-                            <div class="col-sm-5" style="background-color:#69a297">
 
-                                <asp:Label ID="LabelAgregar" runat="server" Text="Agregar a carrito" Style="position: relative; right: 23%"></asp:Label>
-                                <div class="input-group input-group-sm">
-                                    <div class="input-group-append">
-                                        <asp:Button ID="ButtonUpTen" runat="server" Text="+10" CssClass="btn btn-dark btn-sm" OnClick="ButtonUpTen_Click" />
-                                        <asp:Button ID="Buttonup" runat="server" Text="+1" CssClass="btn btn-dark btn-sm" OnClick="Buttonup_Click" />
-                                    </div>
-                                    <asp:TextBox ID="TextCuantity" runat="server" CssClass="form-control col-sm"></asp:TextBox>
-                                    <div class="input-group-prepend">
-                                        <asp:Button ID="ButtonDown" runat="server" Text="-1" CssClass=" btn btn-dark btn-sm" OnClick="ButtonDown_Click" />
-                                        <asp:Button ID="ButtonDownTen" runat="server" Text="-10" CssClass="btn btn-dark btn-sm" OnClick="ButtonDownTen_Click" />
+                    <div class="row card-footer justify-content-md-center" style="text-align: center;">
+                        <div class="container-fluid">
+
+
+                            <div class="row justify-content-center">
+                                <div class="col-5">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-append">
+                                            <asp:Button ID="ButtonUpTen" runat="server" Text="+10" CssClass="btn btn-dark btn-sm" OnClick="ButtonUpTen_Click" />
+                                            <asp:Button ID="Buttonup" runat="server" Text="+1" CssClass="btn btn-dark btn-sm" OnClick="Buttonup_Click" />
+                                        </div>
+                                        <asp:TextBox ID="TextCuantity" runat="server" CssClass="form-control col-sm"></asp:TextBox>
+                                        <div class="input-group-prepend">
+                                            <asp:Button ID="ButtonDown" runat="server" Text="-1" CssClass=" btn btn-dark btn-sm" OnClick="ButtonDown_Click" />
+                                            <asp:Button ID="ButtonDownTen" runat="server" Text="-10" CssClass="btn btn-dark btn-sm" OnClick="ButtonDownTen_Click" />
+                                        </div>
                                     </div>
                                 </div>
 
                             </div>
-                        </div>
-                        <div class="row justify-content-md-center">
-                            
-                            <div class="col-sm-5" style="text-align:center; background-color:#69a297">
-                                <div>&nbsp;</div>
-                                <asp:Button ID="ButtonAddChart" runat="server" Text="Agregar al carrito" CssClass="btn btn-light" style="position:relative;bottom:10px" />
-                            </div>
+                            <div class="row justify-content-md-center">
 
+                                <div class="col-sm-5" style="text-align: center">
+                                    <div>&nbsp;</div>
+                                    <asp:Button ID="ButtonAddChart" runat="server" Text="Agregar al carrito" CssClass="btn btn-secondary " Style="position: relative; bottom: 10px" />
+                                </div>
+
+                            </div>
                         </div>
-                  </div>
-                        
+
                     </div>
+
+
 
 
 

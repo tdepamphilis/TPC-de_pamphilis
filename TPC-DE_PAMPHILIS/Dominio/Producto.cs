@@ -17,6 +17,9 @@ namespace Dominio
 
         public Stock stock { get; set; }
 
+ 
+
+
         //   public List<Categoria> categorias { get; set; }
 
         public float unitPrice()

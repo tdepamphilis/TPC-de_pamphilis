@@ -51,6 +51,7 @@ go
 create table categoriaxarticulo(
 [CodigoArticulo] [varchar] (5) foreign key references articulos(Codigo) ,
 [Idcategoria] [int] foreign key references categorias(id),
+
 )
 go
 create table zonas(

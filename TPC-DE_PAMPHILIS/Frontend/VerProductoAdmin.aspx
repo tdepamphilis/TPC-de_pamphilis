@@ -64,17 +64,17 @@
                 <div class="col-sm-5">
                     <img src="<% = producto.urlimagen %>" class="card-img-top" alt="..." height="370" width="250" style="border: solid">
                 </div>
-                <div class="col-sm-7">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-                                <h1 style="text-align: center;"><%=producto.name %></h1>
-                            </div>
+                <div class="col-sm-7 card">
+
+                    <div class="row card-header">
+                        <div class="col">
+                            <h1 style="text-align: center;"><%=producto.name %></h1>
                         </div>
+                    </div>
+                    <div class="card-body">
                         <div class="row" style="text-align: center">
                             <div class="col">
-                                <div class="hidden-lg hidden-md hidden-sm">&nbsp;</div>
-                                <div class="hidden-lg hidden-md hidden-sm">&nbsp;</div>
+                                
                                 <h4><%= producto.desc %></h4>
                             </div>
                         </div>
@@ -85,18 +85,19 @@
                                 <p>-Stock actual:<%=" "+ producto.stock.ammount %></p>
                                 <p>-Ultimo precio de repsicion: <%=" $"+ (float)producto.stock.price %></p>
                                 <p>-Precio de venta <%=" $"+ producto.unitPrice().ToString() %></p>
-                                <div>&nbsp;</div>
-                                <div>&nbsp;</div>
+                               
 
                             </div>
                         </div>
+                    </div>
+                    <div class="card-footer">
                         <div class="row justify-content-center">
 
 
                             <p>
-                                <a class="btn btn-light btn-sm" data-toggle="collapse" href="#stock" role="button" aria-expanded="false" aria-controls="collapseExample">Agregar stock  </a>
-                                <a href="<%="NuevoProducto.aspx?mod=" + producto.code %> " class="btn btn-light btn-sm">Modificar</a>
-                                <a class="btn btn-light btn-sm" data-toggle="collapse" href="#del" role="button" aria-expanded="false" aria-controls="collapseExample">Eliminar</a>
+                                <a class="btn btn-primary btn-sm " data-toggle="collapse" href="#stock" role="button" aria-expanded="false" aria-controls="collapseExample">Agregar stock  </a>
+                                <a href="<%="NuevoProducto.aspx?mod=" + producto.code %> " class="btn btn-primary btn-sm">Modificar</a>
+                                <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#del" role="button" aria-expanded="false" aria-controls="collapseExample">Eliminar</a>
                             </p>
                         </div>
                         <div class="collapse" id="stock">
@@ -104,14 +105,14 @@
                                 <div class="form-row">
                                     <div class="col-sm-3"></div>
                                     <div class="col-sm-3">
-                                        <asp:TextBox ID="TextAmmount" runat="server" CssClass="form-control" placeholder="Cantidad"></asp:TextBox>
+                                        <asp:TextBox ID="TextAmmount" runat="server" CssClass="form-control" placeholder="Cantidad" type="number" min="1"></asp:TextBox>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">$</div>
                                             </div>
-                                            <asp:TextBox ID="TextPrice" runat="server" CssClass="form-control"></asp:TextBox>
+                                            <asp:TextBox ID="TextPrice" runat="server" CssClass="form-control" type="number" min="1"></asp:TextBox>
                                         </div>
 
                                     </div>
@@ -121,7 +122,7 @@
                                 <div class="form-row mt-3 ">
                                     <div class="col-sm-4"></div>
                                     <div class="col-sm-4">
-                                        <asp:Button ID="ButtonStock" runat="server" Text="Button" OnClick="ButtonStock_Click" CssClass="btn btn-light" />
+                                        <asp:Button ID="ButtonStock" runat="server" Text="Agregar" OnClick="ButtonStock_Click" CssClass="btn btn-light" />
                                     </div>
                                     <div class="col-sm-4"></div>
                                 </div>
@@ -143,16 +144,17 @@
                             </div>
 
                         </div>
-
-
-
-
-
-
-
-
-
                     </div>
+
+
+
+
+
+
+
+
+
+
                 </div>
             </div>
         </div>

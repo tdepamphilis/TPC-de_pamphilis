@@ -16,7 +16,9 @@
         <div class="container-fluid" style="background-color: dimgrey">
             <div class="row">
                 <div class="col-sm-1" style="text-align: center">
+                    <a href="Tienda.aspx">
                     <img src="https://darodistribuidora.com/wp-content/uploads/logodarodist.png" style="width: 170px; height: 80px" alt="Alternate Text" />
+                    </a>                
                 </div>
                 <div class="col-sm-4" style="position: relative; top: 27px; text-align: center;">
                     <div class="dropdown show">

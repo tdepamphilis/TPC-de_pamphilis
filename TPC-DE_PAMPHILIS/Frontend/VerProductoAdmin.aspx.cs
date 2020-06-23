@@ -50,7 +50,11 @@ namespace Frontend
 
         protected void ButtonStock_Click(object sender, EventArgs e)
         {
-            TextAmmount.Text = TextPrice.Text;
+            StockBusiness stockBusiness = new StockBusiness();
+            int newammount = producto.stock.ammount + int.Parse(TextAmmount.Text);
+            decimal newprice = Decimal.Parse(TextPrice.Text);
+            stockBusiness.updatestock(producto.code, newammount, newprice);
+            Response.Redirect("VerProductoAdmin.aspx?prod=" + producto.code);
         }
 
         protected void ButtonDel_Click(object sender, EventArgs e)

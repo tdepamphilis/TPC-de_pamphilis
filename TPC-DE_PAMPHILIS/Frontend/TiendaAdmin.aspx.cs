@@ -69,27 +69,7 @@ namespace Frontend
 
         }
         //-----------------BOTONES---------------------
-        protected void Buttondel_Click(object sender, EventArgs e)
-        {
 
-            StockBusiness stockBusiness = new StockBusiness();
-            productoBusiness.delete(producto.code);
-            productoBusiness.clearcategories(producto.code);
-            stockBusiness.deleteData(producto.code);
-            Response.Redirect("TiendaAdmin.aspx");
-        }
-
-        protected void ButtonStock_Click(object sender, EventArgs e)
-        {
-            if(TextAmmount.Text != "" && TextPrice.Text != "")
-            {
-                StockBusiness stockBusiness = new StockBusiness();
-                int newammount = producto.stock.ammount + int.Parse(TextAmmount.Text);
-                decimal newprice = Decimal.Parse(TextPrice.Text);
-                stockBusiness.updatestock(producto.code, newammount, newprice);
-                Response.Redirect("TiendaAdmin.aspx");
-            }
-        }
 
         protected void TextAmmount_TextChanged(object sender, EventArgs e)
         {

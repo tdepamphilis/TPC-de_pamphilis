@@ -284,16 +284,39 @@ namespace Business
 
         public void mod(Producto producto)
         {
+            GestorConexion gestor = new GestorConexion();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
             try
             {
-                delete(producto.code);
-                create(producto);
+
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "update  ARTICULOS set Nombre = @nombre, Descripcion = @desc, IdMarca = @marca, ImagenUrl = @imagen, MargenGanancia =  @margen, Active = 1 where Codigo = @cod      ";
+                command.Parameters.AddWithValue("@cod", producto.code);
+                command.Parameters.AddWithValue("@nombre", producto.name);
+                command.Parameters.AddWithValue("@desc", producto.desc);
+                command.Parameters.AddWithValue("@marca", producto.marca.id);
+                command.Parameters.AddWithValue("@imagen", producto.urlimagen);
+                command.Parameters.AddWithValue("@margen", producto.margin);
+                command.Connection = connection;
+                connection.Open();
+                command.ExecuteNonQuery();
+
             }
             catch (Exception)
             {
 
                 throw;
             }
+            finally
+            {
+                connection.Close();
+            }
+
+
+
+
+
         }
         //------------GENERACION DE CODIGO-----------------
         public bool checkcode(string code)

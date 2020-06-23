@@ -37,57 +37,71 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="container-fluid">
             <div>&nbsp;</div>
-            <div class="row">
-                <div class="col-sm">
-                    <h1 style="text-align: center"><%=title + " " %> producto</h1>
-                </div>
-            </div>
-            <div>&nbsp;</div>
-            <div class="form-row" style="text-align: center">
-                <div class="col-sm-4"></div>
-                <div class="form-group col-sm-2">
-                    <asp:TextBox ID="TextName" runat="server" CssClass="form-control" placeholder="Nombre"></asp:TextBox>
-                    <div>&nbsp;</div>
-                    <asp:FileUpload ID="FileImage" runat="server" />
-                    <div>&nbsp;</div>
-                    <asp:Label ID="Labelbrand" runat="server" Text="Marca:"></asp:Label>
-                    <asp:DropDownList ID="BrandSelector" runat="server"></asp:DropDownList>
-                    <div>&nbsp;</div>
+           
 
-                </div>
-                <div class="form-group col-sm-2">
-                    <asp:TextBox ID="TextDesc" runat="server" CssClass="form-control" placeholder="Descripcion" Rows="4" TextMode="MultiLine"></asp:TextBox>
-                </div>
-                <div class="col-sm-4"></div>
-            </div>
-            <div class="form-row">
-                <div class="col-sm-5"></div>
-                <div class="form-group col-sm-2">
-                    <div class="form-row" style="text-align:center">
-                        <div class="form-group col-xs" >
-                            <asp:Label ID="LabelCode" runat="server" Text="Codigo" style=" position:relative;left:17%"></asp:Label>
-                            <asp:TextBox ID="TextCode" runat="server" CssClass="form-control" style="width:35%; position:relative; left:50%" > </asp:TextBox>
-                        </div>
+               
+                    <div class="row justify-content-center">
+                        <h1 style="text-align: center"><%=title + " " %> producto</h1>
                     </div>
-                </div>
-                <div class="col-sm-5"></div>
-            </div>
-            <div class="row">
-                <div class="col-sm-5"></div>
-                <div class="form-group col-sm-2 overflow-auto" style="max-height: 170px; border: thin; border: solid">
-                    <asp:CheckBoxList ID="Categorybox" runat="server"></asp:CheckBoxList>
-                </div>
-                <div class="col-sm-5"></div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-sm-5"></div>
-                <div class="form-group col-sm-2" style="text-align:center">
 
-                    <asp:Button ID="ButtonConfirm" runat="server" Text="Confirmar" OnClick="ButtonConfirm_Click"  CssClass="btn btn-light"/>
-                </div>
-                <div class="form-group col-sm-5"></div>
-            </div>
+                    <div>&nbsp;</div>
+
+                        <div class="form-row" style="text-align: center">
+                            <div class="col-sm-4"></div>
+                            <div class="form-group col-sm-2">
+                                <asp:TextBox ID="TextName" runat="server" CssClass="form-control" placeholder="Nombre"></asp:TextBox>
+                                <div>&nbsp;</div>
+                                <asp:FileUpload ID="FileImage" runat="server" />
+                                <div>&nbsp;</div>
+                                <asp:Label ID="Labelbrand" runat="server" Text="Marca:"></asp:Label>
+                                <asp:DropDownList ID="BrandSelector" runat="server"></asp:DropDownList>
+                                <div>&nbsp;</div>
+                                <asp:Label ID="LabelMargin" runat="server" Text="Margen de ganancia"></asp:Label>
+                                <asp:TextBox ID="TextMargin" runat="server" type="number"></asp:TextBox>
+
+                            </div>
+                            <div class="form-group col-sm-2">
+                                <asp:TextBox ID="TextDesc" runat="server" CssClass="form-control" placeholder="Descripcion" Rows="4" TextMode="MultiLine"></asp:TextBox>
+                            </div>
+                            <div class="col-sm-4"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-sm-5"></div>
+                            <div class="form-group col-sm-2">
+                                <div class="form-row" style="text-align: center">
+                                    <div class="form-group col-xs">
+                                        <asp:Label ID="LabelCode" runat="server" Text="Codigo" Style="position: relative; left: 17%"></asp:Label>
+                                        <asp:TextBox ID="TextCode" runat="server" CssClass="form-control" Style="width: 35%; position: relative; left: 50%"> </asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-5"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-5"></div>
+                            <div class="form-group col-sm-2 overflow-auto" style="max-height: 170px; border: thin; border: solid">
+                                <asp:CheckBoxList ID="Categorybox" runat="server"></asp:CheckBoxList>
+                            </div>
+                            <div class="col-sm-5"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-sm-5"></div>
+                            <div class="form-group col-sm-2" style="text-align: center">
+
+                                <asp:Button ID="ButtonConfirm" runat="server" Text="Confirmar" OnClick="ButtonConfirm_Click" CssClass="btn btn-light" />
+                            </div>
+                            <div class="form-group col-sm-5"></div>
+                        </div>
+                    
+                    
+                    
+                    
+              
+
+           
         </div>
 
 

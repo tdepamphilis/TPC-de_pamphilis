@@ -60,6 +60,24 @@ namespace Frontend
         protected global::System.Web.UI.WebControls.DropDownList BrandSelector;
 
         /// <summary>
+        /// Control LabelMargin.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelMargin;
+
+        /// <summary>
+        /// Control TextMargin.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextMargin;
+
+        /// <summary>
         /// Control TextDesc.
         /// </summary>
         /// <remarks>

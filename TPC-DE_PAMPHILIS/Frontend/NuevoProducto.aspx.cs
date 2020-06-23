@@ -82,6 +82,14 @@ namespace Frontend
             TextName.Text = producto.name;
             TextDesc.Text = producto.desc;
             BrandSelector.Items.FindByText(producto.marca.name).Selected = true;
+            TextMargin.Text = producto.margin.ToString();
+            for (int x = 0; x < Categorybox.Items.Count; x++)
+            {
+                Categoria aux = categoriaBusiness.getFromName(Categorybox.Items[x].Text);
+                if (categoriaBusiness.checkItemInCategory(aux.id, producto.code))
+                    Categorybox.Items[x].Selected = true;
+            }
+
 
         }
         protected void ButtonConfirm_Click(object sender, EventArgs e)
@@ -92,7 +100,6 @@ namespace Frontend
 
 
                 StockBusiness stockBusiness = new StockBusiness();
-                productoBusiness.delete(TextCode.Text);                
                 Producto nuevo = new Producto();
                 Marca marca = new Marca();
                 nuevo.name = TextName.Text;
@@ -100,10 +107,37 @@ namespace Frontend
                 nuevo.desc = TextDesc.Text;
                 marca = marcaBusiness.buscarnombre((string)BrandSelector.SelectedItem.Value);
                 nuevo.marca = marca;
-                nuevo.margin = 25;
+                nuevo.margin = int.Parse(TextMargin.Text);
                 nuevo.urlimagen = save();
-                productoBusiness.create(nuevo);
-                stockBusiness.createData(nuevo.code);
+               // si el codigo de producto no esta en la bbdd se trata de una creacion y se genera un codigo y stock nuevo, sino se trata de una modificacion y se hace un update
+                if (!productoBusiness.checkcode(nuevo.code))
+                {
+                   
+                    productoBusiness.create(nuevo);
+                    stockBusiness.createData(nuevo.code);
+                }
+                else
+                {
+                    productoBusiness.mod(nuevo);
+                }
+
+
+
+
+                productoBusiness.clearcategories(nuevo.code);
+                for (int x = 0; x < Categorybox.Items.Count; x++)
+                {
+                    if (Categorybox.Items[x].Selected == true)
+                    {
+                        Categoria aux = new Categoria();
+                        aux = categoriaBusiness.getFromName(Categorybox.Items[x].Text);
+                        categoriaBusiness.assignCategories(aux.id, nuevo.code);
+
+                    }
+                }
+
+
+
                 Response.Redirect("TiendaAdmin.aspx");
 
             }
