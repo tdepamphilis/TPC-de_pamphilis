@@ -17,7 +17,7 @@
             <div class="row" style="background-color: dimgrey">
                 <div class="col-sm-1" style="text-align: center">
                     <a href="TiendaAdmin.aspx">
-                    <img src="https://darodistribuidora.com/wp-content/uploads/logodarodist.png" style="width: 170px; height: 80px" alt="Alternate Text" />
+                        <img src="https://darodistribuidora.com/wp-content/uploads/logodarodist.png" style="width: 170px; height: 80px" alt="Alternate Text" />
                     </a>
                 </div>
                 <div class="col-sm-5" style="position: relative; top: 27px; text-align: center">
@@ -55,21 +55,18 @@
             <div class="row justify-content-center">
                 <div class="col-2">
                     <div class="card">
-
-
-
                         <div class="card-header justify-content-center">
 
-                            <h3 style="text-align:center"><%=selected.name %></h3>
+                            <h3 style="text-align: center"><%=selected.name %></h3>
 
                         </div>
                         <div class="card-body justify-content-center">
                             <div class="row">
-                            <asp:TextBox ID="TextRename" runat="server" placeholder="Nuevo nombre" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox ID="TextRename" runat="server" placeholder="Nuevo nombre" CssClass="form-control pt-3"></asp:TextBox>
 
                             </div>
-                            <div class="row justify-content-center">
-                            <asp:Button ID="Confirmar" runat="server" Text="Confirmar" OnClick="Confirmar_Click" class="btn btn-light align-content-center" />
+                            <div class="row justify-content-center pt-3">
+                                <asp:Button ID="Confirmar" runat="server" Text="Confirmar" OnClick="Confirmar_Click" class="btn btn-light align-content-center" />
 
                             </div>
 
@@ -81,50 +78,60 @@
             <%}
                 else if (action == 2)
                 { %>
-            <div class="form-row">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-4" style="text-align: center">
-                    <h6><%="Está seguro que desea eliminar " + selected.name + "? Tambien borrara todos sus productos." %></h6>
+
+            <div class="row justify-content-center">
+                <div class="col-3">
+
+                    <div class="card">
+                        <div class="card-header justify-content-center">
+
+                            <h6 style="text-align:justify"><%="Está seguro que desea eliminar " + selected.name + "? Tambien borrara todos sus productos." %></h6>
+                        </div>
+
+                   
+                    <div class="card-body align-items-center" style="text-align:center">
+
+                        <a href="Marcas.aspx" class="btn btn-primary btn-sm" style="text-align:center">Cancelar</a>
+
+                        <asp:Button ID="Borrar" runat="server" Text="Borrar" OnClick="Borrar_Click" class="btn btn-danger btn-sm"/>
+
+                    </div>
+
+                     </div>
+
                 </div>
-                <div class="col-sm-4"></div>
-            </div>
-            <div class="form-row">
-                <div class="col-sm-5"></div>
-                <div class="col-sm-1">
-                    <a href="Categorias.aspx">Cancelar</a>
-                </div>
-                <div class="col-sm-1">
-                    <asp:Button ID="Borrar" runat="server" Text="Borrar" OnClick="Borrar_Click" />
-                </div>
-                <div class="col-sm-5"></div>
-            </div>
 
 
+            </div>
+
+        </div>
+
+
+
+
+        <%} %>
+        <div class="row row-cols-2 row-cols-md-6 pt-3">
+
+            <%foreach (Dominio.Marca marca in marcas)
+                { %>
+            <div class="col-md-2">
+
+                <div class="card" style="width: 18rem;">
+                    <div class="card-header" style="text-align: center">
+                        <%=marca.name %>
+                    </div>
+                    <ul class="list-group list-group-flush" style="text-align: center">
+                        <li class="list-group-item">
+                            <a href="Marcas?rnm=<%=marca.id %>">Renombrar</a>
+                            <a href="Marcas?del=<%=marca.id %>">Eliminar</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
 
             <%} %>
-            <div class="row row-cols-2 row-cols-md-6">
-
-                <%foreach (Dominio.Marca marca in marcas)
-                    { %>
-                <div class="col-md-2">
-
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-header" style="text-align: center">
-                            <%=marca.name %>
-                        </div>
-                        <ul class="list-group list-group-flush" style="text-align: center">
-                            <li class="list-group-item">
-                                <a href="Marcas?rnm=<%=marca.id %>">Renombrar</a>
-                                <a href="Marcas?del=<%=marca.id %>">Eliminar</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-
-                <%} %>
-            </div>
+        </div>
         </div>
     </form>
 </body>

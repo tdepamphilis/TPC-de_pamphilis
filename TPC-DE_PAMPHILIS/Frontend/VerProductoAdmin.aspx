@@ -67,7 +67,6 @@
                     <img src="<% = producto.urlimagen %>" class="card-img-top" alt="..." height="370" width="250" style="border: solid">
                 </div>
                 <div class="col-sm-7 card">
-
                     <div class="row card-header">
                         <div class="col">
                             <h1 style="text-align: center;"><%=producto.name %></h1>
@@ -128,11 +127,8 @@
                                     </div>
                                     <div class="col-sm-4"></div>
                                 </div>
-
                             </div>
-
                         </div>
-
                         <div class="collapse" id="del">
                             <div class=" card card-body">
                                 <div class="row justify-content-center">
@@ -144,19 +140,8 @@
                                     <asp:Button ID="ButtonDel" runat="server" Text="Eliminar" CssClass="btn btn-danger btn-sm" OnClick="ButtonDel_Click" />
                                 </div>
                             </div>
-
                         </div>
                     </div>
-
-
-
-
-
-
-
-
-
-
                 </div>
             </div>
         </div>

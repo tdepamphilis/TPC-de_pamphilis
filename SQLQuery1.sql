@@ -2,10 +2,10 @@
 use master
 
 go
-/*
+
 drop database depamphilis_db
 go
-*/
+
 create database depamphilis_db
 go
 use depamphilis_db
@@ -143,6 +143,8 @@ go
 insert into admins values ('abcde','admin@correo','adminpass','tomas')
 
 select * from  vw_usuarios
+
+select * from admins
 /*
 as a
 inner join categoriaxarticulo as cxa on a.Codigo = cxa.CodigoArticulo

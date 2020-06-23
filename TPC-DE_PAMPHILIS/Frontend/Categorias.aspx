@@ -18,7 +18,7 @@
             <div class="row" style="background-color: dimgrey">
                 <div class="col-sm-1" style="text-align: center">
                     <a href="TiendaAdmin.aspx">
-                    <img src="https://darodistribuidora.com/wp-content/uploads/logodarodist.png" style="width: 170px; height: 80px" alt="Alternate Text" />
+                        <img src="https://darodistribuidora.com/wp-content/uploads/logodarodist.png" style="width: 170px; height: 80px" alt="Alternate Text" />
                     </a>
                 </div>
                 <div class="col-sm-5" style="position: relative; top: 27px; text-align: center">
@@ -55,48 +55,51 @@
 
             <%if (action == 1)
                 { %>
-            <div class="form-row">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-4" style="text-align: center">
-                    <h4><%=selected.name %></h4>
+
+            <div class="row justify-content-center">
+                <div class="col-2">
+                    <div class="card">
+                        <div class="card-header justify-content-center">
+                            <h4 style="text-align: center"><%=selected.name %></h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <asp:TextBox ID="TextRename" runat="server" placeholder="Nuevo nombre" CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <div class="row justify-content-center pt-3">
+                                <asp:Button ID="Confirmar" runat="server" Text="Confirmar" OnClick="Confirmar_Click" class="btn btn-light " />
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-sm-4"></div>
-            </div>
-            <div class="form-row">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-3">
-                    <asp:TextBox ID="TextRename" runat="server" placeholder="Nuevo nombre" CssClass="form-control"></asp:TextBox>
-                </div>
-                <div class="col-sm-2">
-                    <asp:Button ID="Confirmar" runat="server" Text="Button" OnClick="Confirmar_Click" />
-                </div>
-                <div class="col-sm-4"></div>
             </div>
             <%}
                 else if (action == 2)
                 {%>
 
-            <div class="form-row">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-4" style="text-align: center">
-                    <h4><%="Está seguro que desea eliminar " + selected.name %></h4>
-                </div>
-                <div class="col-sm-4"></div>
-            </div>
-            <div class="form-row">
-                <div class="col-sm-5"></div>
-                <div class="col-sm-1">
-                    <a href="Categorias.aspx">Cancelar</a>
-                </div>
-                <div class="col-sm-1">
-                    <asp:Button ID="Borrar" runat="server" Text="Borrar" OnClick="Borrar_Click" />
-                </div>
-                <div class="col-sm-5"></div>
-            </div>
+            <div class="row justify-content-center">
+                <div class="col-3">
+                    <div class="card">
 
+                        <div class="card-header">
+                            
+                                <h4 style="text-align:center"><%="Está seguro que desea eliminar " + selected.name %></h4>
+                            
+                        </div>
+                        <div class="card-body">                          
+                            <div class="row justify-content-center">
+                                <a href="Categorias.aspx" class="btn btn-success mx-2">Cancelar</a>
+                                <asp:Button ID="Borrar" runat="server" Text="Borrar" OnClick="Borrar_Click" class=" btn btn-danger mx-2"/>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                </div>
+            </div>
             <%} %>
 
-            <div class="row row-cols-2 row-cols-md-6">
+            <div class="row row-cols-2 row-cols-md-6 pt-4">
 
 
 

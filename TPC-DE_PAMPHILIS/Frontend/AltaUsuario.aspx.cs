@@ -72,7 +72,7 @@ namespace Frontend
                     Response.Redirect("AltaUsuario.aspx?error=server");
                 Session["userCode"] = usuario.code;
                 Session["userPass"] = usuario.pass;
-                Response.Redirect("Tienda.aspx");
+                Response.Redirect("MainPage.aspx");
             }
 
 
