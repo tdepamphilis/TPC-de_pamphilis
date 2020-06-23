@@ -17,7 +17,9 @@
         <div class="container-fluid">
             <div class="row" style="background-color: dimgrey">
                 <div class="col-sm-1" style="text-align: center">
+                    <a href="TiendaAdmin.aspx">
                     <img src="https://darodistribuidora.com/wp-content/uploads/logodarodist.png" style="width: 170px; height: 80px" alt="Alternate Text" />
+                    </a>
                 </div>
                 <div class="col-sm-5" style="position: relative; top: 27px; text-align: center">
 
@@ -32,7 +34,7 @@
                         <a href="GestionStock.aspx" class="btn btn-dark btn-sm">Stock</a>
                         <a href="Marcas.aspx" class="btn btn-dark btn-sm">Marcas</a>
                         <a href="#" class="btn btn-dark btn-sm">Facturacion</a>
-                        <a href="#" class="btn btn-dark btn-sm">Estadisticas</a>
+                        <a href="MainPage.aspx" class="btn btn-dark btn-sm">Salir</a>
                     </div>
                 </div>
                 <div class="hidden-lg hidden-md hidden-sm">&nbsp;</div>

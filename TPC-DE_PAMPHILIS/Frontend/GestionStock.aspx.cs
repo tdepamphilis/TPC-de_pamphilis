@@ -11,7 +11,8 @@ namespace Frontend
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            DropDown.Items.Add("Menos que");
+            DropDown.Items.Add("Mas que");
         }
     }
 }

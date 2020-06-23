@@ -17,13 +17,13 @@
         <div class="container-fluid" style="background-color: dimgrey">
             <div class="row">
                 <div class="col-sm-1" style="text-align: center">
-                  <a href="Tienda.aspx">
-                    <img src="https://darodistribuidora.com/wp-content/uploads/logodarodist.png" style="width: 170px; height: 80px" alt="Alternate Text" />
-                </a>
+                    <a href="Tienda.aspx">
+                        <img src="https://darodistribuidora.com/wp-content/uploads/logodarodist.png" style="width: 170px; height: 80px" alt="Alternate Text" />
+                    </a>
                 </div>
                 <div class="col-sm-4" style="position: relative; top: 27px; text-align: center;">
                     <div class="dropdown show">
-                        <a href="#" class="btn btn-dark btn-sm">Perfil</a>
+                        <a href="Perfil.aspx" class="btn btn-dark btn-sm">Perfil</a>
                         <a href="#" class="btn btn-dark btn-sm">Mis pedidos</a>
                         <a href="MainPage.aspx" class="btn btn-dark btn-sm">Salir</a>
                         <a href="#" class="btn btn-dark btn-sm">Carrito<%=" (" + carrito.items.Count + ")" %></a>
@@ -72,6 +72,8 @@
 
 
                     <div class="row card-footer justify-content-md-center" style="text-align: center;">
+                        <%if (producto.stock.ammount > 0)
+                            { %>
                         <div class="container-fluid">
 
 
@@ -100,7 +102,11 @@
 
                             </div>
                         </div>
-
+                        <%}
+                        else
+                        { %>
+                        <p style="color: red">Sin stock</p>
+                        <%} %>
                     </div>
 
 

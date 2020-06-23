@@ -16,7 +16,9 @@
         <div class="container-fluid">
             <div class="row" style="background-color: dimgrey">
                 <div class="col-sm-1" style="text-align: center">
+                    <a href="TiendaAdmin.aspx">
                     <img src="https://darodistribuidora.com/wp-content/uploads/logodarodist.png" style="width: 170px; height: 80px" alt="Alternate Text" />
+                    </a>
                 </div>
                 <div class="col-sm-5" style="position: relative; top: 27px; text-align: center">
 
@@ -32,7 +34,7 @@
                         <a href="GestionStock.aspx" class="btn btn-dark btn-sm">Stock</a>
                         <a href="Categorias.aspx" class="btn btn-dark btn-sm">categorias</a>
                         <a href="#" class="btn btn-dark btn-sm">Facturacion</a>
-                        <a href="#" class="btn btn-dark btn-sm">Estadisticas</a>
+                        <a href="MainPage.aspx" class="btn btn-dark btn-sm">Salir</a>
                     </div>
                 </div>
                 <div class="hidden-lg hidden-md hidden-sm">&nbsp;</div>
@@ -50,22 +52,31 @@
             </div>
             <%if (action == 1)
                 { %>
-            <div class="form-row">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-4" style="text-align: center">
-                    <h4><%=selected.name %></h4>
+            <div class="row justify-content-center">
+                <div class="col-2">
+                    <div class="card">
+
+
+
+                        <div class="card-header justify-content-center">
+
+                            <h3 style="text-align:center"><%=selected.name %></h3>
+
+                        </div>
+                        <div class="card-body justify-content-center">
+                            <div class="row">
+                            <asp:TextBox ID="TextRename" runat="server" placeholder="Nuevo nombre" CssClass="form-control"></asp:TextBox>
+
+                            </div>
+                            <div class="row justify-content-center">
+                            <asp:Button ID="Confirmar" runat="server" Text="Confirmar" OnClick="Confirmar_Click" class="btn btn-light align-content-center" />
+
+                            </div>
+
+                        </div>
+
+                    </div>
                 </div>
-                <div class="col-sm-4"></div>
-            </div>
-            <div class="form-row">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-3">
-                    <asp:TextBox ID="TextRename" runat="server" placeholder="Nuevo nombre" CssClass="form-control"></asp:TextBox>
-                </div>
-                <div class="col-sm-2">
-                    <asp:Button ID="Confirmar" runat="server" Text="Button" OnClick="Confirmar_Click" />
-                </div>
-                <div class="col-sm-4"></div>
             </div>
             <%}
                 else if (action == 2)

@@ -20,7 +20,7 @@
                 </a>
                 <div class="col-sm-4" style="position: relative; top: 27px; text-align: center;">
                     <div class="dropdown show">
-                        <a href="#" class="btn btn-dark btn-sm">Perfil</a>
+                        <a href="Tienda.aspx" class="btn btn-dark btn-sm">Tienda</a>
                         <a href="#" class="btn btn-dark btn-sm">Mis pedidos</a>
                         <a href="MainPage.aspx" class="btn btn-dark btn-sm">Salir</a>
                         <a href="#" class="btn btn-dark btn-sm">Carrito<%=" (" + carrito.items.Count + ")" %></a>

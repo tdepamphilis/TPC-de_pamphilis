@@ -44,7 +44,7 @@
                     </div>
                     <div class="form-group">
                         <asp:Button ID="ButtonLogin" runat="server" Text="Login"  CssClass="btn btn-light" OnClick="ButtonLogin_Click"/>
-                        <a href="#" class="btn btn-light">Registrarse</a>
+                        <a href="AltaUsuario.aspx" class="btn btn-light">Registrarse</a>
                     </div>
                     <div class="form-group">
                         <a href="#" style="text-align:left; font-size:x-small">Olvido su contraseña?</a>                        

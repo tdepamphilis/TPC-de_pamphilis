@@ -43,7 +43,7 @@ namespace Business
                 throw;
             }
         }
-
+         
         public List<Categoria> buscar(string name)
         {
             GestorConexion gestor = new GestorConexion();
@@ -54,7 +54,7 @@ namespace Business
             try
             {
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "select * from vw_categorias where Nombre like '%" + name + "'";
+                command.CommandText = "select * from vw_categorias where Nombre like '%" + name + "%'";
                 command.Connection = connection;
                 connection.Open();
                 lector = command.ExecuteReader();
