@@ -11,7 +11,7 @@ namespace Frontend
 {
 
 
-    public partial class DetalleOrden
+    public partial class MiCarrito
     {
 
         /// <summary>
@@ -24,12 +24,12 @@ namespace Frontend
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// Control ButtonComprar.
+        /// Control ButtonContinuar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonComprar;
+        protected global::System.Web.UI.WebControls.Button ButtonContinuar;
     }
 }

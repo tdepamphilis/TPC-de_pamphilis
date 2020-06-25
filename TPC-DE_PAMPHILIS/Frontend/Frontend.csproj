@@ -115,7 +115,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
-    <Content Include="DetalleOrden.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="GestionStock.aspx" />
@@ -131,6 +130,7 @@
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="MainPage.aspx" />
     <Content Include="Marcas.aspx" />
+    <Content Include="MiCarrito.aspx" />
     <Content Include="NewBC.aspx" />
     <Content Include="NuevoProducto.aspx" />
     <Content Include="Perfil.aspx" />
@@ -210,13 +210,6 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="DetalleOrden.aspx.cs">
-      <DependentUpon>DetalleOrden.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DetalleOrden.aspx.designer.cs">
-      <DependentUpon>DetalleOrden.aspx</DependentUpon>
-    </Compile>
     <Compile Include="GestionStock.aspx.cs">
       <DependentUpon>GestionStock.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -240,6 +233,13 @@
     </Compile>
     <Compile Include="Marcas.aspx.designer.cs">
       <DependentUpon>Marcas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MiCarrito.aspx.cs">
+      <DependentUpon>MiCarrito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MiCarrito.aspx.designer.cs">
+      <DependentUpon>MiCarrito.aspx</DependentUpon>
     </Compile>
     <Compile Include="NewBC.aspx.cs">
       <DependentUpon>NewBC.aspx</DependentUpon>

@@ -32,10 +32,14 @@ namespace Frontend
             {
                 Usuario usuario = new Usuario();
                 usuario = usuarioBusiness.login(TextUser.Text, TextPass.Text);
+                Session["usermail"] = usuario.mail;
+                Session["userpass"] = usuario.pass;
                 Response.Redirect("Tienda.aspx");
             }
             else
             {
+                
+                
                 Response.Redirect("MainPage.aspx?error=404");
             }
 

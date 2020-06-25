@@ -150,5 +150,6 @@ as a
 inner join categoriaxarticulo as cxa on a.Codigo = cxa.CodigoArticulo
 inner join categorias as c on cxa.Idcategoria = c.id
 */
+use depamphilis_db
+select * from usuarios where Codigo = '3321d'
 
-select Count(*) from usuarios where Codigo = '3321d'
