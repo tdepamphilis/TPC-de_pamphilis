@@ -22,13 +22,86 @@ namespace Business
                 if (checkFactura(factura))
                     done = true;
             }
-            // saveitems
+            foreach(ItemCarrito item in factura.items)
+            {
+                saveItems(item, factura.codigo);
+            }
+        }
+        //---------LECTURA--------
+        public List<Factura> listarFacturas(string userCode)
+        {
+            GestorConexion gestor = new GestorConexion();
+            List<Factura> aux = new List<Factura>();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            SqlDataReader lector;
+            try
+            {
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "select * from vw_facturas where CodigoUsuario = @user ";
+                command.Parameters.AddWithValue("@user", userCode);
+                command.Connection = connection;
+                connection.Open();
+                lector = command.ExecuteReader();
+                while (lector.Read())
+                {
+                    Factura x = new Factura();
+                    x.codigo = lector.GetString(0);
+                    x.codigoUsuario = lector.GetString(1);
+                    x.fecha = lector.GetDateTime(2);
+                    x.estado = lector.GetBoolean(3);
+                    x.modoDePago = lector.GetString(4)[0];
+                    x.monto = (float)lector.GetDecimal(5);
+                    x.dir = lector.GetString(6);
+                    aux.Add(x);
+                }
+                connection.Close();
+                return aux;
+            }
+            catch (Exception)
+            {
 
-
-
+                throw;
+            }
 
         }
 
+        public List<Factura> listarFacturas()
+        {
+            GestorConexion gestor = new GestorConexion();
+            List<Factura> aux = new List<Factura>();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            SqlDataReader lector;
+            try
+            {
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "select * from vw_facturas";
+                command.Connection = connection;
+                connection.Open();
+                lector = command.ExecuteReader();
+                while (lector.Read())
+                {
+                    Factura x = new Factura();
+                    x.codigo = lector.GetString(0);
+                    x.codigoUsuario = lector.GetString(1);
+                    x.fecha = lector.GetDateTime(2);
+                    x.estado = lector.GetBoolean(3);
+                    x.modoDePago = lector.GetString(4)[0];
+                    x.monto = (float)lector.GetDecimal(5);
+                    x.dir = lector.GetString(6);
+                    aux.Add(x);
+                }
+                connection.Close();
+                return aux;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
 
 
         //-------ESCRITURA---------------
