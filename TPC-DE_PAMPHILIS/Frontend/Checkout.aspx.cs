@@ -32,7 +32,7 @@ namespace Frontend
         {
             if (Session["chart"] == null)
             {
-                return new Carrito();
+                
                 Response.Redirect("Tienda.aspx");
             }
             return (Carrito)Session["chart"];
@@ -76,6 +76,7 @@ namespace Frontend
                 factura.modoDePago = 'T';
             factura.codigoUsuario = usuario.code;
             facturaBusiness.GenerarCompra(factura);
+            Session["chart"] = new Carrito();
             Response.Redirect("Tienda.aspx");
 
 

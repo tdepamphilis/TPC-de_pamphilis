@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using Dominio;
-
+using System.Diagnostics;
 
 namespace Business
 {
@@ -22,9 +22,10 @@ namespace Business
                 if (checkFactura(factura))
                     done = true;
             }
-            foreach(ItemCarrito item in factura.items)
+            foreach (ItemCarrito item in factura.items)
             {
                 saveItems(item, factura.codigo);
+               
             }
         }
         //---------LECTURA--------
@@ -103,6 +104,76 @@ namespace Business
 
         }
 
+        public Factura buscarId(string code)
+        {
+            GestorConexion gestor = new GestorConexion();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            SqlDataReader lector;
+            try
+            {
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "select * from vw_facturas where Codigo = @code";
+                command.Parameters.AddWithValue("@code", code);
+                command.Connection = connection;
+                connection.Open();
+                lector = command.ExecuteReader();
+                lector.Read();
+                Factura x = new Factura();
+                x.codigo = lector.GetString(0);
+                x.codigoUsuario = lector.GetString(1);
+                x.fecha = lector.GetDateTime(2);
+                x.estado = lector.GetBoolean(3);
+                x.modoDePago = lector.GetString(4)[0];
+                x.monto = (float)lector.GetDecimal(5);
+                x.dir = lector.GetString(6);                
+                connection.Close();
+                x.items = cargarItems(x.codigo);
+
+                return x;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+
+        private List<ItemCarrito> cargarItems(string codigoFactura)
+        {
+            GestorConexion gestor = new GestorConexion();
+            List<ItemCarrito> aux = new List<ItemCarrito>();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            SqlDataReader lector;
+            try
+            {
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "select * from vw_itemFactura where CodigoFactura = @code";
+                command.Parameters.AddWithValue("@code", codigoFactura);
+                command.Connection = connection;
+                connection.Open();
+                lector = command.ExecuteReader();
+                while (lector.Read())
+                {
+                    ItemCarrito x = new ItemCarrito();
+                    x.code = lector.GetString(1);
+                    x.name = lector.GetString(2);
+                    x.ammount = lector.GetInt32(3);
+                    x.unitPrice = (float)lector.GetDecimal(4);
+                    aux.Add(x);
+                }
+                connection.Close();
+                return aux;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         //-------ESCRITURA---------------
 
@@ -116,9 +187,7 @@ namespace Business
             {
 
                 command.CommandType = System.Data.CommandType.Text;
-
-
-                command.CommandText += "insert into itemsxfactura values(@ArtCode, @CodigoFactura, @price, @cant) ";
+                command.CommandText = "insert into itemsxfactura values(@ArtCode, @CodigoFactura, @price, @cant) ";
                 command.Parameters.AddWithValue("@ArtCode", item.code);
                 command.Parameters.AddWithValue("@CodigoFactura", codigoFactura);
                 command.Parameters.AddWithValue("@price", (decimal)item.unitPrice);
@@ -136,6 +205,7 @@ namespace Business
             finally
             {
                 connection.Close();
+               
             }
         }
 
@@ -164,15 +234,7 @@ namespace Business
                 command.Connection = connection;
                 connection.Open();
                 command.ExecuteNonQuery();
-                connection.Close();
-
-                foreach (ItemCarrito item in factura.items)
-                {
-
-                    saveItems(item, factura.codigo);
-                }
-
-
+                connection.Close();          
             }
             catch (Exception)
             {
@@ -242,12 +304,12 @@ namespace Business
 
         private bool checkFactura(Factura factura)
         {
-            
+
             GestorConexion gestor = new GestorConexion();
             SqlConnection connection = gestor.connection();
             SqlCommand command = new SqlCommand();
             SqlDataReader lector;
-           
+
             int x;
             try
             {

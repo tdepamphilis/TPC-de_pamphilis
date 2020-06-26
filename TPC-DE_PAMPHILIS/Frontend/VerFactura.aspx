@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MisCompras.aspx.cs" Inherits="Frontend.MisCompras" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="VerFactura.aspx.cs" Inherits="Frontend.VerFactura" %>
 
 <!DOCTYPE html>
 
@@ -32,53 +32,53 @@
             </div>
         </div>
         <div class="container-fluid">
-            <div class="row justify-content-center pt-5">
+            <div class="row justify-content-center pt-6">
 
-                <div class="col-sm-4">
+                <div class="col-4">
 
                     <div class="card">
 
+                        <div class="card-header">
+
+                            <h6><%="Codigo: "+ factura.codigo %> </h6>
+
+
+                        </div>
                         <div class="card-body" style="min-height: 300px; max-height: 350px; overflow: auto">
 
-                            <div class="container-fluid">
-                               
-                                
-                                
-                                <%foreach (Dominio.Factura item in facturas)
-                                    { %>
+                            <%foreach (Dominio.ItemCarrito item in factura.items)
+                                { %>
+                            <div class="d-flex bd-highlight mb-3 card-header pt-2" style="border: thin">
+                                <div class="mr-auto p-2 bd-highlight">
 
+                                    <p><%=item.name + " x " + item.ammount.ToString() %></p>
+                                    <p><%= "Subtotal: $" + item.partialPrice() %></p>
 
-
-                                <div class="d-flex bd-highlight mb-3 card-header pt-2" >
-
-                                    <div class="mr-auto p-2 bd-highlight">
-
-                                        <p><%=item.fecha %></p>
-                                        <p><%="Monto: $"+ item.monto %></p>
-
-                                    </div>
-                                    <div class="p-2 bd-highlight align-self-center">
-
-                                        <a href="VerFactura.aspx?fac=<%=item.codigo %>" class="btn btn-secondary">Detalles</a>
-                                    </div>
                                 </div>
+                                <div class="p-2 bd-highlight ">
+
+                                    <p><%="Precio unitario: $" + item.unitPrice.ToString() %> </p>
 
 
-
-                            <%} %>
+                                </div>
                             </div>
+                            <%} %>
                         </div>
-
-
-                    
                     </div>
 
+
+
+                    <div class="card-footer">
+                        <div class="row justify-content-center">
+                            <asp:Button ID="ButtonVolver" runat="server" Text="Volver" CssClass="btn btn-secondary" OnClick="ButtonVolver_Click" />
+                        </div>
+
+                    </div>
                 </div>
 
             </div>
 
         </div>
-
 
 
 

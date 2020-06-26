@@ -3,7 +3,7 @@ use master
 
 go
 
-drop database depamphilis_db
+--drop database depamphilis_db
 go
 
 create database depamphilis_db
@@ -133,7 +133,8 @@ select f.Codigo, f.CodigoUsuario, f.Fecha, f.Estado, f.ModoDePago ,f.Monto, f.Di
 go
 create view [vw_itemFactura]
 as
-select i.CodigoFactura, i.CodigoArticulo, i.Cantidad, i.Precio from itemsxfactura as i
+select i.CodigoFactura, i.CodigoArticulo, a.Nombre , i.Cantidad, i.Precio from itemsxfactura as i
+inner join articulos as a on a.Codigo = i.CodigoArticulo
 go
 insert into marcas values ('arcor'),('la campagnola'),('Magistral'),('la serenisima'),('sancor')
 insert into categorias values ('cocina'),('almacen'),('bebidas'),('lacteos'),('limpieza'),('golosinas')
@@ -167,4 +168,6 @@ select * from facturas
 
 select * from usuarios
 
+select * from vw_itemFactura
+go
 select * from vw_facturas

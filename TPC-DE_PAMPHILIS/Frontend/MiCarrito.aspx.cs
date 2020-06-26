@@ -15,11 +15,18 @@ namespace Frontend
         public Carrito carrito;
         protected void Page_Load(object sender, EventArgs e)
         {
+
+
             carrito = loadchart();
-            isPlus1();
-            isPlus10();
-            istake1();
-            istake10();
+
+            if (!IsPostBack)
+            {
+                isPlus1();
+                isPlus10();
+                istake1();
+                istake10();
+            }
+
 
         }
 
@@ -40,9 +47,9 @@ namespace Frontend
             string code = Request.QueryString["add10"];
             if (code != null)
             {
-                foreach(ItemCarrito item in carrito.items)
+                foreach (ItemCarrito item in carrito.items)
                 {
-                    if(item.code == code)
+                    if (item.code == code)
                     {
                         item.ammount += 10;
                     }
@@ -75,13 +82,13 @@ namespace Frontend
                     if (item.code == code)
                     {
                         item.ammount -= 10;
-                       if (item.ammount < 1)
-                           deletat = x;
+                        if (item.ammount < 1)
+                            deletat = x;
 
                     }
                     x++;
                 }
-                if(deletat != -1)
+                if (deletat != -1)
                 {
                     carrito.items.RemoveAt(deletat);
                 }
@@ -100,8 +107,8 @@ namespace Frontend
                     if (item.code == code)
                     {
                         item.ammount -= 1;
-                       if (item.ammount < 1)
-                           deletat = x;
+                        if (item.ammount < 1)
+                            deletat = x;
 
                     }
                     x++;
@@ -118,12 +125,12 @@ namespace Frontend
         {
 
             UsuarioBusiness usuarioBusiness = new UsuarioBusiness();
-            
-     //       string mail = (string)Session["UserMail"];
-       //     string pass = (string)Session["UserPass"];
-        //    if (mail == null)
-         //       Response.Redirect("MainPage.aspx");
-          //  if (usuarioBusiness.CheckAlta(mail, pass) == 0)
+
+            //       string mail = (string)Session["UserMail"];
+            //     string pass = (string)Session["UserPass"];
+            //    if (mail == null)
+            //       Response.Redirect("MainPage.aspx");
+            //  if (usuarioBusiness.CheckAlta(mail, pass) == 0)
             //    Response.Redirect("MainPage.aspx");
             Session["chart"] = carrito;
             Response.Redirect("Checkout.aspx");
