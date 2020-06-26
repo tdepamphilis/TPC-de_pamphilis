@@ -119,12 +119,14 @@ namespace Frontend
 
             UsuarioBusiness usuarioBusiness = new UsuarioBusiness();
             
-            string mail = (string)Session["UserMail"];
-            string pass = (string)Session["UserPass"];
-            if (mail == null)
-                Response.Redirect("MainPage.aspx");
-            if (usuarioBusiness.CheckAlta(mail, pass) == 0)
-                Response.Redirect("MainPage.aspx");
+     //       string mail = (string)Session["UserMail"];
+       //     string pass = (string)Session["UserPass"];
+        //    if (mail == null)
+         //       Response.Redirect("MainPage.aspx");
+          //  if (usuarioBusiness.CheckAlta(mail, pass) == 0)
+            //    Response.Redirect("MainPage.aspx");
+            Session["chart"] = carrito;
+            Response.Redirect("Checkout.aspx");
 
 
         }

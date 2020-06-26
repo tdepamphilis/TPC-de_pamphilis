@@ -83,7 +83,8 @@ create table facturas(
 [Fecha] [datetime] not null,
 [Estado] [bit] not null,
 [ModoDePago] [varchar] (1) not null,
-[Monto] [money] not null
+[Monto] [money] not null,
+[Direccion] [varchar] (50) not null
 )
 go
 create table itemsxfactura(
@@ -153,3 +154,6 @@ inner join categorias as c on cxa.Idcategoria = c.id
 use depamphilis_db
 select * from usuarios where Codigo = '3321d'
 
+select * from facturas
+
+select * from usuarios

@@ -21,5 +21,12 @@ namespace Dominio
         public char modoDePago { get; set; }
 
         public List<ItemCarrito> items { get; set; }
+
+        public string dir { get; set; }
+
+        public Factura()
+        {
+            dir = "none";
+        }
     }
 }

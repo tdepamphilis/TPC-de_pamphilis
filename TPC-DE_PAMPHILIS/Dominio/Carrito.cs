@@ -31,9 +31,8 @@ namespace Dominio
             Factura nueva = new Factura();
             nueva.items = items;
             nueva.monto = totalPrice();
-            nueva.modoDePago = 'E';
-            nueva.estado = false;
-            nueva.codigoUsuario = "TEST0";
+            nueva.estado = true;
+        
             nueva.fecha = new DateTime(2005, 5, 5);
                        
             return nueva;

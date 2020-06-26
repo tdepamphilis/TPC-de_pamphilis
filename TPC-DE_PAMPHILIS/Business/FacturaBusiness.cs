@@ -12,6 +12,25 @@ namespace Business
     public class FacturaBusiness
     {
 
+        public void GenerarCompra(Factura factura)
+        {
+            bool done = false;
+            while (!done)
+            {
+                factura.codigo = generateCode();
+                SaveFactura(factura);
+                if (checkFactura(factura))
+                    done = true;
+            }
+            // saveitems
+
+
+
+
+        }
+
+
+
         //-------ESCRITURA---------------
 
 
@@ -61,13 +80,14 @@ namespace Business
             {
 
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "insert into facturas values(@code, @userCode, @date, @status, @payment, @value)";
+                command.CommandText = "exec SP_CargaFactura @code, @userCode, @date , @status, @payment, @value, @dir";
                 command.Parameters.AddWithValue("@code", factura.codigo);
                 command.Parameters.AddWithValue("@userCode", factura.codigoUsuario);
                 command.Parameters.AddWithValue("@status", factura.estado);
                 command.Parameters.AddWithValue("@payment", factura.modoDePago);
                 command.Parameters.AddWithValue("@value", (decimal)factura.monto);
-                command.Parameters.AddWithValue("date", factura.fecha);
+                command.Parameters.AddWithValue("@date", factura.fecha);
+                command.Parameters.AddWithValue("@dir", factura.dir);
                 command.Connection = connection;
                 connection.Open();
                 command.ExecuteNonQuery();
@@ -143,6 +163,41 @@ namespace Business
 
                 }
             }
+        }
+
+        // ---------------VALIDACION--------------------
+
+        private bool checkFactura(Factura factura)
+        {
+            
+            GestorConexion gestor = new GestorConexion();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            SqlDataReader lector;
+           
+            int x;
+            try
+            {
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "select Count(*) from facturas where Codigo = @code and CodigoUsuario = @user";
+                command.Parameters.AddWithValue("@code", factura.codigo);
+                command.Parameters.AddWithValue("@user", factura.codigoUsuario);
+                command.Connection = connection;
+                connection.Open();
+                lector = command.ExecuteReader();
+                lector.Read();
+                x = lector.GetInt32(0);
+                connection.Close();
+                if (x != 0)
+                    return true;
+                return false;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
 
     }
