@@ -3,7 +3,7 @@ use master
 
 go
 
---drop database depamphilis_db
+drop database depamphilis_db
 go
 
 create database depamphilis_db
@@ -95,6 +95,12 @@ create table itemsxfactura(
 [Cantidad] [int] not null
 )
 go
+create table favoritosxusuario(
+[Id] [int] primary key identity (1,1),
+[Usuario] [varchar] (5) foreign key references usuarios(Codigo),
+[Articulo] [varchar] (5) foreign key references articulos(Codigo)
+)
+go
 create view [vw_articulos] 
 as
 select a.Codigo, a.Nombre, a.Descripcion, a.MargenGanancia, a.ImagenUrl, a.IdMarca, m.Nombre as Marca, s.Cantidad as stock, s.PrecioDistribuidor as 'precio distribuidor'  from articulos as a 
@@ -129,12 +135,19 @@ inner join zonas as z on z.Id = u.IdZona
 go
 create view [vw_facturas]
 as
-select f.Codigo, f.CodigoUsuario, f.Fecha, f.Estado, f.ModoDePago ,f.Monto, f.Direccion from facturas as f
+select f.Codigo, f.CodigoUsuario, f.Fecha, f.Estado, f.ModoDePago ,f.Monto, f.Direccion, (u.Apellido + ' ' + u.Nombre) as ApellidoNombre from facturas as f
+inner join usuarios as u on u.Codigo = f.CodigoUsuario
 go
 create view [vw_itemFactura]
 as
 select i.CodigoFactura, i.CodigoArticulo, a.Nombre , i.Cantidad, i.Precio from itemsxfactura as i
 inner join articulos as a on a.Codigo = i.CodigoArticulo
+go
+create view [vw_favoritos]
+as
+select Usuario, Articulo from favoritosxusuario
+go
+
 go
 insert into marcas values ('arcor'),('la campagnola'),('Magistral'),('la serenisima'),('sancor')
 insert into categorias values ('cocina'),('almacen'),('bebidas'),('lacteos'),('limpieza'),('golosinas')
@@ -145,11 +158,72 @@ insert into articulos values ('asasd','mermelada de naranja', 'caja 24 unidades'
 go
 insert into categoriaxarticulo values ('asasd',2),('qwere',1),('qwere',5),('qwdas',6),('asdqw',4),('asdqw',2)
 go
-insert into stock values ('asasd', 0,500),('qwere', 300,200),('qwdas', 100,700),('asdqw', 300,500)
+insert into stock values ('asasd', 2,3),('qwere', 300,200),('qwdas', 100,700),('asdqw', 300,500)
 go
 insert into zonas values ('CABA'), ('Norte'), ('Sur')
 go
-insert into usuarios values ('abcdf' ,'Tomas', 'De Pamphilis', 41067359, 'tomdp@gmail.com','hola123','calle falsa 123',2)
+insert into usuarios values 
+('abcdf' ,'Tomas', 'De Pamphilis', 41067359, 'tomdp@gmail.com','hola123','calle falsa 123',2),
+('abder' ,'Juan', 'Moreno', 17895644, 'jmoreno@gmail.com','hola123','Cabildo 500',2),
+('abess' ,'Matias', 'lizi', 74115895, 'mlizi@gmail.com','hola123','Del arca 214',1),
+('abdww' ,'Tomas', 'Ponce', 74015878, 'tponce@gmail.com','hola123','monroe',3),
+('aba23' ,'Roman', 'de veneto', 18569148, 'rveneto@gmail.com','hola123','calle falsa 123',1),
+('abcde' ,'Camila', 'lizi', 35487010, 'clizi@gmail.com','hola123','calle falsa 123',2),
+('abxmv' ,'Mariana', 'lopez', 38256658, 'mlopez@gmail.com','hola123','calle falsa 123',3),
+('ab123' ,'Sol', 'somer', 38458899, 'solsomer@gmail.com','hola123','calle falsa 123',1)
+go
+
+create procedure SP_AltaUsuario(
+@Codigo varchar(5),
+@Nombre varchar (50),
+@Apellido varchar (50),
+@DNI int,
+@Correo varchar (100),
+@Password varchar (50),
+@Direccion varchar (50),
+@zona int
+)
+as
+if (select COUNT(*) from usuarios where Correo = @Correo) = 0 
+begin
+insert into usuarios values (@Codigo, @Nombre, @Apellido, @DNI, @Correo, @Password, @Direccion, @zona)
+end 
+go
+exec SP_AltaUsuario '32d1a','Agustin','DP', 41655477,'agusdp@gmail.com','cac3','falsa332',2
+go
+insert into facturas values ('AHFNCPERTGSFCDW','abder','2014-11-03', 1, 'E', 1000, 'cabildo 500'),
+('AHFNCPERT32FCDW','abder','2014-10-03', 1, 'E', 1000, 'cabildo 500'),
+('AHFNCPERT22FCDW','abder','2014-09-03', 1, 'T', 1000, 'cabildo 500'),
+('AHFNC22dRTGSCDW','abder','2014-08-03', 1, 'E', 1000, 'cabildo 500'),
+('AHFNCPBDTGSFCDW','abder','2014-07-03', 1, 'T', 1000, 'cabildo 500'),
+('AHFN4PERTGSFCDW','abder','2014-07-08', 1, 'E', 1000, 'cabildo 500'),
+('AHFN234PEGSFCDW','abder','2014-04-03', 1, 'E', 1000, 'cabildo 500'),
+('AHFNCPERT44FCDW','abder','2014-02-03', 1, 'E', 1000, 'cabildo 500'),
+('AHFNCPER289FCDW','abder','2014-01-03', 1, 'E', 1000, 'cabildo 500'),
+('AHFNCPERCBGFCDW','abder','2014-01-03', 1, 'E', 1000, 'cabildo 500')
+go
+
+
+create procedure SP_CargaFactura(
+@Codigo varchar(15),
+@Usuario varchar(5),
+@fecha datetime,
+@estado bit,
+@modo varchar (1),
+@monto money,
+@dir varchar (50)
+)
+as 
+if (select count(*) from facturas where Codigo = @Codigo) = 0
+begin
+insert into facturas values (@Codigo, @Usuario, @fecha, @estado, @modo, @monto, @dir)
+end
+
+go
+
+
+
+insert into favoritosxusuario values ('32d1a','qwdas'), ('32d1a','asasd')
 go
 insert into admins values ('abcde','admin@correo','adminpass','tomas')
 
@@ -171,3 +245,18 @@ select * from usuarios
 select * from vw_itemFactura
 go
 select * from vw_facturas
+
+use depamphilis_db
+
+select * from vw_facturas where Codigo like '%ah%'
+
+select * from vw_articulos where stock < 5
+
+select * from facturas
+
+select * from vw_articulos where (Nombre like '%%' or Marca like '%%') and stock > 6
+
+select * from favoritosxusuario
+
+use depamphilis_db
+select * from stock

@@ -6,11 +6,14 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dominio;
 using Business;
+using System.Security.Cryptography.X509Certificates;
+using System.EnterpriseServices;
 
 namespace Frontend
 {
     public partial class Tienda : System.Web.UI.Page
     {
+        private UsuarioBusiness usuarioBusiness = new UsuarioBusiness();
         public List<Producto> productos;
         public List<Categoria> categorias;
         public Carrito carrito = new Carrito();
@@ -22,11 +25,11 @@ namespace Frontend
             checkSearch();
             loadproducts();
             categorias = categoriaBusiness.listar();
-            if(!IsPostBack)
+            if (!IsPostBack)
             {
                 Additem();
             }
-                carrito = readChart();
+            carrito = readChart();
         }
 
         protected void TextBox1_TextChanged(object sender, EventArgs e)
@@ -53,7 +56,7 @@ namespace Frontend
         private void checkSearch()
         {
             string code = Request.QueryString["search"];
-            if(code != null)
+            if (code != null)
             {
                 TextBox1.Text = code;
             }
@@ -115,6 +118,27 @@ namespace Frontend
                 throw;
             }
 
+        }
+
+        
+
+        public List<Producto> leerFavoritos(List<string> lista)
+        {
+            List<Producto> productos = new List<Producto>();
+            foreach(string code in lista)
+            {
+                Producto x = new Producto();
+                x = productoBusiness.buscarid(code);
+                productos.Add(x);
+            }
+            return productos;
+        }
+
+        protected void ButtonFavs_Click(object sender, EventArgs e)
+        {
+            Usuario usuario = usuarioBusiness.login((string)Session["usermail"], (string)Session["userpass"]);
+
+            productos = leerFavoritos(usuario.favoritos);
         }
     }
 }

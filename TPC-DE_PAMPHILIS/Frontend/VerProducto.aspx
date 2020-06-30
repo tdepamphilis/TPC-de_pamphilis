@@ -66,9 +66,22 @@
                             <div>&nbsp;</div>
                             <div>&nbsp;</div>
                             <p><%="Precio unitario: $"+ producto.unitPrice()%></p>
+                            <%if (islogged)
+                                { %>
+
+                            <%if (isfavorite)
+                                {%>
+
+                            <asp:ImageButton ID="ButtonRemoveFav" runat="server" ImageUrl="https://image.flaticon.com/icons/svg/60/60993.svg" Style="height: 20px; width: 20px" OnClick="ButtonRemoveFav_Click" />
+                            <%}
+                                else
+                                { %>
+                            <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="https://image.flaticon.com/icons/svg/61/61046.svg" Style="height: 20px; width: 20px" OnClick="ImageButton1_Click" />
+
+                            <%}
+                                } %>
                         </div>
                     </div>
-
 
 
                     <div class="row card-footer justify-content-md-center" style="text-align: center;">
@@ -97,14 +110,15 @@
 
                                 <div class="col-sm-5" style="text-align: center">
                                     <div>&nbsp;</div>
-                                    <asp:Button ID="ButtonAddChart" runat="server" Text="Agregar al carrito" CssClass="btn btn-secondary " Style="position: relative; bottom: 10px" />
+                                    <asp:Button ID="ButtonAddChart" runat="server" Text="Agregar al carrito" CssClass="btn btn-secondary " Style="position: relative; bottom: 10px" OnClick="ButtonAddChart_Click" />
                                 </div>
 
                             </div>
+
                         </div>
                         <%}
-                        else
-                        { %>
+                            else
+                            { %>
                         <p style="color: red">Sin stock</p>
                         <%} %>
                     </div>

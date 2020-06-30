@@ -11,7 +11,7 @@ namespace Frontend
 {
 
 
-    public partial class GestionStock
+    public partial class FacturacionAdmin
     {
 
         /// <summary>
@@ -33,21 +33,12 @@ namespace Frontend
         protected global::System.Web.UI.WebControls.DropDownList DropDown;
 
         /// <summary>
-        /// Control Textstock.
+        /// Control TextSearch.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Textstock;
-
-        /// <summary>
-        /// Control TextBoxname.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxname;
+        protected global::System.Web.UI.WebControls.TextBox TextSearch;
     }
 }

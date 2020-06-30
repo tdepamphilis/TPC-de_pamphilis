@@ -41,6 +41,11 @@
                         <div class="card-header">
 
                             <h2 style="text-align: center">Mi orden</h2>
+                            <%if (!stockavailable)
+                                { %>
+                            <p style="color:red">Algunos articulos exeden el stock disponible, se ajustaron las cantidades.</p>
+
+                            <%} %>
                         </div>
                         <div class="card-body" style="min-height: 300px; max-height: 350px; overflow: auto">
 

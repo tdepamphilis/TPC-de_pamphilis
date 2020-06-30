@@ -61,6 +61,58 @@ namespace Business
 
         }
 
+
+        public List<Producto> listar(string busqueda, string operador, string cantidad)
+        {
+            GestorConexion gestor = new GestorConexion();
+            List<Producto> aux = new List<Producto>();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            SqlDataReader lector;
+            try
+            {
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "select * from vw_articulos where (Nombre like '%"+ busqueda + "%' or Marca like '%" + busqueda + "%') and stock " +  operador  + " " + cantidad;;
+                command.Connection = connection;
+                connection.Open();
+                lector = command.ExecuteReader();
+                while (lector.Read())
+                {
+                    Producto x = new Producto();
+                    Marca y = new Marca();
+                    Stock s = new Stock();
+                    x.code = lector.GetString(0);
+                    x.name = lector.GetString(1);
+                    x.desc = lector.GetString(2);
+                    x.margin = lector.GetInt32(3);
+                    x.urlimagen = lector.GetString(4);
+                    y.id = lector.GetInt32(5);
+                    y.name = lector.GetString(6);
+                    x.marca = y;
+                    s.ammount = lector.GetInt32(7);
+                    s.price = lector.GetDecimal(8);
+                    x.stock = s;
+
+
+                    aux.Add(x);
+                }
+
+
+                connection.Close();
+                return aux;
+
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+        }
+
         public List<Producto> listarxcat(string busqueda, int cat)
         {
             GestorConexion gestor = new GestorConexion();

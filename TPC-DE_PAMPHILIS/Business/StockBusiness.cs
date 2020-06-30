@@ -94,5 +94,39 @@ namespace Business
             }
         }
 
+        public int checkStock(string code)
+        {
+            GestorConexion gestor = new GestorConexion();
+            int x;
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            SqlDataReader lector;
+            try
+            {
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "select Cantidad from stock where CodigoArticulo = @code";
+                command.Parameters.AddWithValue("@code", code);
+                command.Connection = connection;
+                connection.Open();
+                lector = command.ExecuteReader();
+                lector.Read();
+                x = lector.GetInt32(0);
+
+
+                connection.Close();
+                return x;
+
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+      
+
     }
 }

@@ -24,6 +24,8 @@ namespace Dominio
 
         public string dir { get; set; }
 
+        public string ApellidoNombre { get; set; }
+
         public Factura()
         {
             dir = "none";

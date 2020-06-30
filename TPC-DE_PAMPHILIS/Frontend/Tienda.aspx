@@ -34,6 +34,7 @@
                             <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categorias</button>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="tienda.aspx">Todos</a>
+                                <asp:Button ID="ButtonFavs" runat="server" Text="Favoritos" CssClass="dropdown-item" OnClick="ButtonFavs_Click" />
                                 <%foreach (Dominio.Categoria item in categorias)
                                     { %>
                                 <div><a class="dropdown-item" href="?cat=<%= item.id %>"><%=item.name %></a></div>

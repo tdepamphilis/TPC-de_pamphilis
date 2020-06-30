@@ -22,6 +22,8 @@ namespace Dominio
 
         public Zona zona { get; set; }
 
+        public List<string> favoritos { get; set; }
+
 
     }
 }

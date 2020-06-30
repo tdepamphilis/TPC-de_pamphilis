@@ -11,14 +11,13 @@ namespace Frontend
 {
     public partial class MiCarrito : System.Web.UI.Page
     {
-
+        public bool stockavailable;
         public Carrito carrito;
         protected void Page_Load(object sender, EventArgs e)
         {
 
 
             carrito = loadchart();
-
             if (!IsPostBack)
             {
                 isPlus1();
@@ -26,6 +25,9 @@ namespace Frontend
                 istake1();
                 istake10();
             }
+            SetItemAvailability();
+            stockavailable = availability();
+
 
 
         }
@@ -39,6 +41,32 @@ namespace Frontend
 
             Carrito rtn = (Carrito)Session["chart"];
             return rtn;
+        }
+
+        private bool availability()
+        {
+            StockBusiness stockBusiness = new StockBusiness();
+            bool result = carrito.CheckAvailability();
+            foreach (ItemCarrito item in carrito.items)
+            {
+                if (!item.available)
+                    item.ammount = stockBusiness.checkStock(item.code);
+            }
+
+            return result;
+        }
+
+        private void SetItemAvailability()
+        {
+            StockBusiness stockBusiness = new StockBusiness();
+            foreach (ItemCarrito item in carrito.items)
+            {
+                if (stockBusiness.checkStock(item.code) < item.ammount)
+                    item.available = false;
+                else
+                    item.available = true;
+
+            }
         }
 
         //----------BOTONES DE ITEM------------
@@ -126,14 +154,20 @@ namespace Frontend
 
             UsuarioBusiness usuarioBusiness = new UsuarioBusiness();
 
-            //       string mail = (string)Session["UserMail"];
-            //     string pass = (string)Session["UserPass"];
-            //    if (mail == null)
-            //       Response.Redirect("MainPage.aspx");
-            //  if (usuarioBusiness.CheckAlta(mail, pass) == 0)
-            //    Response.Redirect("MainPage.aspx");
+            string mail = (string)Session["UserMail"];
+            string pass = (string)Session["UserPass"];
+            if (mail == null)
+                Response.Redirect("MainPage.aspx");
+            if (usuarioBusiness.CheckAlta(mail, pass) == 0)
+                Response.Redirect("MainPage.aspx");
+
             Session["chart"] = carrito;
+            if (!carrito.CheckAvailability())
+            {
+                Response.Redirect("MiCarrito.aspx");
+            }
             Response.Redirect("Checkout.aspx");
+
 
 
         }

@@ -116,6 +116,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
+    <Content Include="FacturacionAdmin.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="GestionStock.aspx" />
@@ -168,6 +169,7 @@
     <Content Include="Tienda.aspx" />
     <Content Include="TiendaAdmin.aspx" />
     <Content Include="VerFactura.aspx" />
+    <Content Include="VerFacturaAdmin.aspx" />
     <Content Include="VerProducto.aspx" />
     <Content Include="VerProductoAdmin.aspx" />
     <Content Include="ViewSwitcher.ascx" />
@@ -219,6 +221,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FacturacionAdmin.aspx.cs">
+      <DependentUpon>FacturacionAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FacturacionAdmin.aspx.designer.cs">
+      <DependentUpon>FacturacionAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="GestionStock.aspx.cs">
       <DependentUpon>GestionStock.aspx</DependentUpon>
@@ -314,6 +323,13 @@
     </Compile>
     <Compile Include="VerFactura.aspx.designer.cs">
       <DependentUpon>VerFactura.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VerFacturaAdmin.aspx.cs">
+      <DependentUpon>VerFacturaAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VerFacturaAdmin.aspx.designer.cs">
+      <DependentUpon>VerFacturaAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="VerProducto.aspx.cs">
       <DependentUpon>VerProducto.aspx</DependentUpon>

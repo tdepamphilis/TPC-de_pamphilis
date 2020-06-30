@@ -16,17 +16,24 @@ namespace Frontend
         public List<Categoria> categorias;
         public Producto producto;
         public Carrito carrito;
+        public bool isfavorite = false;
+        public bool islogged = false;
+        private Usuario usuario;
+        private UsuarioBusiness usuarioBusiness = new UsuarioBusiness();
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-                carrito = readchart();
-                categorias = categoriaBusiness.listar();
-            
+
+            checklogged();
+            carrito = readchart();
+            categorias = categoriaBusiness.listar();
+            readproduct();
+            if (islogged == true)
+                isfavorite = checkFav();
+
             if (!IsPostBack)
             {
                 TextCuantity.Text = "1";
             }
-                readproduct();
 
         }
 
@@ -49,6 +56,30 @@ namespace Frontend
             producto = productoBusiness.buscarid(code);
         }
 
+        private bool checkFav()
+        {
+            bool check = false;
+            usuario = usuarioBusiness.login((string)Session["usermail"], (string)Session["userpass"]);
+            foreach (string code in usuario.favoritos)
+            {
+                if (code == producto.code)
+                    check = true;
+            }
+            return check;
+        }
+
+        private void checklogged()
+        {
+
+            if (Session["usermail"] != null && Session["userpass"] != null)
+            {
+                if (usuarioBusiness.CheckAlta((string)Session["usermail"], (string)Session["userpass"]) != 0)
+                    islogged = true;
+                else
+                    islogged = false;
+
+            }
+        }
         protected void TextBox1_TextChanged(object sender, EventArgs e)
         {
             Response.Redirect("Tienda.aspx?search=" + TextBox1.Text);
@@ -57,7 +88,7 @@ namespace Frontend
         protected void Buttonup_Click(object sender, EventArgs e)
         {
             int number = 0;
-            if (int.TryParse(TextCuantity.Text,out  number))
+            if (int.TryParse(TextCuantity.Text, out number))
             {
                 number++;
                 TextCuantity.Text = number.ToString();
@@ -72,7 +103,7 @@ namespace Frontend
             int number = 0;
             if (int.TryParse(TextCuantity.Text, out number))
             {
-                number+= 10;
+                number += 10;
                 TextCuantity.Text = number.ToString();
 
             }
@@ -85,7 +116,7 @@ namespace Frontend
             int number = 0;
             if (int.TryParse(TextCuantity.Text, out number))
             {
-                number --;
+                number--;
                 TextCuantity.Text = number.ToString();
 
             }
@@ -100,6 +131,60 @@ namespace Frontend
                 number -= 10;
                 TextCuantity.Text = number.ToString();
 
+
+            }
+
+        }
+
+        protected void ButtonRemoveFav_Click(object sender, ImageClickEventArgs e)
+        {
+            usuario = usuarioBusiness.login((string)Session["usermail"], (string)Session["userpass"]);
+            usuarioBusiness.removeFav(producto.code, usuario.code);
+            isfavorite = checkFav();
+        }
+
+        protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+        {
+            usuario = usuarioBusiness.login((string)Session["usermail"], (string)Session["userpass"]);
+            usuarioBusiness.addFav(producto.code, usuario.code);
+            isfavorite = checkFav();
+        }
+
+        protected void ButtonAddChart_Click(object sender, EventArgs e)
+        {
+            var comp = new ItemCarrito();
+            try
+            {
+                bool nuevo = true;
+                Carrito aux = (Carrito)Session["chart"];
+                foreach (ItemCarrito item in aux.items)
+                {
+                    if (item.code == producto.code)
+                    {
+                        item.ammount += int.Parse(TextCuantity.Text);
+                        nuevo = false;
+                    }
+                }
+                if (nuevo)
+                {
+                    var auxproduct = productoBusiness.buscarid(producto.code);
+                    comp.name = auxproduct.name;
+                    comp.code = auxproduct.code;
+                    comp.ammount = int.Parse(TextCuantity.Text);
+                    comp.unitPrice = (float)auxproduct.unitPrice();
+                    aux.items.Add(comp);
+                }
+
+
+
+                Session.Remove("chart");
+                Session["chart"] = aux;
+
+
+            }
+            catch (Exception)
+            {
+                throw;
             }
 
         }

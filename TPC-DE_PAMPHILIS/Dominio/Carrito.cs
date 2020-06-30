@@ -38,5 +38,16 @@ namespace Dominio
             return nueva;
         }
 
+        public bool CheckAvailability()
+        {
+            bool result = true;
+            foreach(ItemCarrito item in items)
+            {
+                if (item.available == false)
+                    result = false;
+            }
+            return result;
+        }
+
     }
 }

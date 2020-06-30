@@ -17,8 +17,8 @@
         <div class="container-fluid" style="background-color: dimgrey">
             <div class="row">
                 <div class="col-sm-1" style="text-align: center">
-                  <a href="TiendaAdmin.aspx">
-                    <img src="https://darodistribuidora.com/wp-content/uploads/logodarodist.png" style="width: 170px; height: 80px" alt="Alternate Text" />
+                    <a href="TiendaAdmin.aspx">
+                        <img src="https://darodistribuidora.com/wp-content/uploads/logodarodist.png" style="width: 170px; height: 80px" alt="Alternate Text" />
                     </a>
                 </div>
                 <div class="col-sm-5" style="position: relative; top: 27px; text-align: center">
@@ -41,20 +41,94 @@
                 <div class="col-sm-2" style="position: relative; top: 25px; text-align: center;">
                     <div class="input-group mb-4">
                         <div class="input-group-prepend">
-                            
-                            <asp:DropDownList ID="DropDown" runat="server" CssClass="btn btn-light dropdown-toggle"></asp:DropDownList>
-
+                            <asp:DropDownList ID="DropDown" runat="server" CssClass=" custom-select" AutoPostBack="true"></asp:DropDownList>
                         </div>
-                        <asp:TextBox CssClass="form-control" ID="Textstock" runat="server"></asp:TextBox>
+                        <asp:TextBox CssClass="form-control" ID="Textstock" runat="server" AutoPostBack="true"></asp:TextBox>
                     </div>
                 </div>
+                <div class="col-sm-2" style="position: relative; top: 25px; text-align: center;">
+                    <asp:TextBox ID="TextBoxname" runat="server" CssClass="form-control" placeholder="Buscar" AutoPostBack="true"></asp:TextBox>
+                </div>
                 <div class="hidden-lg hidden-md hidden-sm">&nbsp;</div>
-                <div class="col-sm-4"></div>
-
-
+                <div class="col-sm-2"></div>
             </div>
         </div>
+        <div class="container">
 
+            <div class="row justify-content-center">
+
+                <div class="col-12">
+
+
+                    <div class="card">
+
+                        <div class="card-body">
+
+                            <div class="row flex-row flex-nowrap">
+
+
+                            <div class="col-sm-12">
+
+                                <div class="container-fluid">
+
+                                    <div class="row" style="background-color: black; color: white; height: 30px">
+
+                                        <div class="col-3">
+                                            <p>Nombre</p>
+                                        </div>
+                                        <div class="col-3">
+                                            <p>Marca</p>
+                                        </div>
+                                        <div class="col-2">
+                                            <p>Stock</p>
+                                        </div>
+                                        <div class="col-3">
+                                            <p>ultima reposicion</p>
+                                        </div>
+                                        <div class="col-1">
+                                            <p></p>
+                                        </div>
+
+                                    </div>
+                                    <%foreach (Dominio.Producto producto in productos)
+                                        { %>
+                                    <div class="dropdown-divider"></div>
+                                    <div class="row" style="height:30px">
+                                        <div class="col-3">
+                                            <p><%=producto.name %></p>
+                                        </div>
+                                        <div class="col-3">
+                                            <p><%=producto.marca %></p>
+                                        </div>
+                                        <div class="col-2">
+                                            <p><%=producto.stock.ammount %></p>
+                                        </div>
+                                        <div class="col-3">
+                                            <p><%="$" + producto.stock.price %></p>
+                                        </div>
+                                        <div class="col-1">
+                                            <a href="VerProductoAdmin.aspx?prod=<%=producto.code %>">Detalles</a>
+                                        </div>
+
+                                    </div>
+                                    <%} %>
+                                </div>
+
+                            </div>
+
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
     </form>
 </body>
 </html>

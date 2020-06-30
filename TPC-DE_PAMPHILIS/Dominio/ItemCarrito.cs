@@ -11,13 +11,22 @@ namespace Dominio
 
         public string name { get; set; }
         public string desc { get; set; }
-        public string code{ get; set; }
+        public string code { get; set; }
         public float unitPrice { get; set; }
         public int ammount { get; set; }
+
+        public bool available { get; set; }
+
 
         public float partialPrice()
         {
             return ammount * unitPrice;
+        } 
+
+        public ItemCarrito()
+        {
+            available = true;
+
         }
 
     }

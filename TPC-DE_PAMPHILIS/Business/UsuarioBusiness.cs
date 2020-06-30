@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using Dominio;
+using System.Security.Policy;
 
 namespace Business
 {
@@ -113,7 +114,51 @@ namespace Business
                 zona.name = lector.GetString(8);
                 usuario.zona = zona;
                 connection.Close();
+                List<string> favs = favoritos(usuario.code);
+                usuario.favoritos = favs;
+
+                
+
                 return usuario;
+
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+
+        public List<string> favoritos(string usercode)
+        {
+            List<string> aux = new List<string>();
+            GestorConexion gestor = new GestorConexion();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            SqlDataReader lector;
+            try
+            {
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "select * from vw_favoritos where Usuario = @user ";
+                command.Parameters.AddWithValue("@user", usercode);
+                command.Connection = connection;
+                connection.Open();
+                lector = command.ExecuteReader();
+
+                while (lector.Read())
+                {
+                    string x = lector.GetString(1);
+                    aux.Add(x);
+
+                }
+
+
+                connection.Close();
+                return aux;
 
 
 
@@ -212,5 +257,58 @@ namespace Business
                 connection.Close();
             }
         }
+
+        public void removeFav(string prodcode, string usercode)
+        {
+            GestorConexion gestor = new GestorConexion();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            try
+            {
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "delete from favoritosxusuario where Usuario = @user and Articulo = @art";
+                command.Parameters.AddWithValue("@user", usercode);
+                command.Parameters.AddWithValue("@art", prodcode);
+                command.Connection = connection;
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public void addFav(string prodcode, string usercode)
+        {
+            GestorConexion gestor = new GestorConexion();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            try
+            {
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "insert into favoritosxusuario values (@user, @art)";
+                command.Parameters.AddWithValue("@user", usercode);
+                command.Parameters.AddWithValue("@art", prodcode);
+                command.Connection = connection;
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
     }
 }
