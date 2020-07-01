@@ -40,6 +40,7 @@ create table articulos
 
 create table stock
 (
+	[Id] [int] primary key identity(1,1),
 	[CodigoArticulo] [varchar] (5) foreign key references articulos(Codigo),
 	[Cantidad] [int] not null,
 	[PrecioDistribuidor] [money] not null,
@@ -89,6 +90,7 @@ create table facturas(
 )
 go
 create table itemsxfactura(
+[Id] [int] primary key identity(1,1),
 [CodigoArticulo] [varchar] (5) foreign key references articulos(Codigo),
 [CodigoFactura] [varchar] (15) foreign key references facturas(Codigo),
 [Precio] [money] not null,
@@ -220,9 +222,20 @@ insert into facturas values (@Codigo, @Usuario, @fecha, @estado, @modo, @monto, 
 end
 
 go
+create trigger tr_ventaStock
+on itemsxfactura
+after insert
+as
+begin
+	declare @cant int
+	declare @prod varchar (5)
+	select @cant = Cantidad, @prod = CodigoArticulo from inserted
+	update stock set Cantidad = Cantidad - @cant where CodigoArticulo = @prod
 
 
+end
 
+go
 insert into favoritosxusuario values ('32d1a','qwdas'), ('32d1a','asasd')
 go
 insert into admins values ('abcde','admin@correo','adminpass','tomas')
