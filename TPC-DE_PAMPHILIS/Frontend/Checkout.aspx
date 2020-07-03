@@ -22,9 +22,9 @@
                 <div class="col-sm-4" style="position: relative; top: 27px; text-align: center;">
                     <div class="dropdown show">
                         <a href="Tienda.aspx" class="btn btn-dark btn-sm">Tienda</a>
-                        <a href="#" class="btn btn-dark btn-sm">Mis pedidos</a>
+                        <a href="MisCompras.aspx" class="btn btn-dark btn-sm">Mis pedidos</a>
                         <a href="MainPage.aspx" class="btn btn-dark btn-sm">Salir</a>
-                        <a href="#" class="btn btn-dark btn-sm">Carrito<%=" (" + carrito.items.Count + ")" %></a>
+                        <a href="MiCarrito.aspx" class="btn btn-dark btn-sm">Carrito<%=" (" + carrito.items.Count + ")" %></a>
                     </div>
                 </div>
                 <div class="col-sm-4" style="position: relative; top: 27px;"></div>
@@ -69,25 +69,27 @@
                                         <div class="form-group">
 
                                             <asp:Label ID="Label2" runat="server" Text="Numero de tarjeta"></asp:Label>
-                                            <input id="TextCard" type="text" class="form-control" />
+                                       
+                                           <asp:TextBox ID="Textcard" runat="server" type="number" CssClass="form-control"></asp:TextBox>
+
                                         </div>
                                     </div>
                                     <div class="col-sm-2"></div>
                                     <div class="col-sm-3 px-2">
                                         <asp:Label ID="LabelExp" runat="server" Text="Vencimiento"></asp:Label>
-                                        <asp:TextBox ID="TextExpiration" runat="server" CssClass="form-control" placeholder="MM/AA"></asp:TextBox>
+                                        <asp:TextBox ID="TextExpiration" runat="server" CssClass="form-control" placeholder="MMAA" type="number"></asp:TextBox>
                                     </div>
                                     <div class="col-sm-1"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <asp:Label ID="LabelName" runat="server" Text="Nombre y apellido"></asp:Label>
+                                        <asp:Label ID="LabelName" runat="server" Text="Nombre y apellido" ></asp:Label>
                                         <asp:TextBox ID="TextName" runat="server" Class="form-control"></asp:TextBox>
                                     </div>
                                     <div class="col-sm-1"></div>
                                     <div class="col-sm-5">
                                         <asp:Label ID="LabelDNI" runat="server" Text="DNI" ></asp:Label>
-                                        <asp:TextBox ID="TextBoxDNI" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <asp:TextBox ID="TextBoxDNI" runat="server" CssClass="form-control" type="number"></asp:TextBox>
                                     </div>                                    
                                 </div>
                                 <div class="row justify-content-center">

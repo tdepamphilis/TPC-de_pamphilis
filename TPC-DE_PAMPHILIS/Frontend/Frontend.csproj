@@ -107,6 +107,7 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="AltaUsuario.aspx" />
+    <Content Include="CambiarContraseña.aspx" />
     <Content Include="Categorias.aspx" />
     <Content Include="Checkout.aspx" />
     <Content Include="Contact.aspx" />
@@ -195,6 +196,13 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="CambiarContraseña.aspx.cs">
+      <DependentUpon>CambiarContraseña.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CambiarContraseña.aspx.designer.cs">
+      <DependentUpon>CambiarContraseña.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Categorias.aspx.cs">
       <DependentUpon>Categorias.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

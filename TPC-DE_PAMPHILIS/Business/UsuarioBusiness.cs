@@ -310,5 +310,32 @@ namespace Business
             }
         }
 
+        public void cambiarPass(string mail, string pass, string newpass)
+        {
+            GestorConexion gestor = new GestorConexion();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            try
+            {
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "update usuarios set Password = @newpass where Correo = @mail and Password = @oldpass";
+                command.Parameters.AddWithValue("@mail", mail );
+                command.Parameters.AddWithValue("@oldpass", pass);
+                command.Parameters.AddWithValue("@newpass", newpass);
+                command.Connection = connection;
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
     }
 }

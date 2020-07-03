@@ -61,6 +61,11 @@ namespace Frontend
         {
             Factura factura = carrito.GenerarFactura();
 
+            
+
+
+
+
             // set dir
             if ((DropDownListDelivery.SelectedValue == "0") || (DropDownListDelivery.SelectedValue == "1" && DropDownMetodo.SelectedValue == "0"))
                 factura.dir = usuario.direccion;
@@ -75,6 +80,7 @@ namespace Frontend
             else
                 factura.modoDePago = 'T';
             factura.codigoUsuario = usuario.code;
+            factura.fecha = DateTime.Now;
             facturaBusiness.GenerarCompra(factura);
             Session["chart"] = new Carrito();
             Response.Redirect("Tienda.aspx");

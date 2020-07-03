@@ -21,9 +21,9 @@
                 <div class="col-sm-4" style="position: relative; top: 27px; text-align: center;">
                     <div class="dropdown show">
                         <a href="Tienda.aspx" class="btn btn-dark btn-sm">Tienda</a>
-                        <a href="#" class="btn btn-dark btn-sm">Mis pedidos</a>
+                        <a href="MisCompras.aspx" class="btn btn-dark btn-sm">Mis pedidos</a>
                         <a href="MainPage.aspx" class="btn btn-dark btn-sm">Salir</a>
-                        <a href="#" class="btn btn-dark btn-sm">Carrito<%=" (" + carrito.items.Count + ")" %></a>
+                        <a href="MiCarrito.aspx" class="btn btn-dark btn-sm">Carrito<%=" (" + carrito.items.Count + ")" %></a>
                     </div>
                 </div>
                 <div class="col-sm-4" style="position: relative; top: 27px;"></div>
@@ -44,11 +44,9 @@
 
                         <div class="container">
 
+                            
                             <div class="row pt-3 justify-content-center" >
-                                <asp:Button ID="ButtonInfo" runat="server" Text="Mis datos" CssClass="btn btn-primary" />
-                            </div>
-                            <div class="row pt-3 justify-content-center" >
-                                <asp:Button ID="ButtonPass" runat="server" Text="Cambiar contraseña" CssClass="btn btn-primary" />
+                                <asp:Button ID="ButtonPass" runat="server" Text="Cambiar contraseña" CssClass="btn btn-secondary" OnClick="ButtonPass_Click" />
                             </div>
                         </div>
                     </div>
