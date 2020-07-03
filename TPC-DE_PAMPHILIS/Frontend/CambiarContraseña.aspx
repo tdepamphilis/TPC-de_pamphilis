@@ -36,11 +36,11 @@
                             <div class="container-fluid">
                                 <div class="row mt-3">
                                     <asp:Label ID="Label1" runat="server" Text="Contraseña actual"></asp:Label>
-                                    <asp:TextBox ID="Textold" runat="server" CssClass="form-control"></asp:TextBox>
+                                    <asp:TextBox ID="Textold" runat="server" CssClass="form-control" type="password"></asp:TextBox>
                                 </div>
                                 <div class="row mt-3">
                                     <asp:Label ID="Label2" runat="server" Text="Contraseña nueva"></asp:Label>
-                                    <asp:TextBox ID="Textnew" runat="server" CssClass="form-control"></asp:TextBox>
+                                    <asp:TextBox ID="Textnew" runat="server" CssClass="form-control" type="password"></asp:TextBox>
                                 </div>
                                  <div class="row mt-3 justify-content-center">
                                      <asp:Button ID="Button1" runat="server" Text="Cambiar"  class="btn btn-secondary mx-1" OnClick="Button1_Click"/>

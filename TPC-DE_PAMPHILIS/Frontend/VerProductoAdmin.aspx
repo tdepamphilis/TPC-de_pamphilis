@@ -146,12 +146,7 @@
 
                 </div>
             </div>
-            <div class="row justify-content-between p-md-3">
-                <div class="col-2 justify-content-center">
-                    <asp:Button ID="Button1" runat="server" Text="Volver"  CssClass="btn btn-secondary" OnClick="Button1_Click"/>
-                    
-                </div>
-            </div>
+      
             
         </div>
     </form>

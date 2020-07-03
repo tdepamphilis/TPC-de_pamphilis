@@ -23,24 +23,22 @@ namespace Frontend
         List<Categoria> categorias;
         public Producto producto = new Producto();
         public string title = "Nuevo";
+        private bool modificacion;
         protected void Page_Load(object sender, EventArgs e)
         {
 
             if (!login())
                 Response.Redirect("MainPage.aspx");
-            
+
             if (!IsPostBack)
             {
                 marcas = marcaBusiness.listar();
                 BrandSelector.DataSource = marcas;
                 BrandSelector.DataBind();
                 loadCat();
-                if (!ismod())
-                {
+                modificacion = ismod();
+                if (!modificacion)
                     generateCode();
-                }
-
-
             }
         }
 
@@ -75,7 +73,7 @@ namespace Frontend
             if (code == null)
                 return false;
             loadProduct(code);
-            title = "Modificar";
+
             return true;
 
 
@@ -104,16 +102,14 @@ namespace Frontend
                 if (categoriaBusiness.checkItemInCategory(aux.id, producto.code))
                     Categorybox.Items[x].Selected = true;
             }
+            Session["oldimagepath"] = producto.urlimagen;
 
 
         }
         protected void ButtonConfirm_Click(object sender, EventArgs e)
         {
-            if (TextName.Text != "" && TextDesc.Text != "" && FileImage.HasFile)
+            if (TextName.Text.Trim() != "" && TextDesc.Text.Trim() != "" && (FileImage.HasFile || Session["oldimagepath"] != null))
             {
-
-
-
                 StockBusiness stockBusiness = new StockBusiness();
                 Producto nuevo = new Producto();
                 Marca marca = new Marca();
@@ -123,11 +119,22 @@ namespace Frontend
                 marca = marcaBusiness.buscarnombre((string)BrandSelector.SelectedItem.Value);
                 nuevo.marca = marca;
                 nuevo.margin = int.Parse(TextMargin.Text);
-                nuevo.urlimagen = save();
-               // si el codigo de producto no esta en la bbdd se trata de una creacion y se genera un codigo y stock nuevo, sino se trata de una modificacion y se hace un update
+
+                nuevo.urlimagen = producto.urlimagen;
+
+                if (FileImage.HasFile)
+                {
+                    nuevo.urlimagen = save();
+                }
+                else
+                {
+                    nuevo.urlimagen = (string)Session["oldimagepath"];
+                }
+            
+                // si el codigo de producto no esta en la bbdd se trata de una creacion y se genera un codigo y stock nuevo, sino se trata de una modificacion y se hace un update
                 if (!productoBusiness.checkcode(nuevo.code))
                 {
-                   
+
                     productoBusiness.create(nuevo);
                     stockBusiness.createData(nuevo.code);
                 }
@@ -135,8 +142,6 @@ namespace Frontend
                 {
                     productoBusiness.mod(nuevo);
                 }
-
-
 
 
                 productoBusiness.clearcategories(nuevo.code);
@@ -152,6 +157,7 @@ namespace Frontend
                 }
 
 
+                Session.Remove("oldimagepath");
 
                 Response.Redirect("TiendaAdmin.aspx");
 
