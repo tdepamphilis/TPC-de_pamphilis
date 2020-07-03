@@ -33,7 +33,7 @@
                         <a href="TiendaAdmin.aspx" class="btn btn-dark btn-sm">Productos</a>
                         <a href="Marcas.aspx" class="btn btn-dark btn-sm">Marcas</a>
                         <a href="Categorias.aspx" class="btn btn-dark btn-sm">categorias</a>
-                        <a href="#" class="btn btn-dark btn-sm">Facturacion</a>
+                        <a href="FacturacionAdmin.aspx" class="btn btn-dark btn-sm">Facturacion</a>
                         <a href="MainPage.aspx" class="btn btn-dark btn-sm">Salir</a>
                     </div>
                 </div>
@@ -107,7 +107,7 @@
                                             <p><%="$" + producto.stock.price %></p>
                                         </div>
                                         <div class="col-1">
-                                            <a href="VerProductoAdmin.aspx?prod=<%=producto.code %>">Detalles</a>
+                                            <a href="VerProductoAdmin.aspx?prod=<%=producto.code %>" class="btn btn-secondary btn-sm ">Detalles</a>
                                         </div>
 
                                     </div>

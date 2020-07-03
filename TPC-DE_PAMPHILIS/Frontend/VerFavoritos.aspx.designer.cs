@@ -11,7 +11,7 @@ namespace Frontend
 {
 
 
-    public partial class Tienda
+    public partial class VerFavoritos
     {
 
         /// <summary>

@@ -174,7 +174,7 @@ namespace Business
             {
 
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "delete from marcas where Id = @code";
+                command.CommandText = "Update  marcas set Active = 0 where Id = @code";
                 command.Parameters.AddWithValue("@code", id);
                 command.Connection = connection;
                 connection.Open();

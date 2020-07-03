@@ -21,7 +21,8 @@ go
 
 create table marcas(
 [Id] [int] IDENTITY(1,1) primary key not null,
-[Nombre][varchar] (50) unique not null
+[Nombre][varchar] (50) unique not null,
+[Active] [bit] not null
 )
 
 go
@@ -128,6 +129,7 @@ create view [vw_marcas]
 as
 select m.Id, m.Nombre, COUNT(a.Codigo) as articulos from marcas as m
 left join articulos as a on a.IdMarca = m.Id
+where m.active = 1
 group by m.Nombre, m.Id
 go
 create view [vw_usuarios]
@@ -139,6 +141,7 @@ create view [vw_facturas]
 as
 select f.Codigo, f.CodigoUsuario, f.Fecha, f.Estado, f.ModoDePago ,f.Monto, f.Direccion, (u.Apellido + ' ' + u.Nombre) as ApellidoNombre from facturas as f
 inner join usuarios as u on u.Codigo = f.CodigoUsuario
+where f.Estado = 1
 go
 create view [vw_itemFactura]
 as
@@ -151,16 +154,27 @@ select Usuario, Articulo from favoritosxusuario
 go
 
 go
-insert into marcas values ('arcor'),('la campagnola'),('Magistral'),('la serenisima'),('sancor')
+insert into marcas values ('arcor',1),('la campagnola',1),('Magistral',1),('la serenisima',1),('sancor',1),('Coca cola',1),('Pepsico',1)
+go
 insert into categorias values ('cocina'),('almacen'),('bebidas'),('lacteos'),('limpieza'),('golosinas')
-insert into articulos values ('asasd','mermelada de naranja', 'caja 24 unidades', 2,'https://walmartar.vteximg.com.br/arquivos/ids/829225-1000-1000/Mermelada-Naranja-La-Campagnola-454-Gr-1-17738.jpg?v=636685104012570000', 100,1),
+go
+insert into articulos values 
+('asasd','mermelada de naranja', 'caja 24 unidades', 2,'https://walmartar.vteximg.com.br/arquivos/ids/829225-1000-1000/Mermelada-Naranja-La-Campagnola-454-Gr-1-17738.jpg?v=636685104012570000', 100,1),
 ('qwere','Detergente Magistral', 'caja 24 unidades',3 ,'https://www.ofiflex.com.ar/wp-content/uploads/578_13.jpg', 25,1),
 ('qwdas','Bombones surtidos', 'caja 12 unidades', 1,'https://ardiaqa.vteximg.com.br/arquivos/ids/213174-1000-1000/SURTIDO-CHOCOLATE-ARCOR-266GR.jpg?v=636977361302600000', 25,1),
-('asdqw','Leche largavida', 'pack 8 unidades', 4,'https://statics.dinoonline.com.ar/imagenes/full_600x600_ma/3262754_f.jpg', 25,1)
+('asdqw','Leche largavida', 'pack 8 unidades', 4,'https://statics.dinoonline.com.ar/imagenes/full_600x600_ma/3262754_f.jpg', 25,1),
+('qwert','Pepsi 2.5l', 'pack 8 unidades', 7,'https://lacolonia.vteximg.com.br/arquivos/ids/184532-500-500/360-Bebidas-y-Jugos-Refrescos-Refrescos-de-Cola_7421601101614_1.jpg?v=637117565841900000', 25,1),
+('fkhop','Coca cola 2.5l', 'pack 8 unidades', 6,'https://infonegocios.info/uploads/old_site/Coca.jpg', 25,1),
+('mngop','manteca', 'caja 24 unidades', 4,'https://statics.dinoonline.com.ar/imagenes/full_600x600_ma/3260038_f.jpg', 25,1),
+('progf','yogurt firme', 'caja 24 unidades', 5,'https://ardiaqa.vteximg.com.br/arquivos/ids/223212-1000-1000/Yogur-Entero-Firme-Sancor-Vainilla-190-Gr-_1.jpg?v=637194325015700000', 25,1),
+('ckxa2','Polenta', 'caja 10 unidades', 1,'https://mandamosfruta.com.ar/wp-content/uploads/2020/06/difTKLCb5y_1024x.jpg', 25,1),
+('sd340','Atun', 'pack 8 unidades', 4,'https://ardiaqa.vteximg.com.br/arquivos/ids/190076-1000-1000/ATUN-EN-ACEITE---LA-CAMPAGNOLA-170GR.jpg?v=636838250372330000', 25,1)
 go
-insert into categoriaxarticulo values ('asasd',2),('qwere',1),('qwere',5),('qwdas',6),('asdqw',4),('asdqw',2)
+insert into categoriaxarticulo values ('asasd',2),('qwere',1),('qwere',5),('qwdas',6),('asdqw',4),('asdqw',2),
+('qwert',3),('fkhop',3),('mngop',4),('progf',4),('ckxa2',2),('sd340',2)
 go
-insert into stock values ('asasd', 2,3),('qwere', 300,200),('qwdas', 100,700),('asdqw', 300,500)
+insert into stock values ('asasd', 2,3),('qwere', 300,200),('qwdas', 100,700),('asdqw', 300,500),
+('qwert', 300,350),('fkhop', 300,500),('mngop', 300,500),('progf', 300,500),('ckxa2', 300,500),('sd340', 300,500)
 go
 insert into zonas values ('CABA'), ('Norte'), ('Sur')
 go
@@ -273,3 +287,5 @@ select * from favoritosxusuario
 
 use depamphilis_db
 select * from stock
+
+select * from favoritosxusuario

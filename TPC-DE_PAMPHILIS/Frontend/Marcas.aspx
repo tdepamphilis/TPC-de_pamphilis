@@ -33,7 +33,7 @@
                         <a href="TiendaAdmin.aspx" class="btn btn-dark btn-sm" style="text-align: left">Productos</a>
                         <a href="GestionStock.aspx" class="btn btn-dark btn-sm">Stock</a>
                         <a href="Categorias.aspx" class="btn btn-dark btn-sm">categorias</a>
-                        <a href="#" class="btn btn-dark btn-sm">Facturacion</a>
+                        <a href="FacturacionAdmin.aspx" class="btn btn-dark btn-sm">Facturacion</a>
                         <a href="MainPage.aspx" class="btn btn-dark btn-sm">Salir</a>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
                     <div class="card">
                         <div class="card-header justify-content-center">
 
-                            <h6 style="text-align:justify"><%="Está seguro que desea eliminar " + selected.name + "? Tambien borrara todos sus productos." %></h6>
+                            <h6 style="text-align:justify"><%="Está seguro que desea eliminar " + selected.name + "? Sus productos seguiran existiendo hasta que se eliminen." %></h6>
                         </div>
 
                    

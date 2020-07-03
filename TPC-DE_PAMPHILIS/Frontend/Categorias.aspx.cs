@@ -16,6 +16,9 @@ namespace Frontend
         public Categoria selected;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!login())
+                Response.Redirect("MainPage.aspx");
+            
             loadcards();
             if (isrenaming())
                 action = 1;
@@ -23,6 +26,16 @@ namespace Frontend
                 action = 2;
 
 
+        }
+
+        private bool login()
+        {
+            AdminBusiness adminBusiness = new AdminBusiness();
+            if (Session["adminmail"] == null || Session["adminpass"] == null)
+                return false;
+            if (adminBusiness.checkAdmin((string)Session["adminmail"], (string)Session["adminpass"]) == 0)
+                return false;
+            return true;
         }
 
         private void loadcards()

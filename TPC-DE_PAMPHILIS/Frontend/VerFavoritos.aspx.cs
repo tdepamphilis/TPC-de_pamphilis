@@ -6,13 +6,14 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dominio;
 using Business;
-using System.Security.Cryptography.X509Certificates;
-using System.EnterpriseServices;
 
 namespace Frontend
 {
-    public partial class Tienda : System.Web.UI.Page
+
+    public partial class VerFavoritos : System.Web.UI.Page
     {
+
+
         private bool showingfavs = false;
         public int page;
         private int productperpage = 4;
@@ -23,14 +24,18 @@ namespace Frontend
         public Carrito carrito = new Carrito();
         ProductoBusiness productoBusiness = new ProductoBusiness();
         CategoriaBusiness categoriaBusiness = new CategoriaBusiness();
+        private Usuario user;
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
 
-         //   if (!IsPostBack)
-                //  page = 0;
 
-                checkSearch();
+
+            if (!login())
+                Response.Redirect("MainPage.aspx");
+
+                
             categorias = categoriaBusiness.listar();
             loadproducts();
 
@@ -46,42 +51,22 @@ namespace Frontend
 
         }
 
-        protected void TextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        //-------------FUNCIONES DE CARGA--------------
-
         private void loadproducts()
         {
-            string strcatid = Request.QueryString["cat"];
-            if (strcatid == null)
+            productos = new List<Producto>();
+            foreach(string code in user.favoritos)
             {
-                productos = productoBusiness.listar(TextBox1.Text);
-                return;
-            }            
-            int catid;
-            int.TryParse(strcatid, out catid);
-            productos = productoBusiness.listarxcat(TextBox1.Text, catid);
-            if (true)
-            {
-                page = 0;
-                Session["page"] = 0;
+               
+                Producto aux = new Producto();
+                aux = productoBusiness.buscarid(code);
+                productos.Add(aux);
+
             }
+            
+
+
 
         }
-
-        private void checkSearch()
-        {
-            string code = Request.QueryString["search"];
-            if (code != null)
-            {
-                TextBox1.Text = code;
-            }
-        }
-
-
         private Carrito readChart()
         {
             if (Session["chart"] == null)
@@ -125,9 +110,6 @@ namespace Frontend
                         comp.unitPrice = (float)auxproduct.unitPrice();
                         aux.items.Add(comp);
                     }
-
-
-
                     Session.Remove("chart");
                     Session["chart"] = aux;
                 }
@@ -137,7 +119,6 @@ namespace Frontend
             {
                 throw;
             }
-
         }
 
 
@@ -198,11 +179,15 @@ namespace Frontend
             return productos;
         }
 
-        protected void ButtonFavs_Click(object sender, EventArgs e)
+        private bool login()
         {
-     //       Response.Redirect("VerFavoritos.aspx");
+            if (Session["userpass"] == null || Session["usermail"] == null)
+                return false;
+            string usermail = (string)Session["usermail"];
+            string userpass = (string)Session["userpass"];
+            user =   usuarioBusiness.login(usermail, userpass);
+            return true;
         }
-
         protected void Buttonnext_Click(object sender, EventArgs e)
         {
             if (page + 1 <= productos.Count / productperpage)
@@ -224,6 +209,11 @@ namespace Frontend
 
             }
             loadPage();
+        }
+
+        protected void TextBox1_TextChanged(object sender, EventArgs e)
+        {
+            Response.Redirect("Tienda.aspx?search=" + TextBox1.Text);
         }
     }
 }

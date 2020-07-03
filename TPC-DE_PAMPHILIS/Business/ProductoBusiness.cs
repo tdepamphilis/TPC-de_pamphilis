@@ -322,6 +322,34 @@ namespace Business
                 connection.Open();
                 command.ExecuteNonQuery();
                 connection.Close();
+                removeFromFavorites(code);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+            }
+        }
+
+        public void removeFromFavorites(string code)
+        {
+            GestorConexion gestor = new GestorConexion();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            try
+            {
+
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "delete from favoritosxusuario where Articulo = @code";
+                command.Parameters.AddWithValue("@code", code);
+                command.Connection = connection;
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
 
             }
             catch (Exception)

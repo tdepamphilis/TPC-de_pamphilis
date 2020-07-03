@@ -23,6 +23,8 @@ namespace Frontend
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            if (!IsPostBack)
+                Session["PreviousPageUrl"] = Request.UrlReferrer.ToString();
             checklogged();
             carrito = readchart();
             categorias = categoriaBusiness.listar();
@@ -187,6 +189,11 @@ namespace Frontend
                 throw;
             }
 
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect((string)Session["PreviousPageUrl"]);
         }
     }
 }

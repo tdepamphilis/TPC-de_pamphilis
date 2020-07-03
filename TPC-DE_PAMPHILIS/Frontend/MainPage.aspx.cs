@@ -1,4 +1,5 @@
-﻿using Business;
+﻿
+using Business;
 using Dominio;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace Frontend
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         protected void ButtonLogin_Click(object sender, EventArgs e)
@@ -26,6 +27,8 @@ namespace Frontend
             {
                 Admin admin = new Admin();
                 admin = adminBusiness.login(TextUser.Text, TextPass.Text);
+                Session["adminmail"] = admin.mail;
+                Session["adminpass"] = admin.pass;
                 Response.Redirect("TiendaAdmin.aspx");
             }
             else if (usuarioBusiness.CheckAlta(TextUser.Text, TextPass.Text) != 0)

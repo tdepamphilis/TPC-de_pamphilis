@@ -170,6 +170,7 @@
     <Content Include="TiendaAdmin.aspx" />
     <Content Include="VerFactura.aspx" />
     <Content Include="VerFacturaAdmin.aspx" />
+    <Content Include="VerFavoritos.aspx" />
     <Content Include="VerProducto.aspx" />
     <Content Include="VerProductoAdmin.aspx" />
     <Content Include="ViewSwitcher.ascx" />
@@ -330,6 +331,13 @@
     </Compile>
     <Compile Include="VerFacturaAdmin.aspx.designer.cs">
       <DependentUpon>VerFacturaAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VerFavoritos.aspx.cs">
+      <DependentUpon>VerFavoritos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VerFavoritos.aspx.designer.cs">
+      <DependentUpon>VerFavoritos.aspx</DependentUpon>
     </Compile>
     <Compile Include="VerProducto.aspx.cs">
       <DependentUpon>VerProducto.aspx</DependentUpon>

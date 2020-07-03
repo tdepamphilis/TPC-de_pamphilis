@@ -17,7 +17,9 @@
         <div class="container-fluid" style="background-color: dimgrey">
             <div class="row">
                 <div class="col-sm-1" style="text-align: center">
+                    <a href="Tienda.aspx">
                     <img src="https://darodistribuidora.com/wp-content/uploads/logodarodist.png" style="width: 170px; height: 80px" alt="Alternate Text" />
+                    </a> 
                 </div>
                 <div class="col-sm-5" style="position: relative; top: 27px; text-align: center">
                 </div>
@@ -60,7 +62,7 @@
 
                             <div class="form-group col-6 my-2">
                                 <asp:Label ID="LabelPass" runat="server" Text="Contraseña"></asp:Label>
-                                <asp:TextBox ID="TextPass" runat="server" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox ID="TextPass" runat="server" CssClass="form-control" type="password"></asp:TextBox>
                             </div>
                         </div>
                         
@@ -70,11 +72,11 @@
                             <div class="form-group col-6 my-2 ">
 
                                 <asp:Label ID="LabelDNI" runat="server" Text="D.N.I."></asp:Label>
-                                <asp:TextBox ID="TextDNI" runat="server" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox ID="TextDNI" runat="server" CssClass="form-control" type="number"></asp:TextBox>
                             </div>
                             <div class="form-group col-6 my-2">
                                 <asp:Label ID="LabelTel" runat="server" Text="Telefono"></asp:Label>
-                                <asp:TextBox ID="TextTel" runat="server" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox ID="TextTel" runat="server" CssClass="form-control" type="number"></asp:TextBox>
                             </div>
                         </div>
                         <div class="form-row justify-content-center mt-2">

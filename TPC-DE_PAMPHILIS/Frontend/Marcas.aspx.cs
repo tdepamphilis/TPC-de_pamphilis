@@ -17,6 +17,8 @@ namespace Frontend
         public int action = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!login())
+                Response.Redirect("MainPage.aspx");
             action = 0;
             fillcards();
             if (isrenaming())
@@ -24,6 +26,17 @@ namespace Frontend
             else if (isdelete())
                 action = 2;
         }
+
+        private bool login()
+        {
+            AdminBusiness adminBusiness = new AdminBusiness();
+            if (Session["adminmail"] == null || Session["adminpass"] == null)
+                return false;
+            if (adminBusiness.checkAdmin((string)Session["adminmail"], (string)Session["adminpass"]) == 0)
+                return false;
+            return true;
+        }
+
         private void fillcards()
         {
             marcas = marcaBusiness.buscar(TextSearch.Text);
@@ -64,7 +77,7 @@ namespace Frontend
             ProductoBusiness productoBusiness = new ProductoBusiness();
             try
             {
-                productoBusiness.deleteBrandProducts(selected.id);
+              //  productoBusiness.deleteBrandProducts(selected.id);
                 marcaBusiness.delete(selected.id);
                 Response.Redirect("Marcas.aspx");
             }

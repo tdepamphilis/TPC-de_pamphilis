@@ -34,7 +34,7 @@
                         <a href="GestionStock.aspx" class="btn btn-dark btn-sm">Stock</a>
                         <a href="Marcas.aspx" class="btn btn-dark btn-sm">Marcas</a>
                         <a href="Categorias.aspx" class="btn btn-dark btn-sm">categorias</a>
-                        <a href="#" class="btn btn-dark btn-sm">Facturacion</a>
+                        <a href="FacturacionAdmin.aspx" class="btn btn-dark btn-sm">Facturacion</a>
                         <a href="MainPage.aspx" class="btn btn-dark btn-sm">Salir</a>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                                 <%} %>
                             </div>
                         </div>
-                        <asp:TextBox CssClass="form-control" ID="TextBox1" runat="server" OnTextChanged="TextBox1_TextChanged"></asp:TextBox>
+                        <asp:TextBox CssClass="form-control" ID="TextBox1" runat="server" OnTextChanged="TextBox1_TextChanged" ></asp:TextBox>
                     </div>
                 </div>
                 <div class="hidden-lg hidden-md hidden-sm">&nbsp;</div>
@@ -142,8 +142,17 @@
                             </div>
                         </div>
                     </div>
+
+
                 </div>
             </div>
+            <div class="row justify-content-between p-md-3">
+                <div class="col-2 justify-content-center">
+                    <asp:Button ID="Button1" runat="server" Text="Volver"  CssClass="btn btn-secondary" OnClick="Button1_Click"/>
+                    
+                </div>
+            </div>
+            
         </div>
     </form>
 </body>

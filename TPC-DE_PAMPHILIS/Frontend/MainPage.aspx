@@ -39,7 +39,7 @@
                     <asp:TextBox ID="TextUser" runat="server" CssClass="form-control" Placeholder="Correo electronico"></asp:TextBox>
                     </div>
                     <div class="form-group"> 
-                    <asp:TextBox ID="TextPass" runat="server" CssClass="form-control" placeholder="Contraseña" ></asp:TextBox>
+                    <asp:TextBox ID="TextPass" runat="server" CssClass="form-control" placeholder="Contraseña" type="password" ></asp:TextBox>
                     </div>
                     <div class="form-group">
                         <asp:Button ID="ButtonLogin" runat="server" Text="Login"  CssClass="btn btn-light" OnClick="ButtonLogin_Click"/>

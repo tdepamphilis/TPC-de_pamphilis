@@ -32,7 +32,7 @@
                         <a href="GestionStock.aspx" class="btn btn-dark btn-sm">Stock</a>
                         <a href="Marcas.aspx" class="btn btn-dark btn-sm">Marcas</a>
                         <a href="Categorias.aspx" class="btn btn-dark btn-sm">categorias</a>
-                        <a href="#" class="btn btn-dark btn-sm">Facturacion</a>
+                        <a href="FacturacionAdmin.aspx" class="btn btn-dark btn-sm">Facturacion</a>
                         <a href="MainPage.aspx" class="btn btn-dark btn-sm">Salir</a>
                     </div>
                 </div>

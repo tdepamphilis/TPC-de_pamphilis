@@ -16,11 +16,21 @@ namespace Frontend
         public string title;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!login())
+                Response.Redirect("MainPage.aspx");
             formtype = checkType();
             fillInfo();
         }
 
-
+        private bool login()
+        {
+            AdminBusiness adminBusiness = new AdminBusiness();
+            if (Session["adminmail"] == null || Session["adminpass"] == null)
+                return false;
+            if (adminBusiness.checkAdmin((string)Session["adminmail"], (string)Session["adminpass"]) == 0)
+                return false;
+            return true;
+        }
         private int checkType()
         {
             string url = (string)Request.QueryString["type"];

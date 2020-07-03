@@ -17,22 +17,23 @@ namespace Frontend
         public ProductoBusiness productoBusiness = new ProductoBusiness();
         public CategoriaBusiness CategoriaBusiness = new CategoriaBusiness();
         public StockBusiness stockBusiness = new StockBusiness();
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-                loadCategories();
-                loadProduct();    
-            
-            if(!IsPostBack)
+            if (!IsPostBack)
+                Session["PreviousPageUrl"] = Request.UrlReferrer.ToString();
+            loadCategories();
+            loadProduct();
+
+            if (!IsPostBack)
             {
             }
-            
+
         }
 
         private void loadCategories()
         {
-            categorias = CategoriaBusiness.listar(); 
+            categorias = CategoriaBusiness.listar();
         }
 
         private void loadProduct()
@@ -45,16 +46,19 @@ namespace Frontend
 
         protected void TextBox1_TextChanged(object sender, EventArgs e)
         {
-
+            Response.Redirect("TiendaAdmin.aspx?search=" + TextBox1.Text);
         }
 
         protected void ButtonStock_Click(object sender, EventArgs e)
         {
-            StockBusiness stockBusiness = new StockBusiness();
-            int newammount = producto.stock.ammount + int.Parse(TextAmmount.Text);
-            decimal newprice = Decimal.Parse(TextPrice.Text);
-            stockBusiness.updatestock(producto.code, newammount, newprice);
-            Response.Redirect("VerProductoAdmin.aspx?prod=" + producto.code);
+            if (TextPrice.Text != "" && TextAmmount.Text != "")
+            {
+                StockBusiness stockBusiness = new StockBusiness();
+                int newammount = producto.stock.ammount + int.Parse(TextAmmount.Text);
+                decimal newprice = Decimal.Parse(TextPrice.Text);
+                stockBusiness.updatestock(producto.code, newammount, newprice);
+                Response.Redirect("VerProductoAdmin.aspx?prod=" + producto.code);
+            }
         }
 
         protected void ButtonDel_Click(object sender, EventArgs e)
@@ -64,7 +68,12 @@ namespace Frontend
             stockBusiness.deleteData(producto.code);
             Response.Redirect("TiendaAdmin.aspx");
 
-            
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect((string)Session["PreviousPageUrl"]);
         }
     }
 }

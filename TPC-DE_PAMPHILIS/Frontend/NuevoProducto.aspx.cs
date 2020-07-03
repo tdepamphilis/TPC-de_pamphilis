@@ -25,6 +25,10 @@ namespace Frontend
         public string title = "Nuevo";
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (!login())
+                Response.Redirect("MainPage.aspx");
+            
             if (!IsPostBack)
             {
                 marcas = marcaBusiness.listar();
@@ -39,6 +43,17 @@ namespace Frontend
 
             }
         }
+
+        private bool login()
+        {
+            AdminBusiness adminBusiness = new AdminBusiness();
+            if (Session["adminmail"] == null || Session["adminpass"] == null)
+                return false;
+            if (adminBusiness.checkAdmin((string)Session["adminmail"], (string)Session["adminpass"]) == 0)
+                return false;
+            return true;
+        }
+
 
         //----------CARGA---------------------
         private void loadCat()

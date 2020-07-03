@@ -2,6 +2,7 @@
 using Dominio;
 using System;
 using System.Collections.Generic;
+using System.EnterpriseServices;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -52,8 +53,8 @@ namespace Frontend
         }
         protected void ButtonSend_Click(object sender, EventArgs e)
         {
-            if (true)
-            {
+            if (validateFields())
+            { 
                 Usuario usuario = new Usuario();
                 Zona zona = new Zona();
                 usuario.name = TextName.Text;
@@ -75,7 +76,23 @@ namespace Frontend
                 Response.Redirect("MainPage.aspx");
             }
 
+        }
 
+        private bool validateFields()
+        {
+            TextApellido.Text = TextApellido.Text.Trim();
+            TextDir.Text = TextDir.Text.Trim();
+            TextDNI.Text = TextDNI.Text.Trim();
+            TextMail.Text = TextMail.Text.Trim();
+            TextName.Text = TextName.Text.Trim();
+            TextPass.Text = TextPass.Text.Trim();
+            TextTel.Text = TextTel.Text.Trim();
+            
+            
+            
+            if (TextApellido.Text != "" && TextDir.Text != "" && TextDNI.Text != "" && TextMail.Text != "" && TextName.Text != "" && TextPass.Text != "" && TextTel.Text != "" && DropDownZonas.SelectedValue != "-1")
+                return true;
+            return false;
         }
     }
 }

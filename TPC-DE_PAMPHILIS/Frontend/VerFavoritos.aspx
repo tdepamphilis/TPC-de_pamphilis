@@ -1,8 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Tienda.aspx.cs" Inherits="Frontend.Tienda" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="VerFavoritos.aspx.cs" Inherits="Frontend.VerFavoritos" %>
 
 <!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
@@ -35,7 +33,6 @@
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="tienda.aspx">Todos</a>
                                
-                                <a href="VerFavoritos.aspx" class="dropdown-item">Favoritos</a>
                                 <%foreach (Dominio.Categoria item in categorias)
                                     { %>
                                 <div><a class="dropdown-item" href="?cat=<%= item.id %>"><%=item.name %></a></div>
@@ -50,8 +47,14 @@
         </div>
 
         <div class="container">
-     
-            <div class="row row-cols-1 row-cols-md-5 justify-content-center mt-5">
+            <div class="row">
+                <div class="col-sm"><a href="TiendaAdmin.aspx">Admin</a> </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm"></div>
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-5">
 
                 <% foreach (Dominio.Producto product in productosShow)
 
