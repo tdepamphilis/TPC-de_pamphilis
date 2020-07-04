@@ -18,7 +18,14 @@ namespace Frontend
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if(!IsPostBack)
+            {
+                Session.Remove("adminpass");
+                Session.Remove("adminmail");
+                Session.Remove("usermail");
+                Session.Remove("userpass");
+            }
+
         }
 
         protected void ButtonLogin_Click(object sender, EventArgs e)

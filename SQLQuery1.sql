@@ -1,11 +1,10 @@
-
 use master
 
 go
-
+/*
 drop database depamphilis_db
 go
-
+*/
 create database depamphilis_db
 go
 use depamphilis_db

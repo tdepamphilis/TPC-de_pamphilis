@@ -48,12 +48,6 @@
         </div>
 
         <div class="container">
-            <div class="row">
-                <div class="col-sm"><a href="TiendaAdmin.aspx">Admin</a> </div>
-                <div class="col-sm">
-                </div>
-                <div class="col-sm"></div>
-            </div>
 
             <div class="row row-cols-1 row-cols-md-5">
 
