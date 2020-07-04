@@ -10,6 +10,7 @@ namespace Frontend
 {
     public partial class Categorias : System.Web.UI.Page
     {
+        public FacturaBusiness facturaBusiness = new FacturaBusiness();
         public CategoriaBusiness categoriaBusiness = new CategoriaBusiness();
         public List<Categoria> categorias;
         public int action = 0;

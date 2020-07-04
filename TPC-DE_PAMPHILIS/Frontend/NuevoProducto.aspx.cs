@@ -16,6 +16,7 @@ namespace Frontend
     [AspNetHostingPermission(SecurityAction.Demand, Level = AspNetHostingPermissionLevel.Medium)]
     public partial class NuevoProducto : System.Web.UI.Page
     {
+        public FacturaBusiness facturaBusiness = new FacturaBusiness();
         MarcaBusiness marcaBusiness = new MarcaBusiness();
         CategoriaBusiness categoriaBusiness = new CategoriaBusiness();
         ProductoBusiness productoBusiness = new ProductoBusiness();

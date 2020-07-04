@@ -11,6 +11,7 @@ namespace Frontend
 {
     public partial class TiendaAdmin : System.Web.UI.Page
     {
+        public FacturaBusiness facturaBusiness = new FacturaBusiness();
         public List<Producto> productos;
         public List<Categoria> categorias;
         public Producto producto;

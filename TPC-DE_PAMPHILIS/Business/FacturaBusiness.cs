@@ -228,8 +228,6 @@ namespace Business
             }
         }
 
-
-
         private List<ItemCarrito> cargarItems(string codigoFactura)
         {
             GestorConexion gestor = new GestorConexion();
@@ -262,6 +260,33 @@ namespace Business
 
                 throw;
             }
+        }
+
+        public int contarPendientes()
+        {
+            int x;
+            GestorConexion gestor = new GestorConexion();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            SqlDataReader lector;
+            try
+            {
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "select * from vw_facturasPendientes";
+                command.Connection = connection;
+                connection.Open();
+                lector = command.ExecuteReader();
+                lector.Read();
+                x = lector.GetInt32(0);
+
+                return x;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
 
         //-------ESCRITURA---------------

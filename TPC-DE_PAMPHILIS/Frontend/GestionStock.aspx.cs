@@ -12,6 +12,8 @@ namespace Frontend
 {
     public partial class GestionStock : System.Web.UI.Page
     {
+
+        public FacturaBusiness facturaBusiness = new FacturaBusiness();
         private ProductoBusiness productoBusiness = new ProductoBusiness();
 
         public List<Producto> productos = new List<Producto>();

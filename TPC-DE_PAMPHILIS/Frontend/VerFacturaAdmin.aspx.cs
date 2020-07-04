@@ -13,7 +13,7 @@ namespace Frontend
     {
 
         public Factura factura = new Factura();
-        private FacturaBusiness facturaBusiness = new FacturaBusiness();
+        public FacturaBusiness facturaBusiness = new FacturaBusiness();
 
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -154,6 +154,11 @@ as
 select Usuario, Articulo from favoritosxusuario
 go
 
+create view [vw_facturasPendientes]
+as
+select Count (*) as cantidad from facturas 
+where Estado = 1 and Entrega = 0
+
 go
 insert into marcas values ('arcor',1),('la campagnola',1),('Magistral',1),('la serenisima',1),('sancor',1),('Coca cola',1),('Pepsico',1)
 go

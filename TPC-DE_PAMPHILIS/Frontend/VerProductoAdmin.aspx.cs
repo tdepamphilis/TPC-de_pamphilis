@@ -12,6 +12,7 @@ namespace Frontend
     public partial class VerProductoAdmin : System.Web.UI.Page
     {
 
+        public FacturaBusiness facturaBusiness = new FacturaBusiness();
         public List<Categoria> categorias;
         public Producto producto;
         public ProductoBusiness productoBusiness = new ProductoBusiness();

@@ -11,6 +11,7 @@ namespace Frontend
 {
     public partial class Marcas : System.Web.UI.Page
     {
+        public FacturaBusiness facturaBusiness = new FacturaBusiness();
         public MarcaBusiness marcaBusiness = new MarcaBusiness();
         public List<Marca> marcas;
         public Marca selected;

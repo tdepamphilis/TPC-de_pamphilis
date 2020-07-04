@@ -10,6 +10,7 @@ namespace Frontend
 {
     public partial class NewBC : System.Web.UI.Page
     {
+        public FacturaBusiness facturaBusiness = new FacturaBusiness();
         CategoriaBusiness categoriaBusiness = new CategoriaBusiness();
         MarcaBusiness marcaBusiness = new MarcaBusiness();
         public int formtype;
