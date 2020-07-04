@@ -1,10 +1,10 @@
 use master
 
 go
-/*
+
 drop database depamphilis_db
 go
-*/
+
 create database depamphilis_db
 go
 use depamphilis_db
@@ -86,8 +86,10 @@ create table facturas(
 [Estado] [bit] not null,
 [ModoDePago] [varchar] (1) not null,
 [Monto] [money] not null,
-[Direccion] [varchar] (50) not null
-)
+[Direccion] [varchar] (50) not null,
+[Pago] [bit] not null,
+[Entrega] [int] not null
+) 
 go
 create table itemsxfactura(
 [Id] [int] primary key identity(1,1),
@@ -138,7 +140,7 @@ inner join zonas as z on z.Id = u.IdZona
 go
 create view [vw_facturas]
 as
-select f.Codigo, f.CodigoUsuario, f.Fecha, f.Estado, f.ModoDePago ,f.Monto, f.Direccion, (u.Apellido + ' ' + u.Nombre) as ApellidoNombre from facturas as f
+select f.Codigo, f.CodigoUsuario, f.Fecha, f.Estado, f.ModoDePago ,f.Monto, f.Direccion, (u.Apellido + ' ' + u.Nombre) as ApellidoNombre, f.Pago, f.Entrega from facturas as f
 inner join usuarios as u on u.Codigo = f.CodigoUsuario
 where f.Estado = 1
 go
@@ -206,16 +208,16 @@ end
 go
 exec SP_AltaUsuario '32d1a','Agustin','DP', 41655477,'agusdp@gmail.com','cac3','falsa332',2
 go
-insert into facturas values ('AHFNCPERTGSFCDW','abder','2014-11-03', 1, 'E', 1000, 'cabildo 500'),
-('AHFNCPERT32FCDW','abder','2014-10-03', 1, 'E', 1000, 'cabildo 500'),
-('AHFNCPERT22FCDW','abder','2014-09-03', 1, 'T', 1000, 'cabildo 500'),
-('AHFNC22dRTGSCDW','abder','2014-08-03', 1, 'E', 1000, 'cabildo 500'),
-('AHFNCPBDTGSFCDW','abder','2014-07-03', 1, 'T', 1000, 'cabildo 500'),
-('AHFN4PERTGSFCDW','abder','2014-07-08', 1, 'E', 1000, 'cabildo 500'),
-('AHFN234PEGSFCDW','abder','2014-04-03', 1, 'E', 1000, 'cabildo 500'),
-('AHFNCPERT44FCDW','abder','2014-02-03', 1, 'E', 1000, 'cabildo 500'),
-('AHFNCPER289FCDW','abder','2014-01-03', 1, 'E', 1000, 'cabildo 500'),
-('AHFNCPERCBGFCDW','abder','2014-01-03', 1, 'E', 1000, 'cabildo 500')
+insert into facturas values ('AHFNCPERTGSFCDW','abder','2014-11-03', 1, 'E', 1000, 'cabildo 500',1,2),
+('AHFNCPERT32FCDW','abder','2014-10-03', 1, 'E', 1000, 'cabildo 500',1,2),
+('AHFNCPERT22FCDW','abder','2014-09-03', 1, 'T', 1000, 'cabildo 500',1,2),
+('AHFNC22dRTGSCDW','abder','2014-08-03', 1, 'E', 1000, 'cabildo 500',1,2),
+('AHFNCPBDTGSFCDW','abder','2014-07-03', 1, 'T', 1000, 'cabildo 500',1,2),
+('AHFN4PERTGSFCDW','abder','2014-07-08', 1, 'E', 1000, 'cabildo 500',1,2),
+('AHFN234PEGSFCDW','abder','2014-04-03', 1, 'E', 1000, 'cabildo 500',1,2),
+('AHFNCPERT44FCDW','abder','2014-02-03', 1, 'E', 1000, 'cabildo 500',1,2),
+('AHFNCPER289FCDW','abder','2014-01-03', 1, 'E', 1000, 'cabildo 500',1,2),
+('AHFNCPERCBGFCDW','abder','2014-01-03', 1, 'E', 1000, 'cabildo 500',1,2)
 go
 
 
@@ -226,12 +228,14 @@ create procedure SP_CargaFactura(
 @estado bit,
 @modo varchar (1),
 @monto money,
-@dir varchar (50)
+@dir varchar (50),
+@pago bit,
+@entrega tinyint
 )
 as 
 if (select count(*) from facturas where Codigo = @Codigo) = 0
 begin
-insert into facturas values (@Codigo, @Usuario, @fecha, @estado, @modo, @monto, @dir)
+insert into facturas values (@Codigo, @Usuario, @fecha, @estado, @modo, @monto, @dir, @pago,@entrega)
 end
 
 go
@@ -265,26 +269,3 @@ use depamphilis_db
 select * from usuarios where Codigo = '3321d'
 
 select * from facturas
-
-select * from usuarios
-
-select * from vw_itemFactura
-go
-select * from vw_facturas
-
-use depamphilis_db
-
-select * from vw_facturas where Codigo like '%ah%'
-
-select * from vw_articulos where stock < 5
-
-select * from facturas
-
-select * from vw_articulos where (Nombre like '%%' or Marca like '%%') and stock > 6
-
-select * from favoritosxusuario
-
-use depamphilis_db
-select * from stock
-
-select * from favoritosxusuario

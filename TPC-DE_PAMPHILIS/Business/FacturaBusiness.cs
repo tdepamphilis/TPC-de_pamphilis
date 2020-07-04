@@ -55,6 +55,9 @@ namespace Business
                     x.monto = (float)lector.GetDecimal(5);
                     x.dir = lector.GetString(6);
                     x.ApellidoNombre = lector.GetString(7);
+                    x.pago = lector.GetBoolean(8);
+                    x.estadoEntrega = lector.GetInt32(9);
+
                     aux.Add(x);
                 }
                 connection.Close();
@@ -93,6 +96,8 @@ namespace Business
                     x.monto = (float)lector.GetDecimal(5);
                     x.dir = lector.GetString(6);
                     x.ApellidoNombre = lector.GetString(7);
+                    x.pago = lector.GetBoolean(8);
+                    x.estadoEntrega = lector.GetInt32(9);
                     aux.Add(x);
                 }
                 connection.Close();
@@ -131,6 +136,8 @@ namespace Business
                     x.monto = (float)lector.GetDecimal(5);
                     x.dir = lector.GetString(6);
                     x.ApellidoNombre = lector.GetString(7);
+                    x.pago = lector.GetBoolean(8);
+                    x.estadoEntrega = lector.GetInt32(9);
                     aux.Add(x);
                 }
                 connection.Close();
@@ -169,6 +176,8 @@ namespace Business
                     x.monto = (float)lector.GetDecimal(5);
                     x.dir = lector.GetString(6);
                     x.ApellidoNombre = lector.GetString(7);
+                    x.pago = lector.GetBoolean(8);
+                    x.estadoEntrega = lector.GetInt32(9);
                     aux.Add(x);
                 }
                 connection.Close();
@@ -205,6 +214,8 @@ namespace Business
                 x.monto = (float)lector.GetDecimal(5);
                 x.dir = lector.GetString(6);
                 x.ApellidoNombre = lector.GetString(7);
+                x.pago = lector.GetBoolean(8);
+                x.estadoEntrega = lector.GetInt32(9);
                 connection.Close();
                 x.items = cargarItems(x.codigo);
 
@@ -301,7 +312,7 @@ namespace Business
             {
 
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "exec SP_CargaFactura @code, @userCode, @date , @status, @payment, @value, @dir";
+                command.CommandText = "exec SP_CargaFactura @code, @userCode, @date , @status, @payment, @value, @dir, @paid, @deliveryst";
                 command.Parameters.AddWithValue("@code", factura.codigo);
                 command.Parameters.AddWithValue("@userCode", factura.codigoUsuario);
                 command.Parameters.AddWithValue("@status", factura.estado);
@@ -309,6 +320,8 @@ namespace Business
                 command.Parameters.AddWithValue("@value", (decimal)factura.monto);
                 command.Parameters.AddWithValue("@date", factura.fecha);
                 command.Parameters.AddWithValue("@dir", factura.dir);
+                command.Parameters.AddWithValue("@paid", factura.pago);
+                command.Parameters.AddWithValue("@deliveryst", factura.estadoEntrega);
                 command.Connection = connection;
                 connection.Open();
                 command.ExecuteNonQuery();

@@ -26,9 +26,12 @@ namespace Dominio
 
         public string ApellidoNombre { get; set; }
 
+        public bool pago { get; set; }
+        public int estadoEntrega { get; set; }
         public Factura()
         {
             dir = "none";
         }
+        
     }
 }

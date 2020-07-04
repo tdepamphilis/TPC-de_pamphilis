@@ -81,6 +81,13 @@ namespace Frontend
                 factura.modoDePago = 'T';
             factura.codigoUsuario = usuario.code;
             factura.fecha = DateTime.Now;
+            if (factura.modoDePago == 'E')
+                factura.pago = false;
+            else
+                factura.pago = true;
+            factura.estadoEntrega = 0;
+
+
             facturaBusiness.GenerarCompra(factura);
             Session["chart"] = new Carrito();
             Response.Redirect("Tienda.aspx");
