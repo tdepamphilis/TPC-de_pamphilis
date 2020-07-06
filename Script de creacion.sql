@@ -1,10 +1,10 @@
 use master
 
 go
-/*
+
 drop database depamphilis_db
 go
-*/
+
 create database depamphilis_db
 go
 use depamphilis_db
@@ -40,21 +40,23 @@ create table articulos
 
 create table stock
 (
-	[Id] [int] primary key identity(1,1),
-	[CodigoArticulo] [varchar] (5) foreign key references articulos(Codigo),
+
+	[CodigoArticulo] [varchar] (5) foreign key references articulos(Codigo) primary key,
 	[Cantidad] [int] not null,
 	[PrecioDistribuidor] [money] not null,
 	
 )
-
 go
+
 
 create table categoriaxarticulo(
 [IdRegistro] [int] primary key identity(1,1), 
 [CodigoArticulo] [varchar] (5) foreign key references articulos(Codigo) ,
 [Idcategoria] [int] foreign key references categorias(id),
-
 )
+go
+alter table categoriaxarticulo 
+add constraint categoriaxarticuloun UNIQUE (CodigoArticulo, Idcategoria)
 go
 create table zonas(
 [Id] [int] identity (1,1) primary key,
@@ -66,7 +68,7 @@ create table usuarios(
 [Nombre] [varchar] (50) not null,
 [Apellido] [varchar] (50) not null,
 [DNI] [int] not null,
-[Correo] [varchar] (100) not null,
+[Correo] [varchar] (100) unique not null,
 [Password] [varchar] (50) not null,
 [Dirrecion] [varchar] (50) not null,
 [IdZona] [int] foreign key references zonas(id)
@@ -97,11 +99,17 @@ create table itemsxfactura(
 [Cantidad] [int] not null
 )
 go
+alter table itemsxfactura
+add constraint itemsxfacuraun unique(CodigoArticulo, CodigoFactura)
+go
 create table favoritosxusuario(
 [Id] [int] primary key identity (1,1),
 [Usuario] [varchar] (5) foreign key references usuarios(Codigo),
 [Articulo] [varchar] (5) foreign key references articulos(Codigo)
 )
+go
+alter table favoritosxusuario
+add constraint favoritosxusuarioun unique (Usuario,Articulo)
 go
 create view [vw_articulos] 
 as
@@ -116,6 +124,8 @@ select a.Codigo, a.Nombre, a.Descripcion, a.MargenGanancia, a.ImagenUrl,  a.IdMa
 inner join categoriaxarticulo as cxa on a.Codigo = cxa.CodigoArticulo
 inner join categorias as c on cxa.Idcategoria = c.id
 inner join stock as s on s.CodigoArticulo = a.Codigo
+
+go
 
 go
 create view [vw_categorias]
