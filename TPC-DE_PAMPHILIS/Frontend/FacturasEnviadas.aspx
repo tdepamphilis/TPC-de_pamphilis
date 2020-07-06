@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FacturacionAdmin.aspx.cs" Inherits="Frontend.FacturacionAdmin" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FacturasEnviadas.aspx.cs" Inherits="Frontend.FacturasEnviadas" %>
 
 <!DOCTYPE html>
 
@@ -11,8 +11,9 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
+
 </head>
-<body style="background: #e8e4e1">
+<body>
     <form id="form1" runat="server">
         <div class="container-fluid" style="background-color: dimgrey">
             <div class="row">
@@ -59,8 +60,8 @@
                     <div class="card">
 
                         <div class="card-header text-center">
-                            <a href="GestionPendientes.aspx" class="btn btn-secondary mx-1 align-self-center"><%="Pendientes (" + facturaBusiness.contarPendientes() + ")" %></a>                    
-                            <a href="FacturasEnviadas.aspx" class="btn btn-secondary mx-1 align-self-center">Enviadas</a>                                                     
+                            <a href="GestionPendientes.aspx" class="btn btn-secondary mx-1 align-self-center"><%="Pendientes (" + facturaBusiness.contarPendientes() + ")" %></a>
+                            <a href="FacturacionAdmin.aspx" class="btn btn-secondary mx-1 align-self-center">Confirmadas</a>
                         </div>
                         <div class="card-body" style="min-height: 300px; max-height: 700px; overflow: auto">
 
@@ -104,7 +105,6 @@
             </div>
 
         </div>
-
 
 
 

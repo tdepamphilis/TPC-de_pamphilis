@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FacturacionAdmin.aspx.cs" Inherits="Frontend.FacturacionAdmin" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="GestionPendientes.aspx.cs" Inherits="Frontend.GestionPendientes" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -12,7 +12,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
 </head>
-<body style="background: #e8e4e1">
+<body>
     <form id="form1" runat="server">
         <div class="container-fluid" style="background-color: dimgrey">
             <div class="row">
@@ -32,18 +32,12 @@
                         <a href="GestionStock.aspx" class="btn btn-dark btn-sm">Stock</a>
                         <a href="Marcas.aspx" class="btn btn-dark btn-sm">Marcas</a>
                         <a href="Categorias.aspx" class="btn btn-dark btn-sm">categorias</a>
-                        <a href="#" class="btn btn-dark btn-sm"><%="Facturacion (" + facturaBusiness.contarPendientes() + ")" %></a>
+                        <a href="GestionPendientes.aspx" class="btn btn-dark btn-sm"><%="Facturacion (" + facturaBusiness.contarPendientes() + ")" %></a>
                         <a href="MainPage.aspx" class="btn btn-dark btn-sm">Salir</a>
                     </div>
                 </div>
                 <div class="hidden-lg hidden-md hidden-sm">&nbsp;</div>
                 <div class="col-sm-3" style="position: relative; top: 25px; text-align: center;">
-                    <div class="input-group mb-4">
-                        <div class="input-group-prepend">
-                            <asp:DropDownList ID="DropDown" runat="server" CssClass=" custom-select" AutoPostBack="true"></asp:DropDownList>
-                        </div>
-                        <asp:TextBox CssClass="form-control" ID="TextSearch" runat="server" AutoPostBack="true"></asp:TextBox>
-                    </div>
                 </div>
                 <div class="hidden-lg hidden-md hidden-sm">&nbsp;</div>
                 <div class="col-sm-3"></div>
@@ -59,20 +53,15 @@
                     <div class="card">
 
                         <div class="card-header text-center">
-                            <a href="GestionPendientes.aspx" class="btn btn-secondary mx-1 align-self-center"><%="Pendientes (" + facturaBusiness.contarPendientes() + ")" %></a>                    
+                            <a href="FacturacionAdmin.aspx" class="btn btn-secondary mx-1 align-self-center">Confirmadas</a>
+                     
                             <a href="FacturasEnviadas.aspx" class="btn btn-secondary mx-1 align-self-center">Enviadas</a>                                                     
                         </div>
                         <div class="card-body" style="min-height: 300px; max-height: 700px; overflow: auto">
 
                             <div class="container-fluid">
-
-
-
                                 <%foreach (Dominio.Factura item in facturas)
                                     { %>
-
-
-
                                 <div class="d-flex bd-highlight mb-3 card-header pt-2">
 
                                     <div class="mr-auto p-2 bd-highlight">
@@ -111,5 +100,6 @@
 
 
     </form>
+   
 </body>
 </html>

@@ -214,15 +214,15 @@ go
 exec SP_AltaUsuario '32d1a','Agustin','DP', 41655477,'agusdp@gmail.com','cac3','falsa332',2
 go
 insert into facturas values ('AHFNCPERTGSFCDW','abder','2014-11-03', 1, 'E', 1000, 'cabildo 500',1,2),
-('AHFNCPERT32FCDW','abder','2014-10-03', 1, 'E', 1000, 'cabildo 500',1,2),
-('AHFNCPERT22FCDW','abder','2014-09-03', 1, 'T', 1000, 'cabildo 500',1,2),
-('AHFNC22dRTGSCDW','abder','2014-08-03', 1, 'E', 1000, 'cabildo 500',1,2),
-('AHFNCPBDTGSFCDW','abder','2014-07-03', 1, 'T', 1000, 'cabildo 500',1,2),
-('AHFN4PERTGSFCDW','abder','2014-07-08', 1, 'E', 1000, 'cabildo 500',1,2),
-('AHFN234PEGSFCDW','abder','2014-04-03', 1, 'E', 1000, 'cabildo 500',1,2),
-('AHFNCPERT44FCDW','abder','2014-02-03', 1, 'E', 1000, 'cabildo 500',1,2),
-('AHFNCPER289FCDW','abder','2014-01-03', 1, 'E', 1000, 'cabildo 500',1,2),
-('AHFNCPERCBGFCDW','abder','2014-01-03', 1, 'E', 1000, 'cabildo 500',1,2)
+('AHFNCPERT32FCDW','abder','2014-10-03', 1, 'E', 1034, 'cabildo 500',0,1),
+('AHFNCPERT22FCDW','abder','2014-09-03', 1, 'T', 1043, 'cabildo 500',1,2),
+('AHFNC22dRTGSCDW','abder','2014-08-03', 1, 'E', 10234, 'cabildo 500',1,2),
+('AHFNCPBDTGSFCDW','abder','2014-07-03', 1, 'T', 14320, 'cabildo 500',1,1),
+('AHFN4PERTGSFCDW','abder','2014-07-08', 1, 'E', 4340, 'cabildo 500',0,1),
+('AHFN234PEGSFCDW','abder','2014-04-03', 1, 'E', 1320, 'cabildo 500',1,2),
+('AHFNCPERT44FCDW','abder','2014-02-03', 1, 'E', 1400, 'cabildo 500',1,2),
+('AHFNCPER289FCDW','abder','2014-01-03', 1, 'E', 2300, 'cabildo 500',1,2),
+('AHFNCPERCBGFCDW','abder','2014-01-03', 1, 'E', 100, 'cabildo 500',1,2)
 go
 
 

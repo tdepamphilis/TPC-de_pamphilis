@@ -33,7 +33,7 @@
                         <a href="TiendaAdmin.aspx" class="btn btn-dark btn-sm" style="text-align: left">Productos</a>
                         <a href="GestionStock.aspx" class="btn btn-dark btn-sm">Stock</a>
                         <a href="Categorias.aspx" class="btn btn-dark btn-sm">categorias</a>
-                        <a href="FacturacionAdmin.aspx" class="btn btn-dark btn-sm"><%="Facturacion (" + facturaBusiness.contarPendientes() + ")" %></a>
+                        <a href="GestionPendientes.aspx" class="btn btn-dark btn-sm"><%="Facturacion (" + facturaBusiness.contarPendientes() + ")" %></a>
                         <a href="MainPage.aspx" class="btn btn-dark btn-sm">Salir</a>
                     </div>
                 </div>

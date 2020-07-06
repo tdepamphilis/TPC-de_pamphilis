@@ -25,10 +25,10 @@ namespace Business
             foreach (ItemCarrito item in factura.items)
             {
                 saveItems(item, factura.codigo);
-               
+
             }
         }
-        //---------LECTURA--------
+        // ------------LECTURA GENERAL-------------
         public List<Factura> listarFacturas(string userCode)
         {
             GestorConexion gestor = new GestorConexion();
@@ -71,6 +71,79 @@ namespace Business
 
         }
 
+        public Factura buscarId(string code)
+        {
+            GestorConexion gestor = new GestorConexion();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            SqlDataReader lector;
+            try
+            {
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "select * from vw_facturas where Codigo = @code";
+                command.Parameters.AddWithValue("@code", code);
+                command.Connection = connection;
+                connection.Open();
+                lector = command.ExecuteReader();
+                lector.Read();
+                Factura x = new Factura();
+                x.codigo = lector.GetString(0);
+                x.codigoUsuario = lector.GetString(1);
+                x.fecha = lector.GetDateTime(2);
+                x.estado = lector.GetBoolean(3);
+                x.modoDePago = lector.GetString(4)[0];
+                x.monto = (float)lector.GetDecimal(5);
+                x.dir = lector.GetString(6);
+                x.ApellidoNombre = lector.GetString(7);
+                x.pago = lector.GetBoolean(8);
+                x.estadoEntrega = lector.GetInt32(9);
+                connection.Close();
+                x.items = cargarItems(x.codigo);
+
+                return x;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        private List<ItemCarrito> cargarItems(string codigoFactura)
+        {
+            GestorConexion gestor = new GestorConexion();
+            List<ItemCarrito> aux = new List<ItemCarrito>();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            SqlDataReader lector;
+            try
+            {
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "select * from vw_itemFactura where CodigoFactura = @code";
+                command.Parameters.AddWithValue("@code", codigoFactura);
+                command.Connection = connection;
+                connection.Open();
+                lector = command.ExecuteReader();
+                while (lector.Read())
+                {
+                    ItemCarrito x = new ItemCarrito();
+                    x.code = lector.GetString(1);
+                    x.name = lector.GetString(2);
+                    x.ammount = lector.GetInt32(3);
+                    x.unitPrice = (float)lector.GetDecimal(4);
+                    aux.Add(x);
+                }
+                connection.Close();
+                return aux;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        //---------LECTURA DE EN CAMINO-----------
+
         public List<Factura> listarFacturasCode(string code)
         {
             GestorConexion gestor = new GestorConexion();
@@ -81,7 +154,7 @@ namespace Business
             try
             {
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "select * from vw_facturas where Codigo like '%"+ code + "%' order by ApellidoNombre, Fecha" ;
+                command.CommandText = "select * from vw_facturas where Codigo like '%" + code + "%' and Entrega = 1 order by ApellidoNombre, Fecha";
                 command.Connection = connection;
                 connection.Open();
                 lector = command.ExecuteReader();
@@ -121,7 +194,7 @@ namespace Business
             try
             {
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "select * from vw_facturas where CodigoUsuario like '%" + code + "%' order by ApellidoNombre, Fecha";
+                command.CommandText = "select * from vw_facturas where CodigoUsuario like '%" + code + "%' and Entrega = 1 order by ApellidoNombre, Fecha";
                 command.Connection = connection;
                 connection.Open();
                 lector = command.ExecuteReader();
@@ -161,7 +234,7 @@ namespace Business
             try
             {
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "select * from vw_facturas where ApellidoNombre like '%" + username + "%' order by ApellidoNombre, Fecha";
+                command.CommandText = "select * from vw_facturas where ApellidoNombre like '%" + username + "%' and Entrega = 1 order by ApellidoNombre, Fecha";
                 command.Connection = connection;
                 connection.Open();
                 lector = command.ExecuteReader();
@@ -190,66 +263,36 @@ namespace Business
             }
 
         }
-        public Factura buscarId(string code)
+
+        //--------LECTURA DE PENDIENTES-------
+
+        public List<Factura> listarPendientesCode(string code)
         {
             GestorConexion gestor = new GestorConexion();
+            List<Factura> aux = new List<Factura>();
             SqlConnection connection = gestor.connection();
             SqlCommand command = new SqlCommand();
             SqlDataReader lector;
             try
             {
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "select * from vw_facturas where Codigo = @code";
-                command.Parameters.AddWithValue("@code", code);
-                command.Connection = connection;
-                connection.Open();
-                lector = command.ExecuteReader();
-                lector.Read();
-                Factura x = new Factura();
-                x.codigo = lector.GetString(0);
-                x.codigoUsuario = lector.GetString(1);
-                x.fecha = lector.GetDateTime(2);
-                x.estado = lector.GetBoolean(3);
-                x.modoDePago = lector.GetString(4)[0];
-                x.monto = (float)lector.GetDecimal(5);
-                x.dir = lector.GetString(6);
-                x.ApellidoNombre = lector.GetString(7);
-                x.pago = lector.GetBoolean(8);
-                x.estadoEntrega = lector.GetInt32(9);
-                connection.Close();
-                x.items = cargarItems(x.codigo);
-
-                return x;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        private List<ItemCarrito> cargarItems(string codigoFactura)
-        {
-            GestorConexion gestor = new GestorConexion();
-            List<ItemCarrito> aux = new List<ItemCarrito>();
-            SqlConnection connection = gestor.connection();
-            SqlCommand command = new SqlCommand();
-            SqlDataReader lector;
-            try
-            {
-                command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "select * from vw_itemFactura where CodigoFactura = @code";
-                command.Parameters.AddWithValue("@code", codigoFactura);
+                command.CommandText = "select * from vw_facturas where Codigo like '%" + code + "%' and Entrega = 0 order by Fecha";
                 command.Connection = connection;
                 connection.Open();
                 lector = command.ExecuteReader();
                 while (lector.Read())
                 {
-                    ItemCarrito x = new ItemCarrito();
-                    x.code = lector.GetString(1);
-                    x.name = lector.GetString(2);
-                    x.ammount = lector.GetInt32(3);
-                    x.unitPrice = (float)lector.GetDecimal(4);
+                    Factura x = new Factura();
+                    x.codigo = lector.GetString(0);
+                    x.codigoUsuario = lector.GetString(1);
+                    x.fecha = lector.GetDateTime(2);
+                    x.estado = lector.GetBoolean(3);
+                    x.modoDePago = lector.GetString(4)[0];
+                    x.monto = (float)lector.GetDecimal(5);
+                    x.dir = lector.GetString(6);
+                    x.ApellidoNombre = lector.GetString(7);
+                    x.pago = lector.GetBoolean(8);
+                    x.estadoEntrega = lector.GetInt32(9);
                     aux.Add(x);
                 }
                 connection.Close();
@@ -260,6 +303,7 @@ namespace Business
 
                 throw;
             }
+
         }
 
         public int contarPendientes()
@@ -288,6 +332,129 @@ namespace Business
             }
 
         }
+
+        //--------LECTURA DE CONPLETOS----------
+
+        public List<Factura> listarCompletasCode(string code)
+        {
+
+            GestorConexion gestor = new GestorConexion();
+            List<Factura> aux = new List<Factura>();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            SqlDataReader lector;
+            try
+            {
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "select * from vw_facturas where Codigo like '%" + code + "%' and Entrega = 2 order by ApellidoNombre, Fecha";
+                command.Connection = connection;
+                connection.Open();
+                lector = command.ExecuteReader();
+                while (lector.Read())
+                {
+                    Factura x = new Factura();
+                    x.codigo = lector.GetString(0);
+                    x.codigoUsuario = lector.GetString(1);
+                    x.fecha = lector.GetDateTime(2);
+                    x.estado = lector.GetBoolean(3);
+                    x.modoDePago = lector.GetString(4)[0];
+                    x.monto = (float)lector.GetDecimal(5);
+                    x.dir = lector.GetString(6);
+                    x.ApellidoNombre = lector.GetString(7);
+                    x.pago = lector.GetBoolean(8);
+                    x.estadoEntrega = lector.GetInt32(9);
+                    aux.Add(x);
+                }
+                connection.Close();
+                return aux;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+
+        public List<Factura> listarCompletasUserCode(string code)
+        {
+            GestorConexion gestor = new GestorConexion();
+            List<Factura> aux = new List<Factura>();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            SqlDataReader lector;
+            try
+            {
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "select * from vw_facturas where CodigoUsuario like '%" + code + "%' and Entrega = 2 order by ApellidoNombre, Fecha";
+                command.Connection = connection;
+                connection.Open();
+                lector = command.ExecuteReader();
+                while (lector.Read())
+                {
+                    Factura x = new Factura();
+                    x.codigo = lector.GetString(0);
+                    x.codigoUsuario = lector.GetString(1);
+                    x.fecha = lector.GetDateTime(2);
+                    x.estado = lector.GetBoolean(3);
+                    x.modoDePago = lector.GetString(4)[0];
+                    x.monto = (float)lector.GetDecimal(5);
+                    x.dir = lector.GetString(6);
+                    x.ApellidoNombre = lector.GetString(7);
+                    x.pago = lector.GetBoolean(8);
+                    x.estadoEntrega = lector.GetInt32(9);
+                    aux.Add(x);
+                }
+                connection.Close();
+                return aux;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<Factura> listarCompletasUserName(string username)
+        {
+            GestorConexion gestor = new GestorConexion();
+            List<Factura> aux = new List<Factura>();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            SqlDataReader lector;
+            try
+            {
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "select * from vw_facturas where ApellidoNombre like '%" + username + "%' and Entrega = 2 order by ApellidoNombre, Fecha";
+                command.Connection = connection;
+                connection.Open();
+                lector = command.ExecuteReader();
+                while (lector.Read())
+                {
+                    Factura x = new Factura();
+                    x.codigo = lector.GetString(0);
+                    x.codigoUsuario = lector.GetString(1);
+                    x.fecha = lector.GetDateTime(2);
+                    x.estado = lector.GetBoolean(3);
+                    x.modoDePago = lector.GetString(4)[0];
+                    x.monto = (float)lector.GetDecimal(5);
+                    x.dir = lector.GetString(6);
+                    x.ApellidoNombre = lector.GetString(7);
+                    x.pago = lector.GetBoolean(8);
+                    x.estadoEntrega = lector.GetInt32(9);
+                    aux.Add(x);
+                }
+                connection.Close();
+                return aux;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
 
         //-------ESCRITURA---------------
 
@@ -319,7 +486,7 @@ namespace Business
             finally
             {
                 connection.Close();
-               
+
             }
         }
 
@@ -350,7 +517,7 @@ namespace Business
                 command.Connection = connection;
                 connection.Open();
                 command.ExecuteNonQuery();
-                connection.Close();          
+                connection.Close();
             }
             catch (Exception)
             {
@@ -391,7 +558,7 @@ namespace Business
             }
         }
 
-        
+
 
 
         //--------GENERACION DE CODIGO--------------
@@ -480,5 +647,8 @@ namespace Business
 
         }
 
+
+
     }
+
 }
