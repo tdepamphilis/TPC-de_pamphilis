@@ -243,6 +243,54 @@ if (select count(*) from facturas where Codigo = @Codigo) = 0
 begin
 insert into facturas values (@Codigo, @Usuario, @fecha, @estado, @modo, @monto, @dir)
 end
+go
+
+
+create procedure SP_DevolucionItem(
+@Codigo varchar(5),
+@cantidad int 
+)
+as
+begin
+Update stock set Cantidad = Cantidad + @cantidad where CodigoArticulo = @Codigo
+end
+go
+
+create procedure SP_DevolucionFactura(
+@Factura varchar(15)
+)
+as
+begin
+Declare @CodigoArticulo varchar(5);
+Declare @cantidad int;
+Declare @lastArt varchar (5);
+Declare cursorTabla CURSOR
+FOR SELECT CodigoArticulo, Cantidad FROM itemsxfactura
+WHERE CodigoFactura = @Factura;
+OPEN cursorTabla;
+FETCH NEXT FROM cursorTabla
+        INTO
+        @CodigoArticulo, @Cantidad       
+	   
+	   set @lastArt = @CodigoArticulo
+		exec SP_DevolucionItem @CodigoArticulo, @cantidad
+
+		
+WHILE @@FETCH_STATUS = 0 
+    BEGIN
+        FETCH NEXT FROM cursorTabla
+        INTO
+        @CodigoArticulo, @Cantidad
+        if @lastArt != @CodigoArticulo or @lastArt is null
+		begin
+			
+			set @lastArt = @CodigoArticulo
+			exec SP_DevolucionItem @CodigoArticulo, @cantidad
+		end
+	END
+deallocate cursorTabla
+end
+
 
 go
 create trigger tr_ventaStock
@@ -262,39 +310,16 @@ go
 insert into favoritosxusuario values ('32d1a','qwdas'), ('32d1a','asasd')
 go
 insert into admins values ('abcde','admin@correo','adminpass','tomas')
-
-select * from  vw_usuarios
-
-select * from admins
-/*
-as a
-inner join categoriaxarticulo as cxa on a.Codigo = cxa.CodigoArticulo
-inner join categorias as c on cxa.Idcategoria = c.id
-*/
-use depamphilis_db
-select * from usuarios where Codigo = '3321d'
-
-select * from facturas
-
-select * from usuarios
-
-select * from vw_itemFactura
 go
-select * from vw_facturas
-
+insert into itemsxfactura values ('asasd','AHFNC22dRTGSCDW',14,2),('ckxa2','AHFNC22dRTGSCDW',14,2)
+go
+select * from itemsxfactura
+go
+use master
+go
 use depamphilis_db
+go
 
-select * from vw_facturas where Codigo like '%ah%'
 
-select * from vw_articulos where stock < 5
 
-select * from facturas
-
-select * from vw_articulos where (Nombre like '%%' or Marca like '%%') and stock > 6
-
-select * from favoritosxusuario
-
-use depamphilis_db
 select * from stock
-
-select * from favoritosxusuario

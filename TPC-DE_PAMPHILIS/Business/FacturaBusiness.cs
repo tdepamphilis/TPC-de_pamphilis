@@ -339,6 +339,37 @@ namespace Business
                 command.Connection = connection;
                 connection.Open();
                 command.ExecuteNonQuery();
+                connection.Close();
+                returnItems(code);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+
+            }
+        }
+
+        
+
+        private void returnItems(string codigoFactura)
+        {
+            GestorConexion gestor = new GestorConexion();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            try
+            {
+
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "exec SP_DevolucionFactura @code";
+                command.Parameters.AddWithValue("@code", codigoFactura);
+                command.Connection = connection;
+                connection.Open();
+                command.ExecuteNonQuery();
 
             }
             catch (Exception)
@@ -351,9 +382,8 @@ namespace Business
                 connection.Close();
 
             }
-        }
 
-        
+        }
 
 
         //--------GENERACION DE CODIGO--------------
