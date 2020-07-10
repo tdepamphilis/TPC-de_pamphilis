@@ -490,8 +490,6 @@ namespace Business
             }
         }
 
-
-
         public void SaveFactura(Factura factura)
         {
             if (factura.codigo == null)
@@ -558,7 +556,60 @@ namespace Business
             }
         }
 
+        public void upEnvio(string code)
+        {
+            GestorConexion gestor = new GestorConexion();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            try
+            {
 
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "update facturas set Entrega = Entrega +1 where Codigo = @code";
+                command.Parameters.AddWithValue("@code", code);
+                command.Connection = connection;
+                connection.Open();
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+
+            }
+        }
+
+        public void downEnvio(string code)
+        {
+            GestorConexion gestor = new GestorConexion();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            try
+            {
+
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "update facturas set Entrega = Entrega -1 where Codigo = @code";
+                command.Parameters.AddWithValue("@code", code);
+                command.Connection = connection;
+                connection.Open();
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
 
 
         //--------GENERACION DE CODIGO--------------

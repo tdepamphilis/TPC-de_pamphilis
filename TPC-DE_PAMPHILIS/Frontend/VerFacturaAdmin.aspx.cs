@@ -14,6 +14,8 @@ namespace Frontend
 
         public Factura factura = new Factura();
         public FacturaBusiness facturaBusiness = new FacturaBusiness();
+        
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -21,6 +23,7 @@ namespace Frontend
             if (!login())
                 Response.Redirect("MainPage.aspx");
             loadFactura();
+            loadbuttons();
         }
 
         private bool login()
@@ -40,6 +43,25 @@ namespace Frontend
             factura = facturaBusiness.buscarId(code);
         }
 
+        private void loadbuttons()
+        {
+            if (factura.estadoEntrega == 0)
+            {
+                ButtonDown.Visible = false;
+                ButtonUp.Text = "Confirmar";
+            }
+            if (factura.estadoEntrega == 2)
+            {
+                ButtonUp.Visible = false;
+                ButtonDown.Text = "Marcar como no enviada";
+            }
+            if (factura.estadoEntrega == 1)
+            {
+                ButtonDown.Text = "Marcar como no confirmada";
+                ButtonUp.Text = "Marcar como enviada";
+            }
+        }
+
         protected void ButtonVolver_Click(object sender, EventArgs e)
         {
             Response.Redirect("VerFacturaAdmin.aspx");
@@ -50,5 +72,29 @@ namespace Frontend
             facturaBusiness.anularFactura(factura.codigo);
             Response.Redirect("FacturacionAdmin.aspx");
         }
+
+        protected void ButtonDown_Click(object sender, EventArgs e)
+        {
+            facturaBusiness.downEnvio(factura.codigo);
+            if (factura.estadoEntrega == 0)
+                Response.Redirect("GestionPendientes.aspx");
+            else if (factura.estadoEntrega == 1)
+                Response.Redirect("FacturacionAdmin.aspx");
+            else if (factura.estadoEntrega == 2)
+                Response.Redirect("FacturasEnviadas.aspx");
+        }
+
+        protected void ButtonUp_Click(object sender, EventArgs e)
+        {
+            facturaBusiness.upEnvio(factura.codigo);
+            if (factura.estadoEntrega == 0)
+                Response.Redirect("GestionPendientes.aspx");
+            else if (factura.estadoEntrega == 1)
+                Response.Redirect("FacturacionAdmin.aspx");
+            else if (factura.estadoEntrega == 2)
+                Response.Redirect("FacturasEnviadas.aspx");
+        }
+
+        
     }
 }

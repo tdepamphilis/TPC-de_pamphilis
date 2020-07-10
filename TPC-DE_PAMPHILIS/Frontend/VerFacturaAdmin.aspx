@@ -74,9 +74,13 @@
                             <%} %>
                         </div>
                         <div class="card-footer">
-                            <div class="row justify-content-center">
-                                <asp:Button ID="ButtonVolver" runat="server" Text="Volver" CssClass="btn btn-secondary mx-2" OnClick="ButtonVolver_Click" />
-                                <asp:Button ID="Buttondel" runat="server" Text="Anular" CssClass="btn btn-danger mx-2" OnClick="Buttondel_Click" />
+                             <div class="row justify-content-center">                                
+                                 <asp:Button ID="ButtonDown" runat="server" Text="Anular" CssClass="btn btn-secondary mx-2" OnClick="ButtonDown_Click" />  
+                                <asp:Button ID="ButtonUp" runat="server" Text="Volver" CssClass="btn btn-secondary mx-2" OnClick="ButtonUp_Click" />                                                          
+                            </div>
+                            <div class="row justify-content-center mt-1">                         
+                                <asp:Button ID="ButtonVolver" runat="server" Text="Volver" CssClass="btn btn-secondary mx-2" OnClick="ButtonVolver_Click" />                                                                                 
+                                <asp:Button ID="Buttondel" runat="server" Text="Anular" CssClass="btn btn-danger mx-2" OnClick="Buttondel_Click" />                               
                             </div>
                         </div>
 

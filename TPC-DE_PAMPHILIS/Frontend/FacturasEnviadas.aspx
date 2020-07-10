@@ -13,7 +13,7 @@
 
 
 </head>
-<body>
+<body style="background: #e8e4e1">
     <form id="form1" runat="server">
         <div class="container-fluid" style="background-color: dimgrey">
             <div class="row">
@@ -60,8 +60,13 @@
                     <div class="card">
 
                         <div class="card-header text-center">
+                            <div class="row justify-content-center">
+                                <h3 class="text-center">Compras enviadas</h3>
+                            </div>
+                            <div class="row justify-content-center">
                             <a href="GestionPendientes.aspx" class="btn btn-secondary mx-1 align-self-center"><%="Pendientes (" + facturaBusiness.contarPendientes() + ")" %></a>
                             <a href="FacturacionAdmin.aspx" class="btn btn-secondary mx-1 align-self-center">Confirmadas</a>
+                            </div>                         
                         </div>
                         <div class="card-body" style="min-height: 300px; max-height: 700px; overflow: auto">
 

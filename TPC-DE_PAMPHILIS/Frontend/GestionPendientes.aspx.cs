@@ -33,6 +33,15 @@ namespace Frontend
             return true;
         }
 
+        public string stringPago(Factura factura)
+        {
+            if (factura.pago)
+                return "pago";
+            else
+                return "no pago";
+        }
+            
+
 
     }
 }

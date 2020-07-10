@@ -61,5 +61,13 @@ namespace Frontend
                 facturas = facturaBusiness.listarFacturasUserName(TextSearch.Text);
             }
         }
+
+        public string stringPago(Factura factura)
+        {
+            if (factura.pago)
+                return "pago";
+            else
+                return "no pago";
+        }
     }
 }

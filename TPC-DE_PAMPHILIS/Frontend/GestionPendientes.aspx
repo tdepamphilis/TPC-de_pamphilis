@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="GestionPendientes.aspx.cs" Inherits="Frontend.GestionPendientes" %>
+﻿ <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="GestionPendientes.aspx.cs" Inherits="Frontend.GestionPendientes" %>
 
 <!DOCTYPE html>
 
@@ -12,7 +12,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
 </head>
-<body>
+<body style="background: #e8e4e1">
     <form id="form1" runat="server">
         <div class="container-fluid" style="background-color: dimgrey">
             <div class="row">
@@ -53,9 +53,14 @@
                     <div class="card">
 
                         <div class="card-header text-center">
-                            <a href="FacturacionAdmin.aspx" class="btn btn-secondary mx-1 align-self-center">Confirmadas</a>
-                     
+                            
+                            <div class="row justify-content-center">
+                                <h3 class="text-center">Ordenes pendientes</h3>
+                            </div>
+                            <div class="row justify-content-center">
+                            <a href="FacturacionAdmin.aspx" class="btn btn-secondary mx-1 align-self-center">Confirmadas</a>                     
                             <a href="FacturasEnviadas.aspx" class="btn btn-secondary mx-1 align-self-center">Enviadas</a>                                                     
+                            </div>
                         </div>
                         <div class="card-body" style="min-height: 300px; max-height: 700px; overflow: auto">
 
@@ -69,7 +74,7 @@
                                         <p><%="Factura: "+ item.codigo %></p>
                                         <p><%="Cliente: "+ item.ApellidoNombre %></p>
                                         <p><%=item.fecha %></p>
-                                        <p><%="Monto: $"+ item.monto %></p>
+                                        <p><%="Monto: $"+ item.monto + " " + stringPago(item) %></p>
 
                                     </div>
                                     <div class="p-2 bd-highlight align-self-center">

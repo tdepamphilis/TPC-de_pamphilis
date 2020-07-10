@@ -59,8 +59,14 @@
                     <div class="card">
 
                         <div class="card-header text-center">
+                            <div class="row justify-content-center">
+                                <h3 class="text-center">Compras confirmadas</h3>
+                            </div>
+                            <div class="row justify-content-center">
                             <a href="GestionPendientes.aspx" class="btn btn-secondary mx-1 align-self-center"><%="Pendientes (" + facturaBusiness.contarPendientes() + ")" %></a>                    
                             <a href="FacturasEnviadas.aspx" class="btn btn-secondary mx-1 align-self-center">Enviadas</a>                                                     
+
+                            </div> 
                         </div>
                         <div class="card-body" style="min-height: 300px; max-height: 700px; overflow: auto">
 
@@ -80,7 +86,7 @@
                                         <p><%="Factura: "+ item.codigo %></p>
                                         <p><%="Cliente: "+ item.ApellidoNombre %></p>
                                         <p><%=item.fecha %></p>
-                                        <p><%="Monto: $"+ item.monto %></p>
+                                        <p><%="Monto: $"+ item.monto + " " + stringPago(item) %></p>
 
                                     </div>
                                     <div class="p-2 bd-highlight align-self-center">
