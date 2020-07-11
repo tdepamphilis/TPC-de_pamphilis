@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="VerFacturaAdmin.aspx.cs" Inherits="Frontend.VerFacturaAdmin" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ModificarFactura.aspx.cs" Inherits="Frontend.ModificarFactura" %>
 
 <!DOCTYPE html>
 
@@ -32,7 +32,7 @@
                         <a href="GestionStock.aspx" class="btn btn-dark btn-sm">Stock</a>
                         <a href="Marcas.aspx" class="btn btn-dark btn-sm">Marcas</a>
                         <a href="Categorias.aspx" class="btn btn-dark btn-sm">categorias</a>
-                        <a href="GestionPendientes.aspx" class="btn btn-dark btn-sm"><%="Facturacion (" + facturaBusiness.contarPendientes() + ")" %></a>
+                        <a href="#" class="btn btn-dark btn-sm"><%="Facturacion (" + facturaBusiness.contarPendientes() + ")" %></a>
                         <a href="MainPage.aspx" class="btn btn-dark btn-sm">Salir</a>
                     </div>
                 </div>
@@ -43,62 +43,60 @@
                 <div class="col-sm-3"></div>
             </div>
         </div>
-
         <div class="container-fluid">
-            <div class="row justify-content-center pt-6">
+            <div class="row justify-content-center mt-6">
 
-                <div class="col-4 pt-4">
+                <div class="col-4">
 
                     <div class="card">
 
                         <div class="card-header">
 
-                            <h6><%="Codigo: "+ factura.codigo %> </h6>
-                            <h6><%="Usuario:" + factura.ApellidoNombre %></h6>
-                            <h6><%="Direccion: " + factura.dir %></h6>
-                            <h6><%="fecha: "+ factura.fecha %></h6>
+                            <h2 style="text-align: center">Quitar items</h2>
 
                         </div>
                         <div class="card-body" style="min-height: 300px; max-height: 350px; overflow: auto">
+
                             <%foreach (Dominio.ItemCarrito item in factura.items)
                                 { %>
                             <div class="d-flex bd-highlight mb-3 card-header pt-2" style="border: thin">
                                 <div class="mr-auto p-2 bd-highlight">
+
                                     <p><%=item.name + " x " + item.ammount.ToString() %></p>
                                     <p><%= "Subtotal: $" + item.partialPrice() %></p>
+
                                 </div>
-                                <div class="p-2 bd-highlight ">
-                                    <p><%="Precio unitario: $" + item.unitPrice.ToString() %> </p>
+                                <div class="p-2 bd-highlight align-self-center">
+
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-append">                                            
+                                            <a class="btn btn-secondary btn-sm" href="ModificarFactura.aspx?-1=<%=item.code %>">-1</a>
+                                            <a class="btn btn-secondary btn-sm" href="ModificarFactura.aspx?-10=<%=item.code %>">-10</a>
+                                            <a class="btn btn-secondary btn-sm" href="ModificarFactura.aspx?rmv=<%=item.code %>">Quitar</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+
                             <%} %>
                         </div>
                         <div class="card-footer">
                             <div class="row justify-content-center">
-                                <asp:Button ID="ButtonDown" runat="server" Text="Anular" CssClass="btn btn-secondary mx-2" OnClick="ButtonDown_Click" />
-                                <asp:Button ID="ButtonUp" runat="server" Text="Volver" CssClass="btn btn-secondary mx-2" OnClick="ButtonUp_Click" />
-                                <%if (factura.estadoEntrega == 0)
-                                    { %>
-                                <a href="ModificarFactura.aspx?fac=<%=factura.codigo %>" class="btn btn-secondary">Quitar productos</a>
-                                <%} %>
+                                <p><%="Monto original: $" + originalPrice.ToString() %></p>
+                            </div>
+                            <div class="row justify-content-center">
+                                <p><%="Monto nuevo: $" + factura.monto.ToString() %></p>
                             </div>
                             <div class="row justify-content-center mt-1">
-                                <asp:Button ID="ButtonVolver" runat="server" Text="Volver" CssClass="btn btn-secondary mx-2" OnClick="ButtonVolver_Click" />
-                                <asp:Button ID="Buttondel" runat="server" Text="Anular" CssClass="btn btn-danger mx-2" OnClick="Buttondel_Click" />
+                                <asp:Button ID="buttonConfirm" runat="server" Text="Continuar" CssClass="btn btn-secondary" OnClick="buttonConfirm_Click" />
                             </div>
 
-
                         </div>
-
                     </div>
+
                 </div>
-
             </div>
-
         </div>
-
-
-
     </form>
 </body>
 </html>

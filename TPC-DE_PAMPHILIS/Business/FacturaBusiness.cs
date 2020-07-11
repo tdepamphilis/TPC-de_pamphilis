@@ -611,6 +611,115 @@ namespace Business
             }
         }
 
+        public void changePrice(Factura factura)
+        {
+            GestorConexion gestor = new GestorConexion();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            try
+            {
+
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "update facturas set Monto = @monto where Codigo = @code";
+                command.Parameters.AddWithValue("@code", factura.codigo);
+                command.Parameters.AddWithValue("@monto", (decimal)factura.totalPrice());
+                command.Connection = connection;
+                connection.Open();
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public void updateFacturaItems(Factura factura, List<string> itemsOriginales)
+        {
+            foreach(ItemCarrito item in factura.items)
+            {
+                changeItemAmmount(item.code, factura.codigo, item.ammount);
+            }
+            foreach(string item in itemsOriginales)
+            {
+                bool exists = false;
+                foreach(ItemCarrito itemfactura in factura.items)
+                {
+                    if (itemfactura.code == item)
+                        exists = true;
+                }
+                if (!exists)
+                    deleteItem(item,factura.codigo);
+                    
+
+            }
+
+
+        }
+
+        private void changeItemAmmount(string itemCode, string facturaCode, int ammount)
+        {
+            GestorConexion gestor = new GestorConexion();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            try
+            {
+
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "update itemsxfactura set Cantidad = @cant where CodigoFactura = @fac and CodigoArticulo = @art";
+                command.Parameters.AddWithValue("@cant", ammount);
+                command.Parameters.AddWithValue("@fac", facturaCode);
+                command.Parameters.AddWithValue("@art", itemCode);
+                command.Connection = connection;
+                connection.Open();
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+
+            }
+        }
+
+        private void deleteItem(string itemCode, string facturaCode)
+        {
+            GestorConexion gestor = new GestorConexion();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            try
+            {
+
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "delete itemsxfactura  where CodigoFactura = @fac and CodigoArticulo = @art";
+                command.Parameters.AddWithValue("@fac", facturaCode);
+                command.Parameters.AddWithValue("@art", itemCode);
+                command.Connection = connection;
+                connection.Open();
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+
+            }
+        }
 
         //--------GENERACION DE CODIGO--------------
 

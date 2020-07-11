@@ -31,7 +31,17 @@ namespace Dominio
         public Factura()
         {
             dir = "none";
+            items = new List<ItemCarrito>();
         }
         
+        public float totalPrice()
+        {
+            float total = 0;
+            foreach (ItemCarrito item in items)
+            {
+                total += item.partialPrice();
+            }
+            return total;
+        }
     }
 }

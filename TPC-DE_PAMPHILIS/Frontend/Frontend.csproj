@@ -137,6 +137,7 @@
     <Content Include="Marcas.aspx" />
     <Content Include="MiCarrito.aspx" />
     <Content Include="MisCompras.aspx" />
+    <Content Include="ModificarFactura.aspx" />
     <Content Include="NewBC.aspx" />
     <Content Include="NuevoProducto.aspx" />
     <Content Include="Perfil.aspx" />
@@ -291,6 +292,13 @@
     </Compile>
     <Compile Include="MisCompras.aspx.designer.cs">
       <DependentUpon>MisCompras.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModificarFactura.aspx.cs">
+      <DependentUpon>ModificarFactura.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModificarFactura.aspx.designer.cs">
+      <DependentUpon>ModificarFactura.aspx</DependentUpon>
     </Compile>
     <Compile Include="NewBC.aspx.cs">
       <DependentUpon>NewBC.aspx</DependentUpon>
