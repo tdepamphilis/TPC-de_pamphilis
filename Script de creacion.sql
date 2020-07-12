@@ -263,7 +263,7 @@ as
 begin
 Declare @CodigoArticulo varchar(5);
 Declare @cantidad int;
-Declare @lastArt varchar (5);
+
 Declare cursorTabla CURSOR
 FOR SELECT CodigoArticulo, Cantidad FROM itemsxfactura
 WHERE CodigoFactura = @Factura;
@@ -272,21 +272,14 @@ FETCH NEXT FROM cursorTabla
         INTO
         @CodigoArticulo, @Cantidad       
 	   
-	   set @lastArt = @CodigoArticulo
-		exec SP_DevolucionItem @CodigoArticulo, @cantidad
-
-		
-WHILE @@FETCH_STATUS = 0 
+	   		
+WHILE (@@FETCH_STATUS = 0) 
     BEGIN
-        FETCH NEXT FROM cursorTabla
+     
+		exec SP_DevolucionItem @CodigoArticulo, @cantidad
+		FETCH NEXT FROM cursorTabla
         INTO
-        @CodigoArticulo, @Cantidad
-        if @lastArt != @CodigoArticulo or @lastArt is null
-		begin
-			
-			set @lastArt = @CodigoArticulo
-			exec SP_DevolucionItem @CodigoArticulo, @cantidad
-		end
+        @CodigoArticulo, @Cantidad        
 	END
 deallocate cursorTabla
 end
@@ -320,6 +313,3 @@ go
 use depamphilis_db
 go
 
-
-
-select * from stock
