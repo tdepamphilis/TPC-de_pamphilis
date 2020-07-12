@@ -90,7 +90,7 @@ namespace Frontend
 
             facturaBusiness.GenerarCompra(factura);
             Session["chart"] = new Carrito();
-            Response.Redirect("Tienda.aspx");
+            Response.Redirect("OrdenHecha.aspx");
 
 
 

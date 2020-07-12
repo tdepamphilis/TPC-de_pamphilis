@@ -49,6 +49,15 @@ namespace Frontend
 
 
         }
+        public string estado(int estado)
+        {
+            if (estado == 0)
+                return "Pendiente";
+            else if (estado == 1)
+                return "Confirmado";
+            else
+                return "Entregado";
+        }
 
 
         

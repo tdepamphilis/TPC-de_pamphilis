@@ -140,6 +140,7 @@
     <Content Include="ModificarFactura.aspx" />
     <Content Include="NewBC.aspx" />
     <Content Include="NuevoProducto.aspx" />
+    <Content Include="OrdenHecha.aspx" />
     <Content Include="Perfil.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -313,6 +314,13 @@
     </Compile>
     <Compile Include="NuevoProducto.aspx.designer.cs">
       <DependentUpon>NuevoProducto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrdenHecha.aspx.cs">
+      <DependentUpon>OrdenHecha.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrdenHecha.aspx.designer.cs">
+      <DependentUpon>OrdenHecha.aspx</DependentUpon>
     </Compile>
     <Compile Include="Perfil.aspx.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>

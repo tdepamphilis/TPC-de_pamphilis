@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MisCompras.aspx.cs" Inherits="Frontend.MisCompras" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="OrdenHecha.aspx.cs" Inherits="Frontend.OrdenHecha" %>
 
 <!DOCTYPE html>
 
@@ -10,7 +10,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-
 </head>
 <body style="background: #e8e4e1">
     <form id="form1" runat="server">
@@ -22,9 +21,9 @@
                 <div class="col-sm-4" style="position: relative; top: 27px; text-align: center;">
                     <div class="dropdown show">
                         <a href="Tienda.aspx" class="btn btn-dark btn-sm">Tienda</a>
-                        <a href="#" class="btn btn-dark btn-sm">Mis pedidos</a>
+                        <a href="MisCompras.aspx" class="btn btn-dark btn-sm">Mis pedidos</a>
                         <a href="MainPage.aspx" class="btn btn-dark btn-sm">Salir</a>
-                        <a href="#" class="btn btn-dark btn-sm">Carrito<%=" (" + carrito.items.Count + ")" %></a>
+                        <a href="MiCarrito.aspx" class="btn btn-dark btn-sm">Carrito<%=" (" + carrito.items.Count + ")" %></a>
                     </div>
                 </div>
                 <div class="col-sm-4" style="position: relative; top: 27px;"></div>
@@ -32,57 +31,32 @@
             </div>
         </div>
         <div class="container-fluid">
-            <div class="row justify-content-center pt-5">
-
-                <div class="col-sm-4">
-
+            <div class="row mt-5 justify-content-center">
+                <div class="col-4">
                     <div class="card">
 
-                        <div class="card-body" style="min-height: 300px; max-height: 350px; overflow: auto">
-
-                            <div class="container-fluid">
-                               
-                                
-                                
-                                <%foreach (Dominio.Factura item in facturas)
-                                    { %>
-
-
-
-                                <div class="d-flex bd-highlight mb-3 card-header pt-2" >
-
-                                    <div class="mr-auto p-2 bd-highlight">
-
-                                        <p><%=item.fecha %></p>
-                                        <p><%="Monto: $"+ item.monto %></p>
-                                        <p><%=estado(item.estadoEntrega) %></p>
-
-                                    </div>
-                                    <div class="p-2 bd-highlight align-self-center">
-
-                                        <a href="VerFactura.aspx?fac=<%=item.codigo %>" class="btn btn-secondary">Detalles</a>
-                                    </div>
-                                </div>
-
-
-
-                            <%} %>
+                        <div class="card-header text-center">
+                            <h3>Pedido Confirmado.</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <p>Su compra ha sido procesada y aguarda confirmacion.  </p>
+                                <p>Podra ver su estado en "mis pedidos".</p>
+                            </div>               
+                            <div class="row">
+                                <p>Gracias por comprar con nosotros!</p>
                             </div>
                         </div>
-
-
-                    
+                        <div class="card-footer">
+                            <div class="row justify-content-center">
+                                <a href="MisCompras.aspx" class="btn btn-secondary mx-1">Mis pedidos</a>
+                                <a href="Tienda.aspx" class="btn btn-secondary mx-1">Continuar</a>
+                            </div>
+                        </div>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
-
-
-
 
     </form>
 </body>
