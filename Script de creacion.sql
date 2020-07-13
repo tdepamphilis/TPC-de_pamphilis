@@ -126,8 +126,6 @@ inner join categorias as c on cxa.Idcategoria = c.id
 inner join stock as s on s.CodigoArticulo = a.Codigo
 
 go
-
-go
 create view [vw_categorias]
 as
 select c.Id, c.Nombre, COUNT(cxa.CodigoArticulo) as articulos from categorias as c
@@ -217,15 +215,15 @@ go
 exec SP_AltaUsuario '32d1a','Agustin','DP', 41655477,'agusdp@gmail.com','cac3','falsa332',2
 go
 insert into facturas values ('AHFNCPERTGSFCDW','abder','2014-11-03', 1, 'E', 1000, 'cabildo 500'),
-('AHFNCPERT32FCDW','abder','2014-10-03', 1, 'E', 1000, 'cabildo 500'),
-('AHFNCPERT22FCDW','abder','2014-09-03', 1, 'T', 1000, 'cabildo 500'),
-('AHFNC22dRTGSCDW','abder','2014-08-03', 1, 'E', 1000, 'cabildo 500'),
-('AHFNCPBDTGSFCDW','abder','2014-07-03', 1, 'T', 1000, 'cabildo 500'),
+('AHFNCPERT32FCDW','abder','2014-10-03', 1, 'E', 1200, 'cabildo 500'),
+('AHFNCPERT22FCDW','abder','2014-09-03', 1, 'T', 8500, 'cabildo 500'),
+('AHFNC22dRTGSCDW','abder','2014-08-03', 1, 'E', 100, 'cabildo 500'),
+('AHFNCPBDTGSFCDW','abdww','2014-07-03', 1, 'T', 1100, 'cabildo 500'),
 ('AHFN4PERTGSFCDW','abder','2014-07-08', 1, 'E', 1000, 'cabildo 500'),
 ('AHFN234PEGSFCDW','abder','2014-04-03', 1, 'E', 1000, 'cabildo 500'),
-('AHFNCPERT44FCDW','abder','2014-02-03', 1, 'E', 1000, 'cabildo 500'),
+('AHFNCPERT44FCDW','abdww','2014-02-03', 1, 'E', 1023, 'cabildo 500'),
 ('AHFNCPER289FCDW','abder','2014-01-03', 1, 'E', 1000, 'cabildo 500'),
-('AHFNCPERCBGFCDW','abder','2014-01-03', 1, 'E', 1000, 'cabildo 500')
+('AHFNCPERCBGFCDW','ab123','2014-01-03', 1, 'E', 1000, 'cabildo 500')
 go
 
 
@@ -255,7 +253,39 @@ begin
 Update stock set Cantidad = Cantidad + @cantidad where CodigoArticulo = @Codigo
 end
 go
+create procedure SP_TotalxUsuario(
+@user varchar(5)
+)
+as
+begin
+declare @Cantidad int
+declare @Total int 
+set @Total = 0
+Declare cursorTabla CURSOR
+FOR SELECT Monto FROM facturas
+WHERE CodigoUsuario = @user and Estado = 1
+OPEN cursorTabla;
+FETCH NEXT FROM cursorTabla
+        INTO
+        @Cantidad       
+	   
+	   		
+WHILE (@@FETCH_STATUS = 0) 
+    BEGIN
+     
+		set @Total = @Total + @Cantidad
+		FETCH NEXT FROM cursorTabla
+        INTO
+        @Cantidad        
+	END
+deallocate cursorTabla
+select Nombre, @Total as total  from usuarios
+where Codigo = @user
 
+end
+
+
+go
 create procedure SP_DevolucionFactura(
 @Factura varchar(15)
 )
@@ -312,4 +342,5 @@ use master
 go
 use depamphilis_db
 go
+
 

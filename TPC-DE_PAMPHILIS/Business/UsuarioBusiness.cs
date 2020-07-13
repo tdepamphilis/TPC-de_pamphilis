@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using Dominio;
 using System.Security.Policy;
+using System.Net.Http.Headers;
 
 namespace Business
 {
@@ -117,7 +118,7 @@ namespace Business
                 List<string> favs = favoritos(usuario.code);
                 usuario.favoritos = favs;
 
-                
+
 
                 return usuario;
 
@@ -131,7 +132,35 @@ namespace Business
             }
         }
 
+        public int gastos(string usercode)
+        {
 
+            GestorConexion gestor = new GestorConexion();
+
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            SqlDataReader lector;
+            int result;
+            try
+            {
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = " exec SP_TotalxUsuario @user";
+                command.Parameters.AddWithValue("@user", usercode);
+                command.Connection = connection;
+                connection.Open();
+                lector = command.ExecuteReader();
+                lector.Read();
+                result = lector.GetInt32(1);
+                connection.Close();
+                return result;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         public List<string> favoritos(string usercode)
         {
@@ -168,6 +197,56 @@ namespace Business
 
                 throw;
             }
+        }
+
+        public List<Usuario> listar()
+        {
+            Zona zona = new Zona();
+            GestorConexion gestor = new GestorConexion();
+            List<Usuario> aux = new List<Usuario>();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            SqlDataReader lector;
+            try
+            {
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "select * from vw_usuarios";
+                command.Connection = connection;
+                connection.Open();
+                lector = command.ExecuteReader();
+                while (lector.Read())
+                {
+                    Usuario usuario = new Usuario();
+                    usuario.code = lector.GetString(0);
+                    usuario.name = lector.GetString(1);
+                    usuario.apellido = lector.GetString(2);
+                    usuario.dni = lector.GetInt32(3);
+                    usuario.mail = lector.GetString(4);
+                    usuario.pass = lector.GetString(5);
+                    usuario.direccion = lector.GetString(6);
+                    zona.id = lector.GetInt32(7);
+                    zona.name = lector.GetString(8);
+                    usuario.zona = zona;
+                    aux.Add(usuario);
+                }
+
+                connection.Close();
+
+                return aux;
+
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+
+
+
         }
         //-------------CODIGOS------------------
 
@@ -319,7 +398,7 @@ namespace Business
             {
                 command.CommandType = System.Data.CommandType.Text;
                 command.CommandText = "update usuarios set Password = @newpass where Correo = @mail and Password = @oldpass";
-                command.Parameters.AddWithValue("@mail", mail );
+                command.Parameters.AddWithValue("@mail", mail);
                 command.Parameters.AddWithValue("@oldpass", pass);
                 command.Parameters.AddWithValue("@newpass", newpass);
                 command.Connection = connection;

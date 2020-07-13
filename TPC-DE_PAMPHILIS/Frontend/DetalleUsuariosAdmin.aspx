@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TiendaAdmin.aspx.cs" Inherits="Frontend.TiendaAdmin" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DetalleUsuariosAdmin.aspx.cs" Inherits="Frontend.DetalleUsuariosAdmin" %>
 
 <!DOCTYPE html>
 
@@ -14,12 +14,11 @@
 </head>
 <body style="background: #e8e4e1">
     <form id="form1" runat="server">
-
         <div class="container-fluid" style="background-color: dimgrey">
             <div class="row">
                 <div class="col-sm-1" style="text-align: center">
                     <a href="TiendaAdmin.aspx">
-                    <img src="https://darodistribuidora.com/wp-content/uploads/logodarodist.png" style="width: 170px; height: 80px" alt="Alternate Text" />
+                        <img src="https://darodistribuidora.com/wp-content/uploads/logodarodist.png" style="width: 170px; height: 80px" alt="Alternate Text" />
                     </a>
                 </div>
                 <div class="col-sm-5" style="position: relative; top: 27px; text-align: center">
@@ -34,76 +33,53 @@
                         <a href="Marcas.aspx" class="btn btn-dark btn-sm">Marcas</a>
                         <a href="Categorias.aspx" class="btn btn-dark btn-sm">categorias</a>
                         <a href="FacturacionAdmin.aspx" class="btn btn-dark btn-sm">Facturacion</a>
-                        <a href="DetalleUsuariosAdmin.aspx" class="btn btn-dark btn-sm">Gasto por usuario</a>
                         <a href="MainPage.aspx" class="btn btn-dark btn-sm">Salir</a>
                     </div>
                 </div>
                 <div class="hidden-lg hidden-md hidden-sm">&nbsp;</div>
                 <div class="col-sm-3" style="position: relative; top: 25px; text-align: center;">
-                    <div class="input-group mb-4">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: white">Categorias</button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="tiendaAdmin.aspx">Todos</a>
-                                <%foreach (Dominio.Categoria item in categorias)
-                                    { %>
-                                <div><a class="dropdown-item" href="?cat=<%= item.id %>"><%=item.name %></a></div>
-                                <%} %>
-                            </div>
-                        </div>
-                        <asp:TextBox CssClass="form-control" ID="TextBox1" runat="server" OnTextChanged="TextBox1_TextChanged"></asp:TextBox>
-                    </div>
                 </div>
                 <div class="hidden-lg hidden-md hidden-sm">&nbsp;</div>
                 <div class="col-sm-3"></div>
-
-
             </div>
         </div>
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm" style="text-align: center">
+            <div class="row mt-3 justify-content-center">
+                <div class="col-4">
+                    <div class="card">
 
-                    <h1>Gestion de productos</h1>
-                    <div>&nbsp;</div>
-                </div>
-
-            </div>
-
-            <div class="row">
-                <div class="col-sm">
-                    <div class="container-fluid">
-
-                        <div class="row row-cols-1 row-cols-md-6" style="text-align: center">
-
-                            <% foreach (Dominio.Producto product in productos)
-
-                                {
-                            %>
-
-                            <div class="col-sm">
-                                <div class="card">
-                                    
-                                    <a href="VerProductoAdmin?prod=<%=product.code %>"> 
-                                    <img src="<% = product.urlimagen %>" class="card-img-top" alt="..." height="200" width="200">
-                                    </a>
-                                    <div class="card-footer align-content-center" style="height: 80px">
-                                        <h5 class="card-title" style="text-align:center"><% = product.name %></h5>
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-6">
+                                        <h6>Nombre</h6>
+                                    </div>
+                                    <div class="col-6">
+                                        <h6>Gastado</h6>
                                     </div>
                                 </div>
+                                <div class="dropdown-divider"></div>
+                                <%foreach (Dominio.Usuario user in usuarios)
+                                    { %>
+
+                                <div class="row justify-content-center">
+                                    <div class="col-6">
+                                        <h6><%=user.apellido + " " + user.name %></h6>
+                                    </div>
+                                    <div class="col-6">
+                                        <h6><%= "$" + usuarioBusiness.gastos(user.code) %></h6>
+                                    </div>
+                                </div>
+
+
+                                <%} %>
                             </div>
-                            <%} %>
+
                         </div>
                     </div>
-
-
                 </div>
-
             </div>
-
         </div>
-
-
     </form>
 </body>
 </html>
