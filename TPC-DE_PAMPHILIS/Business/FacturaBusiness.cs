@@ -39,7 +39,7 @@ namespace Business
             try
             {
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "select * from vw_facturas where CodigoUsuario = @user ";
+                command.CommandText = "select * from vw_facturas where CodigoUsuario = @user order by Fecha desc";
                 command.Parameters.AddWithValue("@user", userCode);
                 command.Connection = connection;
                 connection.Open();
@@ -134,6 +134,36 @@ namespace Business
                 }
                 connection.Close();
                 return aux;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public string getLastCode(string usercode)
+        {
+            GestorConexion gestor = new GestorConexion();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            SqlDataReader lector;
+            try
+            {
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "select * from vw_facturas where CodigoUsuario = @user order by Fecha desc ";
+                command.Parameters.AddWithValue("@user", usercode);
+                command.Connection = connection;
+                connection.Open();
+                lector = command.ExecuteReader();
+                lector.Read();                     
+                string result = lector.GetString(0);                                       
+                connection.Close();
+                if (result == null)
+                    return "notFount";
+                else
+                    return result;
+
             }
             catch (Exception)
             {

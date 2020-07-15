@@ -38,7 +38,7 @@
 
                     <div class="card">
 
-                        <div class="card-body" style="min-height: 300px; max-height: 350px; overflow: auto">
+                        <div class="card-body" style="min-height: 300px; max-height: 650px; overflow: auto">
 
                             <div class="container-fluid">
                                

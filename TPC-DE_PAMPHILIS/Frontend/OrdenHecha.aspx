@@ -40,7 +40,8 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <p>Su compra ha sido procesada y aguarda confirmacion.  </p>
+                                <h6>Orden numero : <%=facturaCode %>  </h6>
+                                <p>Su orden ha sido procesada y aguarda confirmacion.  </p>
                                 <p>Podra ver su estado en "mis pedidos".</p>
                             </div>               
                             <div class="row">
