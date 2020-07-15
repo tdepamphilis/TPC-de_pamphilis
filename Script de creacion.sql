@@ -258,6 +258,49 @@ begin
 end
 
 go
+-- PROCEDIMIENTOS DE DEVOLUCION
+create procedure SP_DevolucionItem(
+@Codigo varchar(5),
+@cantidad int 
+)
+as
+begin
+Update stock set Cantidad = Cantidad + @cantidad where CodigoArticulo = @Codigo
+end
+go
+ 
+create procedure SP_DevolucionFactura(
+@Factura varchar(15)
+)
+as
+begin
+Declare @CodigoArticulo varchar(5);
+Declare @cantidad int;
+
+Declare cursorTabla CURSOR
+FOR SELECT CodigoArticulo, Cantidad FROM itemsxfactura
+WHERE CodigoFactura = @Factura;
+OPEN cursorTabla;
+FETCH NEXT FROM cursorTabla
+        INTO
+        @CodigoArticulo, @Cantidad       
+	   
+	   		
+WHILE (@@FETCH_STATUS = 0) 
+    BEGIN
+     
+		exec SP_DevolucionItem @CodigoArticulo, @cantidad
+		FETCH NEXT FROM cursorTabla
+        INTO
+        @CodigoArticulo, @Cantidad        
+	END
+deallocate cursorTabla
+end
+
+
+go
+
+go
 insert into favoritosxusuario values ('32d1a','qwdas'), ('32d1a','asasd')
 go
 insert into admins values ('abcde','admin@correo','adminpass','tomas')

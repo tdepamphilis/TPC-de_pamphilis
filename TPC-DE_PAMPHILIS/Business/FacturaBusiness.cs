@@ -751,6 +751,34 @@ namespace Business
             }
         }
 
+        public void devolverStock(string code)
+        {
+            GestorConexion gestor = new GestorConexion();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            try
+            {
+
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "exec SP_DevolucionFactura @code";
+                command.Parameters.AddWithValue("@code", code);
+                command.Connection = connection;
+                connection.Open();
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+
+            }
+        }
+
         //--------GENERACION DE CODIGO--------------
 
         private bool checkCode(string code)

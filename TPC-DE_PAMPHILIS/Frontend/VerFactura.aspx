@@ -70,7 +70,11 @@
 
                     <div class="card-footer">
                         <div class="row justify-content-center">
-                            <asp:Button ID="ButtonVolver" runat="server" Text="Volver" CssClass="btn btn-secondary" OnClick="ButtonVolver_Click" />
+                            <asp:Button ID="ButtonVolver" runat="server" Text="Volver" CssClass="btn btn-secondary mx-1" OnClick="ButtonVolver_Click" />
+                            <%if (factura.estadoEntrega == 0)
+                                { %>
+                            <asp:Button ID="ButtonCancelar" runat="server" Text="Cancelar pedido" CssClass="btn btn-danger mx-1" OnClick="ButtonCancelar_Click" />
+                            <%} %>
                         </div>
 
                     </div>

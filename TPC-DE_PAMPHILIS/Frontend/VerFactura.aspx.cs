@@ -61,5 +61,12 @@ namespace Frontend
         {
             Response.Redirect("MisCompras.aspx");
         }
+
+        protected void ButtonCancelar_Click(object sender, EventArgs e)
+        {
+            facturaBusiness.anularFactura(factura.codigo);
+            facturaBusiness.devolverStock(factura.codigo);
+            Response.Redirect("MisCompras.aspx");
+        }
     }
 }
