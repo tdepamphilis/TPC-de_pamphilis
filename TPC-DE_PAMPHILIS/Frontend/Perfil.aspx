@@ -48,6 +48,12 @@
                             <div class="row pt-3 justify-content-center" >
                                 <asp:Button ID="ButtonPass" runat="server" Text="Cambiar contraseña" CssClass="btn btn-secondary" OnClick="ButtonPass_Click" />
                             </div>
+                            <div class="row mt-4 justify-content-center">
+                                <div class="col-4">
+                                    <h6 class="text-center"><%="Credito: $" + usuario.credito.ToString()%></h6>
+                                     
+                                </div>
+                            </div>
                         </div>
                     </div>
 

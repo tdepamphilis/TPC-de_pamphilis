@@ -69,7 +69,8 @@ create table usuarios(
 [Correo] [varchar] (100) not null,
 [Password] [varchar] (50) not null,
 [Dirrecion] [varchar] (50) not null,
-[IdZona] [int] foreign key references zonas(id)
+[IdZona] [int] foreign key references zonas(id),
+[Credito] [money] not null
 )
 go
 create table admins(
@@ -135,7 +136,7 @@ group by m.Nombre, m.Id
 go
 create view [vw_usuarios]
 as
-select u.codigo, u.Nombre,u.Apellido,u.DNI,u.Correo,u.Password, u.Dirrecion, z.Id as idzona, z.Nombre as zona from usuarios as u
+select u.codigo, u.Nombre,u.Apellido,u.DNI,u.Correo,u.Password, u.Dirrecion, z.Id as idzona, z.Nombre as zona, u.Credito from usuarios as u
 inner join zonas as z on z.Id = u.IdZona
 go
 create view [vw_facturas]
@@ -185,14 +186,14 @@ go
 insert into zonas values ('CABA'), ('Norte'), ('Sur')
 go
 insert into usuarios values 
-('abcdf' ,'Tomas', 'De Pamphilis', 41067359, 'tomdp@gmail.com','hola123','calle falsa 123',2),
-('abder' ,'Juan', 'Moreno', 17895644, 'jmoreno@gmail.com','hola123','Cabildo 500',2),
-('abess' ,'Matias', 'lizi', 74115895, 'mlizi@gmail.com','hola123','Del arca 214',1),
-('abdww' ,'Tomas', 'Ponce', 74015878, 'tponce@gmail.com','hola123','monroe',3),
-('aba23' ,'Roman', 'de veneto', 18569148, 'rveneto@gmail.com','hola123','calle falsa 123',1),
-('abcde' ,'Camila', 'lizi', 35487010, 'clizi@gmail.com','hola123','calle falsa 123',2),
-('abxmv' ,'Mariana', 'lopez', 38256658, 'mlopez@gmail.com','hola123','calle falsa 123',3),
-('ab123' ,'Sol', 'somer', 38458899, 'solsomer@gmail.com','hola123','calle falsa 123',1)
+('abcdf' ,'Tomas', 'De Pamphilis', 41067359, 'tomdp@gmail.com','hola123','calle falsa 123',2,0),
+('abder' ,'Juan', 'Moreno', 17895644, 'jmoreno@gmail.com','hola123','Cabildo 500',2,0),
+('abess' ,'Matias', 'lizi', 74115895, 'mlizi@gmail.com','hola123','Del arca 214',1,0),
+('abdww' ,'Tomas', 'Ponce', 74015878, 'tponce@gmail.com','hola123','monroe',3,0),
+('aba23' ,'Roman', 'de veneto', 18569148, 'rveneto@gmail.com','hola123','calle falsa 123',1,0),
+('abcde' ,'Camila', 'lizi', 35487010, 'clizi@gmail.com','hola123','calle falsa 123',2,0),
+('abxmv' ,'Mariana', 'lopez', 38256658, 'mlopez@gmail.com','hola123','calle falsa 123',3,0),
+('ab123' ,'Sol', 'somer', 38458899, 'solsomer@gmail.com','hola123','calle falsa 123',1,0)
 go
 
 create procedure SP_AltaUsuario(
@@ -203,15 +204,16 @@ create procedure SP_AltaUsuario(
 @Correo varchar (100),
 @Password varchar (50),
 @Direccion varchar (50),
-@zona int
+@zona int,
+@Credito money
 )
 as
 if (select COUNT(*) from usuarios where Correo = @Correo) = 0 
 begin
-insert into usuarios values (@Codigo, @Nombre, @Apellido, @DNI, @Correo, @Password, @Direccion, @zona)
+insert into usuarios values (@Codigo, @Nombre, @Apellido, @DNI, @Correo, @Password, @Direccion, @zona, @Credito)
 end 
 go
-exec SP_AltaUsuario '32d1a','Agustin','DP', 41655477,'agusdp@gmail.com','cac3','falsa332',2
+exec SP_AltaUsuario '32d1a','Agustin','DP', 41655477,'agusdp@gmail.com','cac3','falsa332',2,0
 go
 insert into facturas values ('AHFNCPERTGSFCDW','abder','2014-11-03', 1, 'E', 1000, 'cabildo 500',1,2),
 ('AHFNCPERT32FCDW','abder','2014-10-03', 1, 'E', 1034, 'cabildo 500',0,1),
@@ -313,7 +315,3 @@ as a
 inner join categoriaxarticulo as cxa on a.Codigo = cxa.CodigoArticulo
 inner join categorias as c on cxa.Idcategoria = c.id
 */
-use depamphilis_db
-select * from usuarios where Codigo = '3321d'
-
-select * from facturas

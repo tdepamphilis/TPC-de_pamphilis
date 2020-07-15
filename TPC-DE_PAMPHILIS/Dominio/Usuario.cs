@@ -24,6 +24,8 @@ namespace Dominio
 
         public List<string> favoritos { get; set; }
 
+        public decimal credito { get; set; }
+
 
     }
 }

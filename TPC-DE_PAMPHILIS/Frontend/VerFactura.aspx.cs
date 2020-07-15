@@ -15,6 +15,7 @@ namespace Frontend
         public Carrito carrito;
         public Factura factura = new Factura();
         private FacturaBusiness facturaBusiness = new FacturaBusiness();
+        private UsuarioBusiness usuarioBusiness = new UsuarioBusiness();
         private Usuario usuario;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -46,7 +47,7 @@ namespace Frontend
 
         private void login()
         {
-            UsuarioBusiness usuarioBusiness = new UsuarioBusiness();
+           
             if ((string)Session["usermail"] == null || (string)Session["userpass"] == null)
                 Response.Redirect("MainPage.aspx");
 
@@ -66,6 +67,9 @@ namespace Frontend
         {
             facturaBusiness.anularFactura(factura.codigo);
             facturaBusiness.devolverStock(factura.codigo);
+            if (factura.pago == true)
+                usuarioBusiness.creditTransaction(factura.monto, factura.codigoUsuario);
+                
             Response.Redirect("MisCompras.aspx");
         }
     }

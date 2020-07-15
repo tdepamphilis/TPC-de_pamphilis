@@ -15,8 +15,10 @@ namespace Frontend
     {
 
         public FacturaBusiness facturaBusiness = new FacturaBusiness();
+        private UsuarioBusiness usuarioBusiness = new UsuarioBusiness();
         public Factura factura;
         public float originalPrice;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
@@ -142,10 +144,18 @@ namespace Frontend
             factura = (Factura)Session["facturamod"];
             facturaBusiness.changePrice(factura);
             facturaBusiness.updateFacturaItems(factura, (List<string>)Session["itemsIniciales"]);
+            
+            if (factura.pago == true )
+            {
+                float diferencia = (float)Session["originalPrice"] - factura.monto;
+                usuarioBusiness.creditTransaction(diferencia,factura.codigoUsuario);
+
+            }
             Session.Remove("facturamod");
             Session.Remove("itemsIniciales");
-            Session.Remove("originalPrice");
+            Session.Remove("originalPrice");            
             Response.Redirect("VerFacturaAdmin.aspx?fac=" + factura.codigo);
+
            
         }
     }

@@ -14,7 +14,8 @@ namespace Frontend
 
         public Factura factura = new Factura();
         public FacturaBusiness facturaBusiness = new FacturaBusiness();
-        
+        private UsuarioBusiness usuarioBusiness = new UsuarioBusiness();
+
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -70,6 +71,8 @@ namespace Frontend
         protected void Buttondel_Click(object sender, EventArgs e)
         {
             facturaBusiness.anularFactura(factura.codigo);
+            if (factura.pago == true)
+                usuarioBusiness.creditTransaction(factura.monto, factura.codigoUsuario);
             Response.Redirect("FacturacionAdmin.aspx");
         }
 
@@ -95,6 +98,6 @@ namespace Frontend
                 Response.Redirect("FacturasEnviadas.aspx");
         }
 
-        
+
     }
 }

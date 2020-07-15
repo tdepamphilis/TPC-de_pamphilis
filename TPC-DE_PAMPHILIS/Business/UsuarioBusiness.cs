@@ -112,6 +112,7 @@ namespace Business
                 usuario.direccion = lector.GetString(6);
                 zona.id = lector.GetInt32(7);
                 zona.name = lector.GetString(8);
+                usuario.credito = lector.GetDecimal(9);
                 usuario.zona = zona;
                 connection.Close();
                 List<string> favs = favoritos(usuario.code);
@@ -234,7 +235,7 @@ namespace Business
             try
             {
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "exec SP_AltaUsuario @Codigo, @Nombre, @Apellido, @DNI, @Correo, @Password, @Dir, @Zona ";
+                command.CommandText = "exec SP_AltaUsuario @Codigo, @Nombre, @Apellido, @DNI, @Correo, @Password, @Dir, @Zona, 0 ";
                 command.Parameters.AddWithValue("@Codigo", usuario.code);
                 command.Parameters.AddWithValue("@Nombre", usuario.name);
                 command.Parameters.AddWithValue("@Apellido", usuario.apellido);
@@ -322,6 +323,32 @@ namespace Business
                 command.Parameters.AddWithValue("@mail", mail );
                 command.Parameters.AddWithValue("@oldpass", pass);
                 command.Parameters.AddWithValue("@newpass", newpass);
+                command.Connection = connection;
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public void creditTransaction(float monto, string userCode)
+        {
+            GestorConexion gestor = new GestorConexion();
+            SqlConnection connection = gestor.connection();
+            SqlCommand command = new SqlCommand();
+            try
+            {
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "update usuarios set Credito = Credito + @value where Codigo = @userCode";
+                command.Parameters.AddWithValue("@value", monto);
+                command.Parameters.AddWithValue("@userCode", userCode);
                 command.Connection = connection;
                 connection.Open();
                 command.ExecuteNonQuery();
