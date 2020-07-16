@@ -45,7 +45,29 @@
                             <div class="container-fluid">
                                 <div class="row pt-1 ">
                                     <div class="col-sm-5 align-self-center  ">
-                                        <h5 class="card-text align-self-center"><%="monto final :$" + carrito.totalPrice().ToString() %>   </h5>
+                                        <div class="row">
+                                            <h5 class="card-text align-self-center"><%="monto final :$" + carrito.totalPrice().ToString() %>   </h5>
+                                        </div>
+                                        <%if (CheckBoxCredito.Checked == true)
+                                            { %>
+                                        <div class="row">
+                                            <h5 class="card-text align-self-center"><%="- $" + availableCredits.ToString() %>   </h5>
+                                        </div>
+                                        <div class="row">
+                                            <h5 class="card-text align-self-center"><%="Total a pagar: $" + (carrito.totalPrice() - availableCredits).ToString()  %> </h5>
+                                        </div>
+
+                                        <%} %>
+                                        <div class="row mt-1">
+                                            <asp:CheckBox ID="CheckBoxCredito" runat="server" AutoPostBack="true" />
+                                            <asp:Label ID="LabelCredito" runat="server" Text="Usar Credito" CssClass="mx-1"></asp:Label>
+                                            <%if (DropDownMetodo.SelectedValue == "0")
+                                                {       %>
+                                            <p class="text-danger font-" style="font-size:x-small">Los creditos no pueden usarse pagando en efectivo.</p>
+
+                                            <%} %>
+
+                                        </div>
                                     </div>
                                     <div class="col-sm-2"></div>
                                     <div class="col-sm-5 ">
@@ -59,18 +81,18 @@
                                 </div>
                                 <div class="row pt-2 justify-content-center">
                                 </div>
-                               
+
                                 <%if (DropDownMetodo.SelectedValue == "1")
                                     { %>
-                                
+
                                 <div class="dropdown-divider pt-3"></div>
                                 <div class="row">
                                     <div class="col-sm-6 ">
                                         <div class="form-group">
 
                                             <asp:Label ID="Label2" runat="server" Text="Numero de tarjeta"></asp:Label>
-                                       
-                                           <asp:TextBox ID="Textcard" runat="server" type="number" CssClass="form-control"></asp:TextBox>
+
+                                            <asp:TextBox ID="Textcard" runat="server" type="number" CssClass="form-control"></asp:TextBox>
 
                                         </div>
                                     </div>
@@ -83,14 +105,14 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <asp:Label ID="LabelName" runat="server" Text="Nombre y apellido" ></asp:Label>
+                                        <asp:Label ID="LabelName" runat="server" Text="Nombre y apellido"></asp:Label>
                                         <asp:TextBox ID="TextName" runat="server" Class="form-control"></asp:TextBox>
                                     </div>
                                     <div class="col-sm-1"></div>
                                     <div class="col-sm-5">
-                                        <asp:Label ID="LabelDNI" runat="server" Text="DNI" ></asp:Label>
+                                        <asp:Label ID="LabelDNI" runat="server" Text="DNI"></asp:Label>
                                         <asp:TextBox ID="TextBoxDNI" runat="server" CssClass="form-control" type="number"></asp:TextBox>
-                                    </div>                                    
+                                    </div>
                                 </div>
                                 <div class="row justify-content-center">
                                     <div class="col-sm-10">
@@ -102,7 +124,7 @@
                                 <div class="dropdown-divider pt-3"></div>
                                 <div class="row pt-1">
                                     <div class="col-sm-4">
-                                         <asp:Label ID="LabelDelAdress" runat="server" Text="Direccion de entrega" CssClass="text-left"></asp:Label>
+                                        <asp:Label ID="LabelDelAdress" runat="server" Text="Direccion de entrega" CssClass="text-left"></asp:Label>
                                         <asp:DropDownList ID="DropDownListDelivery" runat="server" CssClass="custom-select" AutoPostBack="true"></asp:DropDownList>
                                     </div>
                                     <div class="col-sm-2"></div>

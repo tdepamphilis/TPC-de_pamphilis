@@ -15,6 +15,7 @@ namespace Frontend
         private Usuario usuario;
         private UsuarioBusiness usuarioBusiness = new UsuarioBusiness();
         private FacturaBusiness facturaBusiness = new FacturaBusiness();
+        public float availableCredits;
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -26,13 +27,26 @@ namespace Frontend
                 loadPayMethods();
                 loadDeliveryOptions();
             }
+            if (usuario.credito <= 0 || DropDownMetodo.SelectedValue == "0")
+            {
+                CheckBoxCredito.Enabled = false;
+                CheckBoxCredito.Checked = false;
+            }
+            else if (usuario.credito > 0 && DropDownMetodo.SelectedValue == "1")
+                CheckBoxCredito.Enabled = true;
+
+            if ((float)usuario.credito >= carrito.totalPrice())
+                availableCredits = carrito.totalPrice();
+            else
+                availableCredits = (float)usuario.credito;
+
         }
 
         private Carrito loadchart()
         {
             if (Session["chart"] == null)
             {
-                
+
                 Response.Redirect("Tienda.aspx");
             }
             return (Carrito)Session["chart"];
@@ -61,7 +75,7 @@ namespace Frontend
         {
             Factura factura = carrito.GenerarFactura();
 
-            
+
 
 
 
@@ -86,9 +100,9 @@ namespace Frontend
             else
                 factura.pago = true;
             factura.estadoEntrega = 0;
-
-
             facturaBusiness.GenerarCompra(factura);
+            if (CheckBoxCredito.Checked == true)
+                usuarioBusiness.creditTransaction(-availableCredits, usuario.code);
             Session["chart"] = new Carrito();
             Response.Redirect("OrdenHecha.aspx");
 
